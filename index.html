@@ -44,7 +44,11 @@
   <div id="dartdoc-main-content" class="main-content">
       
 <section class="desc markdown">
-  <h1 id="rohd-verification-framework">ROHD Verification Framework</h1>
+  <p><a href="https://github.com/intel/rohd-vf/actions/workflows/test.yml"><img src="https://github.com/intel/rohd-vf/actions/workflows/test.yml/badge.svg" alt="Tests"></a>
+<a href="https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html"><img src="https://github.com/intel/rohd-vf/actions/workflows/docs.yml/badge.svg" alt="Docs"></a>
+<a href="https://github.com/intel/rohd-vf/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-BSD--3-blue" alt="License"></a>
+<a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-1.4-4baaaa.svg" alt="Contributor Covenant"></a></p>
+<h1 id="rohd-verification-framework">ROHD Verification Framework</h1>
 <p>The ROHD Verification Framework (ROHD-VF) is a verification framework built upon the <a href="https://www.github.com/intel/rohd">Rapid Open Hardware Development (ROHD) framework</a>.  It enables testbench organization in a way similar to <a href="https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.1.pdf">UVM</a>.  A key motivation behind it is that hardware testbenches are really just software, and verification engineers should be empowered to write them as great software.  The ROHD Verification Framework enables development of a testbench in a <em>modern</em> programming language, taking advantage of recent innovations in the software industry.</p>
 <p>With ROHD and ROHD-VF, your testbench and hardware execute natively in Dart in a single fully-debuggable process.  There is no black-box vendor simulator to interact with, just execute your software.  You can leverage the cosimulation functionality of ROHD to build ROHD-VF testbenches for designs that include (or are entirely) written in other languages (e.g. SystemVerilog).</p>
 <p>The ROHD Verification Framework does <em>not</em> implement exactly the same API as UVM.  Rather, it takes some key concepts that are useful for testbench design and omits features that are rarely used, present to work around language limitations in SystemVerilog, encourage outdated or overly opinionated design patterns, or otherwise don't add significant value.  <strong>The ROHD Verification Framework eliminates the macros and boilerplate that are associated with UVM.</strong></p>
@@ -56,7 +60,7 @@
 <p>Dive right in with a full <a href="example/main.dart">example testbench for a counter</a>.  The example includes <code>Monitor</code>s, a <code>Driver</code>, a <code>Sequencer</code>, an <code>Agent</code>, an <code>Env</code>, a <code>Test</code>, the same DUT as the ROHD counter example, a <code>Sequence</code> with <code>SequenceItem</code>s, a scoreboard, and a main function to kick it all off, all in a single commented file.</p>
 <h3 id="constructing-objects">Constructing Objects</h3>
 <p>The ROHD Verification Framework does not come with a built-in "factory" (like UVM) for constructing <code>Component</code>s in the testbench.  Instead, objects can just be constructed like any other object.  It is a good idea to build a testbench with modularity and configurability in mind so that behavior can be easily changed depending on the desired test.  There is no restriction against using a factory design pattern to build a testbench if that's the right approach for a specific situation.  You also might be interested in using other approaches, such as dependency injection.  ROHD-VF doesn't push a strong opinion here.</p>
-<h3 id="phases"><code>Phase</code>s</h3>
+<h3 id="phasehttpsintelgithubiorohd-vfrohd_vfphase-classhtmls"><a href="https://intel.github.io/rohd-vf/rohd_vf/Phase-class.html"><code>Phase</code></a>s</h3>
 <p>A lot of setup for the testbench can occur in the constructor of the object.  ROHD-VF comes with some phasing (similar to UVM) to help configure, connect, and run a testbench in coordinated steps.  Every <code>Component</code> goes through phases.</p>
 <ul>
 <li>The constructor
@@ -83,25 +87,25 @@
 </li>
 </ul>
 <h2 id="components"><code>Component</code>s</h2>
-<p>A <code>Component</code> is an object which holds a fixed hierarchical position in the testbench.  The hierarchy is determined at construction time by passing information about each <code>Component</code>'s parent (null if no parent / top level).  All of the below classes extend <code>Component</code>.  You can build your testbench extending these subclasses of <code>Component</code> or directly extend <code>Component</code>.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Component-class.html"><code>Component</code></a> is an object which holds a fixed hierarchical position in the testbench.  The hierarchy is determined at construction time by passing information about each <code>Component</code>'s parent (null if no parent / top level).  All of the below classes extend <code>Component</code>.  You can build your testbench extending these subclasses of <code>Component</code> or directly extend <code>Component</code>.</p>
 <h3 id="monitor"><code>Monitor</code></h3>
-<p>A <code>Monitor</code> is responsible for watching an interface and reporting out interesting events onto an output stream.  This bridges the hardware world into an object that can be manipulated in the testbench.  Many things can listen to a <code>Monitor</code>, often logging or checking logic.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Monitor-class.html"><code>Monitor</code></a> is responsible for watching an interface and reporting out interesting events onto an output stream.  This bridges the hardware world into an object that can be manipulated in the testbench.  Many things can listen to a <code>Monitor</code>, often logging or checking logic.</p>
 <h3 id="driver"><code>Driver</code></h3>
-<p>A <code>Driver</code> is responsible for converting a <code>SequenceItem</code> into signal transitions on a hardware interface.  The driver accepts incoming items from a <code>Sequencer</code>.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Driver-class.html"><code>Driver</code></a> is responsible for converting a <code>SequenceItem</code> into signal transitions on a hardware interface.  The driver accepts incoming items from a <code>Sequencer</code>.</p>
 <h3 id="sequencer"><code>Sequencer</code></h3>
-<p>A <code>Sequencer</code> accepts <code>SequenceItem</code>s from stimulus sources (e.g. <code>Sequence</code>s) and determines how to pass them to the appropriate <code>Driver</code>(s).  The default behavior of a <code>Sequencer</code> is to directly pass them to the <code>Driver</code> immediately, but they can be more complex than that.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Sequencer-class.html"><code>Sequencer</code></a> accepts <code>SequenceItem</code>s from stimulus sources (e.g. <code>Sequence</code>s) and determines how to pass them to the appropriate <code>Driver</code>(s).  The default behavior of a <code>Sequencer</code> is to directly pass them to the <code>Driver</code> immediately, but they can be more complex than that.</p>
 <h3 id="agent"><code>Agent</code></h3>
-<p>The <code>Agent</code> is a wrapper for related components, often which all look at a single interface or set of interfaces.  Typically, an <code>Agent</code> constructs some <code>Monitor</code>s, <code>Driver</code>s, and <code>Sequencer</code>s, and then connects them up appropriately to each other and interfaces.</p>
+<p>The <a href="https://intel.github.io/rohd-vf/rohd_vf/Agent-class.html"><code>Agent</code></a> is a wrapper for related components, often which all look at a single interface or set of interfaces.  Typically, an <code>Agent</code> constructs some <code>Monitor</code>s, <code>Driver</code>s, and <code>Sequencer</code>s, and then connects them up appropriately to each other and interfaces.</p>
 <h3 id="env"><code>Env</code></h3>
-<p>The <code>Env</code> is a wrapper for a collection of related components, often each with their own hierarchy. <code>Env</code>s are usually composed of <code>Agent</code>s, scoreboards, configuration &amp; coordination logic, other smaller <code>Env</code>s, etc.</p>
+<p>The <a href="https://intel.github.io/rohd-vf/rohd_vf/Env-class.html"><code>Env</code></a> is a wrapper for a collection of related components, often each with their own hierarchy. <code>Env</code>s are usually composed of <code>Agent</code>s, scoreboards, configuration &amp; coordination logic, other smaller <code>Env</code>s, etc.</p>
 <h3 id="test"><code>Test</code></h3>
-<p>A <code>Test</code> is like a top-level testing entity that contains the top testbench <code>Env</code> and kicks off <code>Sequence</code>s.  Only one <code>Test</code> should be running at a time.  The <code>Test</code> also contains a central <code>Random</code> object to be used for randomization in a reproducible way.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Test-class.html"><code>Test</code></a> is like a top-level testing entity that contains the top testbench <code>Env</code> and kicks off <code>Sequence</code>s.  Only one <code>Test</code> should be running at a time.  The <code>Test</code> also contains a central <code>Random</code> object to be used for randomization in a reproducible way.</p>
 <h2 id="stimulus">Stimulus</h2>
 <p>Sending stimulus through the testbench to the device under test is done by passing <code>SequenceItem</code>s through a <code>Sequencer</code> to a <code>Driver</code>.</p>
 <h3 id="sequenceitem"><code>SequenceItem</code></h3>
-<p>A <code>SequenceItem</code> represents a collection of information to transmit across an interface.  A typical use case would be an object representing a transaction to be driven over a standardized hardware interface.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/SequenceItem-class.html"><code>SequenceItem</code></a> represents a collection of information to transmit across an interface.  A typical use case would be an object representing a transaction to be driven over a standardized hardware interface.</p>
 <h3 id="sequence"><code>Sequence</code></h3>
-<p>A <code>Sequence</code> is a modular object which has instructions for how to send <code>SequenceItem</code>s to a <code>Sequencer</code>.  A typical use case would be sending a collection of <code>SequenceItem</code>s in a specific order.</p>
+<p>A <a href="https://intel.github.io/rohd-vf/rohd_vf/Sequence-class.html"><code>Sequence</code></a> is a modular object which has instructions for how to send <code>SequenceItem</code>s to a <code>Sequencer</code>.  A typical use case would be sending a collection of <code>SequenceItem</code>s in a specific order.</p>
 <h2 id="virtual-sequencers--sequences">Virtual Sequencers &amp; Sequences</h2>
 <p>It is possible to create a "virtual" <code>Sequencer</code> whose role is to distribute <code>Sequence</code>s or <code>SequenceItem</code>s to other sub-sequencers.  <code>Sequence</code>s that run on a "virtual" <code>Sequencer</code> are called "virtual" <code>Sequence</code>s.  There's no special support in ROHD-VF for these, but the standard <code>Sequencer</code> and <code>Sequence</code> objects can be easily used for this purpose.</p>
 <h2 id="logging">Logging</h2>
