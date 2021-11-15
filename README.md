@@ -20,7 +20,7 @@ A testbench is software used to interact with and test a device under test (DUT)
 
 ![Testbench Diagram](/doc/rohdvfdiagram1.png)
 
-## Example
+### Example
 
 Dive right in with a full [example testbench for a counter](example/main.dart).  The example includes `Monitor`s, a `Driver`, a `Sequencer`, an `Agent`, an `Env`, a `Test`, the same DUT as the ROHD counter example, a `Sequence` with `SequenceItem`s, a scoreboard, and a main function to kick it all off, all in a single commented file.
 
