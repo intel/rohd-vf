@@ -56,7 +56,7 @@
 <h2 id="testbenches">Testbenches</h2>
 <p>A testbench is software used to interact with and test a device under test (DUT).  ROHD Verification Framework testbenches are organized in a modular and extenable way using simple base classes which have specific roles.  The diagram below shows what a typical testbench might look like.  More details about each of the objects in the testbench are described below.  This should look very familiar if you've used UVM.</p>
 <p><img src="/doc/rohdvfdiagram1.png" alt="Testbench Diagram"></p>
-<h2 id="example">Example</h2>
+<h3 id="example">Example</h3>
 <p>Dive right in with a full <a href="example/main.dart">example testbench for a counter</a>.  The example includes <code>Monitor</code>s, a <code>Driver</code>, a <code>Sequencer</code>, an <code>Agent</code>, an <code>Env</code>, a <code>Test</code>, the same DUT as the ROHD counter example, a <code>Sequence</code> with <code>SequenceItem</code>s, a scoreboard, and a main function to kick it all off, all in a single commented file.</p>
 <h3 id="constructing-objects">Constructing Objects</h3>
 <p>The ROHD Verification Framework does not come with a built-in "factory" (like UVM) for constructing <code>Component</code>s in the testbench.  Instead, objects can just be constructed like any other object.  It is a good idea to build a testbench with modularity and configurability in mind so that behavior can be easily changed depending on the desired test.  There is no restriction against using a factory design pattern to build a testbench if that's the right approach for a specific situation.  You also might be interested in using other approaches, such as dependency injection.  ROHD-VF doesn't push a strong opinion here.</p>
