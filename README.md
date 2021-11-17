@@ -18,7 +18,8 @@ The ROHD Verification Framework offers a simple, clean, and scalable methodology
 ## Testbenches
 A testbench is software used to interact with and test a device under test (DUT).  ROHD Verification Framework testbenches are organized in a modular and extenable way using simple base classes which have specific roles.  The diagram below shows what a typical testbench might look like.  More details about each of the objects in the testbench are described below.  This should look very familiar if you've used UVM.
 
-![Testbench Diagram](/doc/rohdvfdiagram1.png)
+![Testbench Diagram](https://github.com/intel/rohd-vf/raw/main/doc/rohdvfdiagram1.png)
+
 
 ### Example
 
