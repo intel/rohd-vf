@@ -61,10 +61,10 @@
     </section>
     
 <section class="desc markdown">
-  <p>Adds a single <code>item</code> to this <a href="../../rohd_vf/Sequencer-class.html">Sequencer</a> to be passed on to 
+  <p>Adds a single <code>item</code> to this <a href="../../rohd_vf/Sequencer-class.html">Sequencer</a> to be passed on to
 the associated <a href="../../rohd_vf/Driver-class.html">Driver</a>.</p>
 <p>If the sequencer should perform some operations before passing <code>item</code>
-along to the <a href="../../rohd_vf/Driver-class.html">Driver</a>, this is a good method to override.  Calling 
+along to the <a href="../../rohd_vf/Driver-class.html">Driver</a>, this is a good method to override.  Calling
 <code>super.add(item)</code> from a subclass of <a href="../../rohd_vf/Sequencer-class.html">Sequencer</a> will finally pass
 <code>item</code> along to the <a href="../../rohd_vf/Driver-class.html">Driver</a>.</p>
 </section>
@@ -74,7 +74,7 @@ along to the <a href="../../rohd_vf/Driver-class.html">Driver</a>, this is a goo
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void add(SequenceItemType item) {
-  if(isConnected) {
+  if (isConnected) {
     _streamController.add(item);
   } else {
     throw Exception(&#39;No listener connected to sequencer&#39;);

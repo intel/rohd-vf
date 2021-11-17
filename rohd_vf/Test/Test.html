@@ -69,7 +69,9 @@ pass the same <code>randomSeed</code> as the previous run.</p>
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Test(String name, {int? randomSeed}) : _random = Random(randomSeed), super(name, null) {
+  <pre class="language-dart"><code class="language-dart">Test(String name, {int? randomSeed})
+    : _random = Random(randomSeed),
+      super(name, null) {
   instance = this;
   configureLogger();
 }</code></pre>

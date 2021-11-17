@@ -61,7 +61,7 @@
     
 <section class="desc markdown">
   <p>Starts the test on the <a href="https://pub.dev/documentation/rohd/0.1.0/rohd/Simulator-class.html">Simulator</a>.</p>
-<p>It will kick off the run phase and continue to run until 
+<p>It will kick off the run phase and continue to run until
 all objections have dropped.</p>
 </section>
 
@@ -73,7 +73,7 @@ all objections have dropped.</p>
   build();
   var runPhase = Phase();
   unawaited(run(runPhase));
-  if(!Simulator.hasStepsRemaining()) {
+  if (!Simulator.hasStepsRemaining()) {
     logger.warning(&#39;Simulator has no registered events.&#39;);
   }
   unawaited(Simulator.run());

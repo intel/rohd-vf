@@ -69,7 +69,7 @@ if nothing else is holding it from completing.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void drop() {
-  if(!isRaised) throw Exception(&#39;Objection already dropped&#39;);
+  if (!isRaised) throw Exception(&#39;Objection already dropped&#39;);
   phase._dropObjection(this);
   _completer.complete();
 }</code></pre>

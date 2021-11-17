@@ -76,13 +76,14 @@ log messages.</p>
   <pre class="language-dart"><code class="language-dart">@protected
 void configureLogger() {
   Logger.root.onRecord.listen((record) {
-    print(&#39;[${record.level.name}] @ ${Simulator.time} | ${record.loggerName}: ${record.message}&#39;);
+    print(
+        &#39;[${record.level.name}] @ ${Simulator.time} | ${record.loggerName}: ${record.message}&#39;);
 
-    if(record.level &gt;= killLevel) {
+    if (record.level &gt;= killLevel) {
       failureDetected = true;
       throw Exception(&#39;Test killed due to failure.&#39;);
-    } else if(record.level &gt;= failLevel) {
-      if(!failureDetected) {
+    } else if (record.level &gt;= failLevel) {
+      if (!failureDetected) {
         print(&#39;Test failure detected, but continuing to run to end.&#39;);
       }
       failureDetected = true;

@@ -69,7 +69,7 @@ raised objections on this <a href="../../rohd_vf/Phase-class.html">Phase</a>.</p
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; allObjectionsDropped() async {
-  while(_objections.isNotEmpty) {
+  while (_objections.isNotEmpty) {
     var nextObjection = _objections.first;
     await nextObjection.dropped;
     _objections.remove(nextObjection);
