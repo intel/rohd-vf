@@ -3,10 +3,10 @@
 ///
 /// counter_example_test.dart
 /// Tests an example of a complete ROHD-VF testbench
-/// 
+///
 /// 2021 October 20
 /// Author: Max Korbel <max.korbel@intel.com>
-/// 
+///
 
 import 'package:logging/logging.dart';
 import 'package:rohd/rohd.dart';

@@ -3,10 +3,10 @@
 ///
 /// main.dart
 /// Example of a complete ROHD-VF testbench
-/// 
+///
 /// 2021 May 11
 /// Author: Max Korbel <max.korbel@intel.com>
-/// 
+///
 
 import 'dart:async';
 import 'dart:collection';
@@ -15,10 +15,8 @@ import 'package:rohd/rohd.dart';
 import 'package:rohd_vf/rohd_vf.dart';
 import 'counter.dart';
 
-
 /// Main function entry point to execute this testbench.
 Future<void> main({Level loggerLevel = Level.FINER}) async {
-
   // Set the logger level
   Logger.root.level = loggerLevel;
 
@@ -30,25 +28,23 @@ Future<void> main({Level loggerLevel = Level.FINER}) async {
 
   // Attach a waveform dumper to the DUT
   WaveDumper(tb.counter);
-  
+
   // Set a maximum simulation time so it doesn't run forever
   Simulator.setMaxSimTime(300);
 
   // Create and start the test!
   var test = CounterTest(tb.counter);
   await test.start();
-
 }
 
 // Top-level testbench to bundle the DUT with a clock generator
 class TopTB {
-
   // Instance of the DUT
   late final Counter counter;
-  
+
   // A constant value for the width to use in this testbench
   static const int width = 8;
-  
+
   TopTB() {
     // Build an instance of the interface for the Counter
     var intf = CounterInterface(width: width);
@@ -63,7 +59,6 @@ class TopTB {
 
 /// A simple test that brings the [Counter] out of reset and wiggles the enable.
 class CounterTest extends Test {
-
   /// The [Counter] device under test.
   final Counter dut;
 
@@ -73,7 +68,7 @@ class CounterTest extends Test {
   /// A private, local pointer to the test environment's [Sequencer].
   late final CounterSequencer _counterSequencer;
 
-  CounterTest(this.dut, {String name='counterTest'}) : super(name) {
+  CounterTest(this.dut, {String name = 'counterTest'}) : super(name) {
     env = CounterEnv(dut.intf, this);
     _counterSequencer = env.agent.sequencer;
   }
@@ -81,7 +76,7 @@ class CounterTest extends Test {
   // A "time consuming" method, similar to `task` in SystemVerilog, which
   // waits for a given number of cycles before completing.
   Future<void> waitCycles(int numCycles) async {
-    for(var i = 0; i < numCycles; i++) {
+    for (var i = 0; i < numCycles; i++) {
       await dut.clk.nextNegedge;
     }
   }
@@ -112,14 +107,12 @@ class CounterTest extends Test {
 
     // Wait for the next negative edge of reset
     await dut.intf.reset.nextNegedge;
-    
+
     // Wait 3 more cycles
     await waitCycles(3);
-    
+
     // Kick off a sequence on the sequencer
-    await _counterSequencer.start(
-      CounterSequence(5)
-    );
+    await _counterSequencer.start(CounterSequence(5));
 
     logger.info('Done adding stimulus to the sequencer');
 
@@ -130,7 +123,6 @@ class CounterTest extends Test {
 
 /// Environment to bundle the testbench for the [Counter].
 class CounterEnv extends Env {
-
   /// An instance of the interface to the [Counter].
   final CounterInterface intf;
 
@@ -140,14 +132,14 @@ class CounterEnv extends Env {
   /// A scoreboard for checking functionality of the [Counter].
   late final CounterScoreboard scoreboard;
 
-  CounterEnv(this.intf, Component parent, {String name='counterEnv'}) : super(name, parent) {
+  CounterEnv(this.intf, Component parent, {String name = 'counterEnv'})
+      : super(name, parent) {
     agent = CounterAgent(intf, this);
     scoreboard = CounterScoreboard(
-      agent.enableMonitor.stream.map((event) => event.en == 1),
-      agent.valueMonitor.stream,
-      intf,
-      this
-    );
+        agent.enableMonitor.stream.map((event) => event.en == 1),
+        agent.valueMonitor.stream,
+        intf,
+        this);
   }
 
   @override
@@ -158,22 +150,19 @@ class CounterEnv extends Env {
     agent.enableMonitor.stream.listen((event) {
       logger.finer('Detected enable on counter: $event');
     });
-
   }
-  
 }
-
 
 /// An agent to bundle the sequencer, driver, and monitors for one [Counter].
 class CounterAgent extends Agent {
-  
   final CounterInterface intf;
   late final CounterSequencer sequencer;
   late final CounterDriver driver;
   late final CounterEnableMonitor enableMonitor;
   late final CounterValueMonitor valueMonitor;
-  
-  CounterAgent(this.intf, Component parent, {String name='counterAgent'}) : super(name, parent) {
+
+  CounterAgent(this.intf, Component parent, {String name = 'counterAgent'})
+      : super(name, parent) {
     sequencer = CounterSequencer(this);
     driver = CounterDriver(intf, sequencer, this);
     enableMonitor = CounterEnableMonitor(intf, this);
@@ -181,24 +170,24 @@ class CounterAgent extends Agent {
   }
 }
 
-
 /// A basic [Sequencer] for the [Counter].
 class CounterSequencer extends Sequencer<CounterSeqItem> {
-  CounterSequencer(Component parent, {String name='counterSequencer'}) : super(name, parent);
+  CounterSequencer(Component parent, {String name = 'counterSequencer'})
+      : super(name, parent);
 }
 
 // A simple sequence that sends a variable number of 0->1->0 transitions
 class CounterSequence extends Sequence {
-
   /// Number of times to repeat the 0->1->0 flow.
   final int numRepeat;
 
-  CounterSequence(this.numRepeat, {String name='counterSequence'}) : super(name);
+  CounterSequence(this.numRepeat, {String name = 'counterSequence'})
+      : super(name);
 
   @override
   Future<void> body(Sequencer sequencer) async {
     var counterSequencer = sequencer as CounterSequencer;
-    for(var i = 0; i < numRepeat; i++) {
+    for (var i = 0; i < numRepeat; i++) {
       counterSequencer.add(CounterSeqItem(true));
       counterSequencer.add(CounterSeqItem(false));
     }
@@ -207,7 +196,6 @@ class CounterSequence extends Sequence {
 
 /// A simple [SequenceItem] that maps a boolean to an int.
 class CounterSeqItem extends SequenceItem {
-
   final bool _enable;
   CounterSeqItem(this._enable);
 
@@ -217,10 +205,8 @@ class CounterSeqItem extends SequenceItem {
   String toString() => 'enable=$_enable';
 }
 
-
 /// A driver for the enable signal on the [Counter].
 class CounterDriver extends Driver<CounterSeqItem> {
-
   final CounterInterface intf;
 
   // Keep a queue of items from the sequencer to be driven when desired
@@ -228,7 +214,9 @@ class CounterDriver extends Driver<CounterSeqItem> {
 
   Objection? _driverObjection;
 
-  CounterDriver(this.intf, CounterSequencer sequencer, Component parent, {String name='counterDriver'}) : super(name, parent, sequencer: sequencer);
+  CounterDriver(this.intf, CounterSequencer sequencer, Component parent,
+      {String name = 'counterDriver'})
+      : super(name, parent, sequencer: sequencer);
 
   @override
   Future<void> run(Phase phase) async {
@@ -243,21 +231,20 @@ class CounterDriver extends Driver<CounterSeqItem> {
 
     // Every clock negative edge, drive the next pending item if it exists
     intf.clk.negedge.listen((args) {
-      if(_pendingItems.isNotEmpty) {
+      if (_pendingItems.isNotEmpty) {
         var nextItem = _pendingItems.removeFirst();
         drive(nextItem);
-        if(_pendingItems.isEmpty) {
+        if (_pendingItems.isEmpty) {
           _driverObjection?.drop();
           _driverObjection = null;
         }
       }
     });
-
   }
 
   // Translate a SequenceItem into pin wiggles
   void drive(CounterSeqItem? item) {
-    if(item == null) {
+    if (item == null) {
       intf.en.inject(0);
     } else {
       intf.en.inject(item.en);
@@ -267,16 +254,17 @@ class CounterDriver extends Driver<CounterSeqItem> {
 
 /// A monitor for the value output of the [Counter]].
 class CounterValueMonitor extends Monitor<LogicValues> {
-
   /// Instance of the [Interface] to the DUT.
   final CounterInterface intf;
 
-  CounterValueMonitor(this.intf, Component parent, {String name='counterValueMonitor'}) : super(name, parent);
+  CounterValueMonitor(this.intf, Component parent,
+      {String name = 'counterValueMonitor'})
+      : super(name, parent);
 
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
-    
+
     // Every positive edge of the clock
     intf.clk.posedge.listen((event) {
       // Send out an event with the value of the counter
@@ -287,32 +275,31 @@ class CounterValueMonitor extends Monitor<LogicValues> {
 
 /// A monitor for the enable signal of the [Counter].
 class CounterEnableMonitor extends Monitor<CounterSeqItem> {
-
   /// Instance of the [Interface] to the DUT.
   final CounterInterface intf;
 
-  CounterEnableMonitor(this.intf, Component parent, {String name='counterEnableMonitor'}) : super(name, parent);
-  
+  CounterEnableMonitor(this.intf, Component parent,
+      {String name = 'counterEnableMonitor'})
+      : super(name, parent);
+
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
     // Every positive edge of the clock
     intf.clk.posedge.listen((event) {
-      // If the enable bit on the interface is 1  
-      if(intf.en.bit == LogicValue.one) {
+      // If the enable bit on the interface is 1
+      if (intf.en.bit == LogicValue.one) {
         // Send out an event with `true` out of this Monitor
         add(CounterSeqItem(true));
       }
     });
   }
-  
 }
 
 /// A scoreboard to check that the value output from the [Counter] matches
 /// expectations based on the clk, enable, and reset signals.
 class CounterScoreboard extends Component {
-
   /// A stream which pops out a `true` every time enable is high.
   final Stream<bool> enableStream;
 
@@ -322,9 +309,11 @@ class CounterScoreboard extends Component {
   /// An instance of the interface to the [Counter].
   final CounterInterface intf;
 
-  CounterScoreboard(this.enableStream, this.valueStream, this.intf, Component parent, {String name='counterScoreboard'}) :
-    super(name, parent);
-  
+  CounterScoreboard(
+      this.enableStream, this.valueStream, this.intf, Component parent,
+      {String name = 'counterScoreboard'})
+      : super(name, parent);
+
   /// Whether an enable was seen this cycle.
   bool _sawEnable = false;
 
@@ -356,12 +345,11 @@ class CounterScoreboard extends Component {
 
     // check values on negative edge
     intf.clk.negedge.listen((event) {
-      if(_sawEnable) {
-
+      if (_sawEnable) {
         int expected;
 
         // handle counter overflow
-        if(_lastSeenValue == (1<<intf.width)-1) {
+        if (_lastSeenValue == (1 << intf.width) - 1) {
           expected = 0;
         } else {
           expected = _lastSeenValue + 1;
@@ -369,7 +357,7 @@ class CounterScoreboard extends Component {
 
         var matchesExpectations = _seenValue == expected;
 
-        if(!matchesExpectations) {
+        if (!matchesExpectations) {
           logger.severe('Expected $expected but saw $_seenValue');
         } else {
           logger.finest('Counter value matches expectations with $_seenValue');
@@ -380,7 +368,3 @@ class CounterScoreboard extends Component {
     });
   }
 }
-
-
-
-

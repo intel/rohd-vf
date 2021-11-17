@@ -3,23 +3,22 @@
 ///
 /// phase.dart
 /// Definition for Objection and Phase for ROHD-VF
-/// 
+///
 /// 2021 May 11
 /// Author: Max Korbel <max.korbel@intel.com>
-/// 
+///
 
 import 'dart:async';
 import 'dart:collection';
 
 /// Represents an objection to the test completing.
-/// 
+///
 /// An [Objection] is raised by a [Phase] and will attempt
-/// to prevent the phase and test from ending until it is dropped 
+/// to prevent the phase and test from ending until it is dropped
 /// with [Objection.drop].
 class Objection {
-
   /// The name of this [Objection].
-  /// 
+  ///
   /// Useful for logging and debug purposes.
   final String name;
 
@@ -38,27 +37,26 @@ class Objection {
   Future get dropped => _completer.future;
 
   Objection._(this.name, this.phase);
-  
+
   /// Drops this [Objection] on [phase], allowing it to progress
   /// if nothing else is holding it from completing.
   void drop() {
-    if(!isRaised) throw Exception('Objection already dropped');
+    if (!isRaised) throw Exception('Objection already dropped');
     phase._dropObjection(this);
     _completer.complete();
   }
 }
 
 class Phase {
-  
   /// All active [Objection]s to this phase completing.
   final Queue<Objection> _objections = Queue<Objection>();
 
-  /// An unmodifiable [Iterable] of all active [Objection]s which are 
+  /// An unmodifiable [Iterable] of all active [Objection]s which are
   /// preventing this phase from completing.
   Iterable<Objection> get objections => UnmodifiableListView(_objections);
 
   /// Creates and returns a new objection named [name] applied to this [Phase].
-  Objection raiseObjection([String name='']) {
+  Objection raiseObjection([String name = '']) {
     var newObjection = Objection._(name, this);
     _objections.add(newObjection);
     return newObjection;
@@ -66,14 +64,15 @@ class Phase {
 
   /// Drops [objection] from applying to this [Phase].
   void _dropObjection(Objection objection) {
-    if(objection.phase != this) throw Exception('Objection was not registered with this phase.');
+    if (objection.phase != this)
+      throw Exception('Objection was not registered with this phase.');
     _objections.remove(objection);
   }
 
   /// A [Future] which will complete once there are no more
   /// raised objections on this [Phase].
   Future<void> allObjectionsDropped() async {
-    while(_objections.isNotEmpty) {
+    while (_objections.isNotEmpty) {
       var nextObjection = _objections.first;
       await nextObjection.dropped;
       _objections.remove(nextObjection);
