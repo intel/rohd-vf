@@ -64,8 +64,9 @@ class Phase {
 
   /// Drops [objection] from applying to this [Phase].
   void _dropObjection(Objection objection) {
-    if (objection.phase != this)
+    if (objection.phase != this) {
       throw Exception('Objection was not registered with this phase.');
+    }
     _objections.remove(objection);
   }
 
