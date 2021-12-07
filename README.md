@@ -81,6 +81,9 @@ The `Test` object contains settings for `killLevel` and `failLevel` which will, 
 
 To log a message from any ROHD-VF object or component, just use the inherited `logger` object.
 
+### Logging with the `Tracker`
+ROHD-VF comes with a flexible [`Tracker`](https://intel.github.io/rohd-vf/rohd_vf/Tracker-class.html) which enables pretty printing and convenient output files associated with arbitrary events (which implement [`Trackable`](https://intel.github.io/rohd-vf/rohd_vf/Trackable-class.html)) throughout your test.  `Tracker` currently supports a JSON output as well as an ASCII table output.  Check out the [tracker unit test](./test/tracker_test.dart) for an example of how to configure and use the `Tracker`.
+
 ----------------
 2021 November 9  
 Author: Max Korbel <<max.korbel@intel.com>>

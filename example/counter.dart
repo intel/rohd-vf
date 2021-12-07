@@ -57,7 +57,7 @@ class Counter extends Module {
 
     nextVal <= val + 1;
 
-    FF(clk, [
+    Sequential(clk, [
       If(reset, then: [
         val < 0
       ], orElse: [

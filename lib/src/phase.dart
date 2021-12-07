@@ -47,6 +47,11 @@ class Objection {
   }
 }
 
+/// A object responsible for controlling a period of time during the test
+/// which can be prevented from ending.
+///
+/// Raising [Objection]s on a [Phase] keeps this portion of the test from
+/// completing.
 class Phase {
   /// All active [Objection]s to this phase completing.
   final Queue<Objection> _objections = Queue<Objection>();

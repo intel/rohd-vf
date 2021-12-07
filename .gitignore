@@ -11,3 +11,6 @@ waves.vcd
 
 pubspec.lock
 .vscode
+
+*.tracker.json
+*.tracker.log
