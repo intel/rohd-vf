@@ -112,6 +112,8 @@
 <p>ROHD-VF uses the Dart <a href="https://pub.dev/packages/logging"><code>logging</code></a> package for all logging.  It comes with a variety of verbosity levels and excellent customizability.</p>
 <p>The <code>Test</code> object contains settings for <code>killLevel</code> and <code>failLevel</code> which will, respectively, immediately end the test or cause a test failure when the simulation finishes running.  These levels are associated with the levels from the <code>logging</code> package.</p>
 <p>To log a message from any ROHD-VF object or component, just use the inherited <code>logger</code> object.</p>
+<h3 id="logging-with-the-tracker">Logging with the <code>Tracker</code></h3>
+<p>ROHD-VF comes with a flexible <a href="https://intel.github.io/rohd-vf/rohd_vf/Tracker-class.html"><code>Tracker</code></a> which enables pretty printing and convenient output files associated with arbitrary events (which implement <a href="https://intel.github.io/rohd-vf/rohd_vf/Trackable-class.html"><code>Trackable</code></a>) throughout your test.  <code>Tracker</code> currently supports a JSON output as well as an ASCII table output.  Check out the <a href="./test/tracker_test.dart">tracker unit test</a> for an example of how to configure and use the <code>Tracker</code>.</p>
 <hr>
 <p>2021 November 9<br>
 Author: Max Korbel &lt;<a href="mailto:max.korbel@intel.com">max.korbel@intel.com</a>&gt;</p>

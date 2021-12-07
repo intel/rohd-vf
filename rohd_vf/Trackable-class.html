@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Phase class from the rohd_vf library, for the Dart programming language.">
-  <title>Phase class - rohd_vf library - Dart API</title>
+  <meta name="description" content="API docs for the Trackable class from the rohd_vf library, for the Dart programming language.">
+  <title>Trackable class - rohd_vf library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">rohd_vf</a></li>
     <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
-    <li class="self-crumb">Phase class</li>
+    <li class="self-crumb">Trackable abstract class</li>
   </ol>
-  <div class="self-name">Phase</div>
+  <div class="self-name">Trackable</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -44,17 +44,15 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-class">Phase</span> class 
+<h1><span class="kind-class">Trackable</span> class 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>A object responsible for controlling a period of time during the test
-which can be prevented from ending.</p>
-<p>Raising <a href="../rohd_vf/Objection-class.html">Objection</a>s on a <a href="../rohd_vf/Phase-class.html">Phase</a> keeps this portion of the test from
-completing.</p>
+  <p>An interface for an object that can be tracked by a <a href="../rohd_vf/Tracker-class.html">Tracker</a>.</p>
+<p>Any item that <code>implements</code> this class can be tracked.</p>
 </section>
 
 
@@ -63,8 +61,8 @@ completing.</p>
       <h2>Constructors</h2>
 
       <dl class="constructor-summary-list">
-        <dt id="Phase" class="callable">
-          <span class="name"><a href="../rohd_vf/Phase/Phase.html">Phase</a></span><span class="signature">()</span>
+        <dt id="Trackable" class="callable">
+          <span class="name"><a href="../rohd_vf/Trackable/Trackable.html">Trackable</a></span><span class="signature">()</span>
         </dt>
         <dd>
            
@@ -72,7 +70,7 @@ completing.</p>
       </dl>
     </section>
 
-    <section class="summary offset-anchor" id="instance-properties">
+    <section class="summary offset-anchor inherited" id="instance-properties">
       <h2>Properties</h2>
 
       <dl class="properties">
@@ -84,18 +82,6 @@ completing.</p>
 <dd class="inherited">
   The hash code for this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">[...]</a>
   <div class="features">read-only, inherited</div>
-
-</dd>
-
-        <dt id="objections" class="property">
-  <span class="name"><a href="../rohd_vf/Phase/objections.html">objections</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Objection-class.html">Objection</a></span>&gt;</span></span> 
-
-</dt>
-<dd>
-  An unmodifiable <a href="https://api.dart.dev/stable/2.14.4/dart-core/Iterable-class.html">Iterable</a> of all active <code>Objection</code>s which are
-preventing this phase from completing. 
-  <div class="features">read-only</div>
 
 </dd>
 
@@ -116,20 +102,6 @@ preventing this phase from completing.
     <section class="summary offset-anchor" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
-        <dt id="allObjectionsDropped" class="callable">
-  <span class="name"><a href="../rohd_vf/Phase/allObjectionsDropped.html">allObjectionsDropped</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd>
-  A <a href="https://api.dart.dev/stable/2.14.4/dart-async/Future-class.html">Future</a> which will complete once there are no more
-raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>. 
-  
-
-</dd>
-
         <dt id="noSuchMethod" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
@@ -143,19 +115,6 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
 
 </dd>
 
-        <dt id="raiseObjection" class="callable">
-  <span class="name"><a href="../rohd_vf/Phase/raiseObjection.html">raiseObjection</a></span><span class="signature">(<wbr><span class="parameter" id="raiseObjection-param-name">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span> = <span class="default-value">&#39;&#39;</span>]</span>)
-    <span class="returntype parameter">&#8594; <a href="../rohd_vf/Objection-class.html">Objection</a></span>
-  </span>
-  
-
-</dt>
-<dd>
-  Creates and returns a new objection named <code>name</code> applied to this <a href="../rohd_vf/Phase-class.html">Phase</a>. 
-  
-
-</dd>
-
         <dt id="toString" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
@@ -166,6 +125,19 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
 <dd class="inherited">
   A string representation of this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">[...]</a>
   <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="trackerString" class="callable">
+  <span class="name"><a href="../rohd_vf/Trackable/trackerString.html">trackerString</a></span><span class="signature">(<wbr><span class="parameter" id="trackerString-param-field"><span class="type-annotation"><a href="../rohd_vf/TrackerField-class.html">TrackerField</a></span> <span class="parameter-name">field</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a formatted <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a> value associated with <code>field</code> in this object. 
+  
 
 </dd>
 
@@ -206,7 +178,7 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
   <li><a href="../index.html">rohd_vf</a></li>
   <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
-  <li class="self-crumb">Phase class</li>
+  <li class="self-crumb">Trackable abstract class</li>
 </ol>
 
 
@@ -245,24 +217,22 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <ol>
 
-    <li class="section-title"><a href="../rohd_vf/Phase-class.html#constructors">Constructors</a></li>
-    <li><a href="../rohd_vf/Phase/Phase.html">Phase</a></li>
+    <li class="section-title"><a href="../rohd_vf/Trackable-class.html#constructors">Constructors</a></li>
+    <li><a href="../rohd_vf/Trackable/Trackable.html">Trackable</a></li>
 
 
-    <li class="section-title">
-      <a href="../rohd_vf/Phase-class.html#instance-properties">Properties</a>
+    <li class="section-title inherited">
+      <a href="../rohd_vf/Trackable-class.html#instance-properties">Properties</a>
     </li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../rohd_vf/Phase/objections.html">objections</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
-    <li class="section-title"><a href="../rohd_vf/Phase-class.html#instance-methods">Methods</a></li>
-    <li><a href="../rohd_vf/Phase/allObjectionsDropped.html">allObjectionsDropped</a></li>
+    <li class="section-title"><a href="../rohd_vf/Trackable-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li><a href="../rohd_vf/Phase/raiseObjection.html">raiseObjection</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></li>
+    <li><a href="../rohd_vf/Trackable/trackerString.html">trackerString</a></li>
 
-    <li class="section-title inherited"><a href="../rohd_vf/Phase-class.html#operators">Operators</a></li>
+    <li class="section-title inherited"><a href="../rohd_vf/Trackable-class.html#operators">Operators</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 

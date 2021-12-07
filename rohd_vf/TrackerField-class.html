@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Phase class from the rohd_vf library, for the Dart programming language.">
-  <title>Phase class - rohd_vf library - Dart API</title>
+  <meta name="description" content="API docs for the TrackerField class from the rohd_vf library, for the Dart programming language.">
+  <title>TrackerField class - rohd_vf library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">rohd_vf</a></li>
     <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
-    <li class="self-crumb">Phase class</li>
+    <li class="self-crumb">TrackerField class</li>
   </ol>
-  <div class="self-name">Phase</div>
+  <div class="self-name">TrackerField</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -44,17 +44,14 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-class">Phase</span> class 
+<h1><span class="kind-class">TrackerField</span> class 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>A object responsible for controlling a period of time during the test
-which can be prevented from ending.</p>
-<p>Raising <a href="../rohd_vf/Objection-class.html">Objection</a>s on a <a href="../rohd_vf/Phase-class.html">Phase</a> keeps this portion of the test from
-completing.</p>
+  <p>A field or column in a <a href="../rohd_vf/Tracker-class.html">Tracker</a> log.</p>
 </section>
 
 
@@ -63,11 +60,12 @@ completing.</p>
       <h2>Constructors</h2>
 
       <dl class="constructor-summary-list">
-        <dt id="Phase" class="callable">
-          <span class="name"><a href="../rohd_vf/Phase/Phase.html">Phase</a></span><span class="signature">()</span>
+        <dt id="TrackerField" class="callable">
+          <span class="name"><a href="../rohd_vf/TrackerField/TrackerField.html">TrackerField</a></span><span class="signature">(<span class="parameter" id="-param-title"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>, </span><span class="parameter" id="-param-columnWidth"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">columnWidth</span>, </span><span class="parameter" id="-param-emptyFill">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">emptyFill</span> = <span class="default-value">&#39;&#39;</span>, </span><span class="parameter" id="-param-justify"><span class="type-annotation"><a href="../rohd_vf/Justify-class.html">Justify</a></span> <span class="parameter-name">justify</span> = <span class="default-value">Justify.right</span>}</span>)</span>
         </dt>
         <dd>
            
+          <div class="constructor-modifier features">const</div>
         </dd>
       </dl>
     </section>
@@ -76,6 +74,28 @@ completing.</p>
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="columnWidth" class="property">
+  <span class="name"><a href="../rohd_vf/TrackerField/columnWidth.html">columnWidth</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd>
+  The width (in characters) of a column for a <a href="../rohd_vf/Tracker-class.html">Tracker</a> log. 
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="emptyFill" class="property">
+  <span class="name"><a href="../rohd_vf/TrackerField/emptyFill.html">emptyFill</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  A <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a> to use to fill a column for a row where no data is provided. 
+  <div class="features">final</div>
+
+</dd>
+
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span> 
@@ -87,15 +107,14 @@ completing.</p>
 
 </dd>
 
-        <dt id="objections" class="property">
-  <span class="name"><a href="../rohd_vf/Phase/objections.html">objections</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Objection-class.html">Objection</a></span>&gt;</span></span> 
+        <dt id="justify" class="property">
+  <span class="name"><a href="../rohd_vf/TrackerField/justify.html">justify</a></span>
+  <span class="signature">&#8594; <a href="../rohd_vf/Justify-class.html">Justify</a></span> 
 
 </dt>
 <dd>
-  An unmodifiable <a href="https://api.dart.dev/stable/2.14.4/dart-core/Iterable-class.html">Iterable</a> of all active <code>Objection</code>s which are
-preventing this phase from completing. 
-  <div class="features">read-only</div>
+  How the data should be aligned with a column of a <a href="../rohd_vf/Tracker-class.html">Tracker</a> log. 
+  <div class="features">final</div>
 
 </dd>
 
@@ -110,26 +129,23 @@ preventing this phase from completing.
 
 </dd>
 
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="instance-methods">
-      <h2>Methods</h2>
-      <dl class="callables">
-        <dt id="allObjectionsDropped" class="callable">
-  <span class="name"><a href="../rohd_vf/Phase/allObjectionsDropped.html">allObjectionsDropped</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-  </span>
-  
+        <dt id="title" class="property">
+  <span class="name"><a href="../rohd_vf/TrackerField/title.html">title</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
-  A <a href="https://api.dart.dev/stable/2.14.4/dart-async/Future-class.html">Future</a> which will complete once there are no more
-raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>. 
-  
+  The title and name of a column for a <a href="../rohd_vf/Tracker-class.html">Tracker</a> log. 
+  <div class="features">final</div>
 
 </dd>
 
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
@@ -140,19 +156,6 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
 <dd class="inherited">
   Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">[...]</a>
   <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="raiseObjection" class="callable">
-  <span class="name"><a href="../rohd_vf/Phase/raiseObjection.html">raiseObjection</a></span><span class="signature">(<wbr><span class="parameter" id="raiseObjection-param-name">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span> = <span class="default-value">&#39;&#39;</span>]</span>)
-    <span class="returntype parameter">&#8594; <a href="../rohd_vf/Objection-class.html">Objection</a></span>
-  </span>
-  
-
-</dt>
-<dd>
-  Creates and returns a new objection named <code>name</code> applied to this <a href="../rohd_vf/Phase-class.html">Phase</a>. 
-  
 
 </dd>
 
@@ -206,7 +209,7 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
   <li><a href="../index.html">rohd_vf</a></li>
   <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
-  <li class="self-crumb">Phase class</li>
+  <li class="self-crumb">TrackerField class</li>
 </ol>
 
 
@@ -245,24 +248,25 @@ raised objections on this <a href="../rohd_vf/Phase-class.html">Phase</a>.
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <ol>
 
-    <li class="section-title"><a href="../rohd_vf/Phase-class.html#constructors">Constructors</a></li>
-    <li><a href="../rohd_vf/Phase/Phase.html">Phase</a></li>
+    <li class="section-title"><a href="../rohd_vf/TrackerField-class.html#constructors">Constructors</a></li>
+    <li><a href="../rohd_vf/TrackerField/TrackerField.html">TrackerField</a></li>
 
 
     <li class="section-title">
-      <a href="../rohd_vf/Phase-class.html#instance-properties">Properties</a>
+      <a href="../rohd_vf/TrackerField-class.html#instance-properties">Properties</a>
     </li>
+    <li><a href="../rohd_vf/TrackerField/columnWidth.html">columnWidth</a></li>
+    <li><a href="../rohd_vf/TrackerField/emptyFill.html">emptyFill</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../rohd_vf/Phase/objections.html">objections</a></li>
+    <li><a href="../rohd_vf/TrackerField/justify.html">justify</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../rohd_vf/TrackerField/title.html">title</a></li>
 
-    <li class="section-title"><a href="../rohd_vf/Phase-class.html#instance-methods">Methods</a></li>
-    <li><a href="../rohd_vf/Phase/allObjectionsDropped.html">allObjectionsDropped</a></li>
+    <li class="section-title inherited"><a href="../rohd_vf/TrackerField-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li><a href="../rohd_vf/Phase/raiseObjection.html">raiseObjection</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../rohd_vf/Phase-class.html#operators">Operators</a></li>
+    <li class="section-title inherited"><a href="../rohd_vf/TrackerField-class.html#operators">Operators</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
