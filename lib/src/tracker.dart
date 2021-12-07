@@ -28,8 +28,12 @@ class TrackerField {
   /// How the data should be aligned with a column of a [Tracker] log.
   final Justify justify;
 
+  /// If set to true, will not print as part of the table, but still be included in
+  /// the map outputs.
+  final bool mapOnly;
+
   const TrackerField(this.title, this.columnWidth,
-      {this.emptyFill = '', this.justify = Justify.right})
+      {this.emptyFill = '', this.justify = Justify.right, this.mapOnly = false})
       : assert(columnWidth > 0);
 }
 
@@ -99,7 +103,11 @@ class Tracker<TrackableType extends Trackable> {
   }
 
   /// Records [trackable] into all enabled logs.
-  void record(TrackableType trackable) {
+  ///
+  /// If [trackable] does not specify a value for a field, then
+  /// the value from [defaults] will be used (key=title), if present.
+  void record(TrackableType trackable,
+      {Map<String, String?> defaults = const {}}) {
     for (var dumper in _dumpers) {
       dumper.record(trackable);
     }
@@ -141,7 +149,8 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
   }
 
   /// Logs [trackable] into the log controlled by this [_TrackerDumper].
-  void record(TrackableType trackable);
+  void record(TrackableType trackable,
+      {Map<String, String?> defaults = const {}});
 
   /// Keeps track if this has already performed a termination.
   bool _hasTerminated = false;
@@ -170,22 +179,27 @@ class _TableDumper<TrackableType extends Trackable>
   }
 
   @override
-  void record(TrackableType trackable) {
-    _recordLine(
-        {for (var field in _fields) field: trackable.trackerString(field)});
+  void record(TrackableType trackable,
+      {Map<String, String?> defaults = const {}}) {
+    _recordLine({
+      for (var field in _fields)
+        field: trackable.trackerString(field) ?? defaults[field.title]
+    });
   }
 
   /// Prints the table header with vertically printed titles and separators.
   void _recordHeader() {
-    var headerHeight =
-        _fields.map((field) => field.title.length).reduce((a, b) => max(a, b));
+    var headerFields = _fields.where((element) => !element.mapOnly);
+    var headerHeight = headerFields
+        .map((field) => field.title.length)
+        .reduce((a, b) => max(a, b));
 
     _recordSeparator();
     for (var charIdx = 0; charIdx < headerHeight; charIdx++) {
       var entry = <TrackerField, String>{};
-      for (var field in _fields) {
+      for (var field in headerFields) {
         if (charIdx < field.title.length) {
-          entry[field] = field.title[charIdx];
+          entry[field] = field.title[charIdx].toUpperCase();
         }
       }
       _recordLine(entry,
@@ -198,6 +212,7 @@ class _TableDumper<TrackableType extends Trackable>
   void _recordSeparator() {
     logln(List.generate(
         _fields
+                .where((element) => !element.mapOnly)
                 .map((field) => field.columnWidth + spacer.length)
                 .reduce((l1, l2) => l1 + l2) +
             spacer.length,
@@ -206,7 +221,8 @@ class _TableDumper<TrackableType extends Trackable>
 
   void _recordLine(Map<TrackerField, String?> entry,
       {Justify? justify, String? emptyFill, bool includeMap = true}) {
-    var fieldVals = _fields.map((field) {
+    var headerFields = _fields.where((element) => !element.mapOnly);
+    var fieldVals = headerFields.map((field) {
       var value = entry[field] ?? emptyFill ?? field.emptyFill;
       var fieldJustify = justify ?? field.justify;
 
@@ -262,12 +278,14 @@ class _JsonDumper<TrackableType extends Trackable>
 
   bool _isFirst = true;
   @override
-  void record(TrackableType trackable) {
+  void record(TrackableType trackable,
+      {Map<String, String?> defaults = const {}}) {
     var start = _isFirst ? ' ' : ',';
     _isFirst = false;
     var map = {
       for (var field in _fields)
-        '"${field.title}"': '"${trackable.trackerString(field)}"'
+        '"${field.title}"':
+            '"${trackable.trackerString(field) ?? defaults[field.title]}"'
     };
     logln('$start $map');
   }
