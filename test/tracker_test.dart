@@ -31,6 +31,8 @@ class FruitEvent implements Trackable {
         return banana;
       case 'Carrot':
         return carrot.toString();
+      case 'Durian':
+        return (carrot * 2).toRadixString(16);
     }
     return null;
   }
@@ -43,18 +45,19 @@ void main() {
       [
         TrackerField('Apple', 10),
         TrackerField('Banana', 5),
-        TrackerField('Carrot', 12, justify: Justify.center)
+        TrackerField('Carrot', 12, justify: Justify.center),
+        TrackerField('Durian', 12, mapOnly: true)
       ],
     );
 
     tracker.record(FruitEvent(LogicValues.fromString('1x0'), 'banana', 25));
     tracker.record(
-        FruitEvent(LogicValues.fromString('1x01111000011010101'), 'aaa', 4));
+        FruitEvent(LogicValues.fromString('1x01111000011010101'), 'aaa', 5));
 
     // Expect JSON log to look like:
     // {"records":[
-    //   {"Apple": "3'b1x0", "Banana": "banana", "Carrot": "25"}
-    // , {"Apple": "19'b1x01111000011010101", "Banana": "aaa", "Carrot": "4"}
+    //   {"Apple": "3'b1x0", "Banana": "banana", "Carrot": "25", "Durian": "32"}
+    // , {"Apple": "19'b1x01111000011010101", "Banana": "aaa", "Carrot": "4", "Durian": "8"}
     // ]}
 
     tracker.terminate();
@@ -62,21 +65,23 @@ void main() {
     var jsonOutput = json.decode(File(tracker.jsonFileName).readAsStringSync());
     expect(jsonOutput['records'].length, equals(2));
     expect(jsonOutput['records'][0]['Banana'], equals('banana'));
+    expect(jsonOutput['records'][1]['Durian'], equals('a'));
 
     // Expect table log to look like:
     // ---------------------------------------
-    //  | A          | B     | C
-    //  | p          | a     | a
-    //  | p          | n     | r
-    //  | l          | a     | r
-    //  | e          | n     | o
-    //  |            | a     | t
+    //  | A          | B     | C            |
+    //  | P          | A     | A            |
+    //  | P          | N     | R            |
+    //  | L          | A     | R            |
+    //  | E          | N     | O            |
+    //  |            | A     | T            |
     // ---------------------------------------
-    //  |     3'b1x0 | bana* |      25      | {Apple: 3'b1x0, Banana: banana, Carrot: 25}
-    //  | 19'b1x011* |   aaa |      4       | {Apple: 19'b1x01111000011010101, Banana: aaa, Carrot: 4}
+    //  |     3'b1x0 | bana* |      25      | {Apple: 3'b1x0, Banana: banana, Carrot: 25, Durian: 32}
+    //  | 19'b1x011* |   aaa |      5       | {Apple: 19'b1x01111000011010101, Banana: aaa, Carrot: 5, Durian: a}
 
     var logOutput = File(tracker.tableFileName).readAsStringSync();
     expect(logOutput.contains('bana*'), equals(true));
+    expect(logOutput.split('\n')[1].split('|').length, equals(5));
 
     File(tracker.jsonFileName).deleteSync();
     File(tracker.tableFileName).deleteSync();
