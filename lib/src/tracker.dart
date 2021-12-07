@@ -43,8 +43,8 @@ abstract class Trackable {
 
 /// A logger that tracks a sequence of [Trackable] events into multiple output formats.
 ///
-/// By default, [Tracker] outputs to both a ASCII table format (*.tracker.log) and a
-/// JSON format (*.tracker.json).
+/// By default, [Tracker] outputs to both a ASCII table format (<name>.tracker.log) and a
+/// JSON format (<name>.tracker.json).
 class Tracker<TrackableType extends Trackable> {
   /// An optional output directory for the logs.
   ///
