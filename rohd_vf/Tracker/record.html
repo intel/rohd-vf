@@ -53,7 +53,8 @@
       
 
 <span class="returntype">void</span>
-<span class="name ">record</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="record-param-trackable"><span class="type-annotation">TrackableType</span> <span class="parameter-name">trackable</span></span></li>
+<span class="name ">record</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="record-param-trackable"><span class="type-annotation">TrackableType</span> <span class="parameter-name">trackable</span>, </span></li>
+<li><span class="parameter" id="record-param-defaults">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span>&gt;</span></span> <span class="parameter-name">defaults</span> = <span class="default-value">const {}</span>}</span></li>
 </ol>)
 
       
@@ -62,13 +63,16 @@
     
 <section class="desc markdown">
   <p>Records <code>trackable</code> into all enabled logs.</p>
+<p>If <code>trackable</code> does not specify a value for a field, then
+the value from <code>defaults</code> will be used (key=title), if present.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void record(TrackableType trackable) {
+  <pre class="language-dart"><code class="language-dart">void record(TrackableType trackable,
+    {Map&lt;String, String?&gt; defaults = const {}}) {
   for (var dumper in _dumpers) {
     dumper.record(trackable);
   }
