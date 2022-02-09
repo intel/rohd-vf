@@ -50,9 +50,9 @@ void main() {
       ],
     );
 
-    tracker.record(FruitEvent(LogicValues.fromString('1x0'), 'banana', 25));
+    tracker.record(FruitEvent(LogicValues.ofString('1x0'), 'banana', 25));
     tracker.record(
-        FruitEvent(LogicValues.fromString('1x01111000011010101'), 'aaa', 5));
+        FruitEvent(LogicValues.ofString('1x01111000011010101'), 'aaa', 5));
 
     // Expect JSON log to look like:
     // {"records":[
