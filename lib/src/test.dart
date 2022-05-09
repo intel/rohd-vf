@@ -32,6 +32,8 @@ abstract class Test extends Component {
   /// reproduced by setting the same seed again.
   static Random get random => instance._random;
 
+  //TODO: make this always return a Random, even if no test
+
   /// The minimum level that should immediately kill the test.
   ///
   /// This level should be greater than or equal to [failLevel].
@@ -70,6 +72,8 @@ abstract class Test extends Component {
     instance = this;
     configureLogger();
   }
+
+  //TODO: make it print the random seed
 
   /// Configures the root logger to provide information about
   /// log messages.

@@ -253,7 +253,7 @@ class CounterDriver extends Driver<CounterSeqItem> {
 }
 
 /// A monitor for the value output of the [Counter]].
-class CounterValueMonitor extends Monitor<LogicValues> {
+class CounterValueMonitor extends Monitor<LogicValue> {
   /// Instance of the [Interface] to the DUT.
   final CounterInterface intf;
 
@@ -289,7 +289,7 @@ class CounterEnableMonitor extends Monitor<CounterSeqItem> {
     // Every positive edge of the clock
     intf.clk.posedge.listen((event) {
       // If the enable bit on the interface is 1
-      if (intf.en.bit == LogicValue.one) {
+      if (intf.en.value == LogicValue.one) {
         // Send out an event with `true` out of this Monitor
         add(CounterSeqItem(true));
       }
@@ -304,7 +304,7 @@ class CounterScoreboard extends Component {
   final Stream<bool> enableStream;
 
   /// A stream which sends out the current value out of the counter once per cycle.
-  final Stream<LogicValues> valueStream;
+  final Stream<LogicValue> valueStream;
 
   /// An instance of the interface to the [Counter].
   final CounterInterface intf;

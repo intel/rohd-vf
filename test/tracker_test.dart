@@ -16,7 +16,7 @@ import 'package:rohd_vf/rohd_vf.dart';
 import 'package:test/test.dart';
 
 class FruitEvent implements Trackable {
-  final LogicValues apple;
+  final LogicValue apple;
   final String banana;
   final int carrot;
 
@@ -50,9 +50,9 @@ void main() {
       ],
     );
 
-    tracker.record(FruitEvent(LogicValues.ofString('1x0'), 'banana', 25));
+    tracker.record(FruitEvent(LogicValue.ofString('1x0'), 'banana', 25));
     tracker.record(
-        FruitEvent(LogicValues.ofString('1x01111000011010101'), 'aaa', 5));
+        FruitEvent(LogicValue.ofString('1x01111000011010101'), 'aaa', 5));
 
     // Expect JSON log to look like:
     // {"records":[
