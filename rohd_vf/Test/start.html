@@ -78,9 +78,24 @@ all objections have dropped.</p>
   }
   unawaited(Simulator.run());
   logger.finest(&#39;Waiting for objections to finish...&#39;);
-  await runPhase.allObjectionsDropped();
-  logger.finest(&#39;Objections completed, ending simulation.&#39;);
-  Simulator.endSimulation();
+
+  await Future.any([
+    Simulator.simulationEnded,
+    runPhase.allObjectionsDropped(),
+  ]);
+
+  if (runPhase.objections.isNotEmpty) {
+    logger
+        .warning(&#39;Simulation has ended before all objections were dropped!&#39;);
+  } else {
+    logger.finest(&#39;Objections completed, ending simulation.&#39;);
+    Simulator.endSimulation();
+  }
+
+  if (!Simulator.simulationHasEnded) {
+    await Simulator.simulationEnded;
+  }
+
   logger.finest(&#39;Simulation ended, test complete.&#39;);
 }</code></pre>
 </section>
