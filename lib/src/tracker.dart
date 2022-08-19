@@ -120,9 +120,7 @@ class Tracker<TrackableType extends Trackable> {
   /// If this is not called, the logs may be left in an
   /// incomplete/invalid format.
   Future<void> terminate() async {
-    for (var dumper in _dumpers) {
-      dumper.terminate();
-    }
+    await Future.wait(_dumpers.map((dumper) => dumper.terminate()));
   }
 }
 
@@ -135,11 +133,15 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
   /// The [File] to dump output to.
   final File _file;
 
+  /// A sink to write contents into [_file].
+  late final IOSink _fileSink;
+
   /// Constructs a new [_TrackerDumper], erasing any existing file with the same name.
   _TrackerDumper(String fileName, List<TrackerField> fields)
       : _fields = List.from(fields),
         _file = File(fileName) {
-    _file.writeAsStringSync(''); // empty out existing files
+    // default is write mode, empty out existing files
+    _fileSink = _file.openWrite();
   }
 
   /// Prints [message] to [_file], with a new line at the end.
@@ -147,7 +149,7 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
     if (_hasTerminated) {
       throw Exception('Log has already terminated, cannot log more!');
     }
-    _file.writeAsStringSync(message + '\n', mode: FileMode.append);
+    _fileSink.write(message + '\n');
   }
 
   /// Logs [trackable] into the log controlled by this [_TrackerDumper].
@@ -160,10 +162,12 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
   /// Performs any clean-up or file ending at the end of the log.
   ///
   /// No more can be logged after this is called.
-  void terminate() {
+  Future<void> terminate() async {
     if (_hasTerminated) {
       throw Exception('Already terminated.');
     }
+    await _fileSink.flush();
+    await _fileSink.close();
     _hasTerminated = true;
   }
 }
@@ -293,8 +297,8 @@ class _JsonDumper<TrackableType extends Trackable>
   }
 
   @override
-  void terminate() {
+  Future<void> terminate() async {
     _recordEnd();
-    super.terminate();
+    await super.terminate();
   }
 }
