@@ -70,9 +70,7 @@ incomplete/invalid format.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; terminate() async {
-  for (var dumper in _dumpers) {
-    dumper.terminate();
-  }
+  await Future.wait(_dumpers.map((dumper) =&gt; dumper.terminate()));
 }</code></pre>
 </section>
 
