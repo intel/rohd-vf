@@ -1,6 +1,6 @@
 name: rohd_vf
 description: The ROHD Verification Framework, a verification framework built upon ROHD for building testbenches.
-version: 0.3.0
+version: 0.3.1
 homepage: https://www.github.com/intel/rohd-vf
 repository: https://github.com/intel/rohd-vf
 issue_tracker: https://github.com/intel/rohd-vf/issues
