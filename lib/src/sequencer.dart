@@ -25,7 +25,7 @@ class Sequencer<SequenceItemType extends SequenceItem> extends Component {
 
   /// A controller for the output [stream] of this [Sequencer].
   final StreamController<SequenceItemType> _streamController =
-      StreamController<SequenceItemType>();
+      StreamController<SequenceItemType>(sync: true);
 
   /// The output [Stream] of [SequenceItemType] from this [Sequencer], intended
   /// to be consumed by a [Driver].

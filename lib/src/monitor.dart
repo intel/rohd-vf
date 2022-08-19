@@ -17,7 +17,7 @@ import 'package:rohd_vf/rohd_vf.dart';
 abstract class Monitor<MonitorItem> extends Component {
   /// A controller for the main output [stream] of this [Monitor].
   final StreamController<MonitorItem> _streamController =
-      StreamController<MonitorItem>.broadcast();
+      StreamController<MonitorItem>.broadcast(sync: true);
 
   /// A [Stream] of items that this [Monitor] has detected and shared with listeners.
   ///
