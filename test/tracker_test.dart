@@ -39,7 +39,7 @@ class FruitEvent implements Trackable {
 }
 
 void main() {
-  test('tracker test', () {
+  test('tracker test', () async {
     var tracker = Tracker(
       'testTracker',
       [
@@ -60,7 +60,7 @@ void main() {
     // , {"Apple": "19'b1x01111000011010101", "Banana": "aaa", "Carrot": "4", "Durian": "8"}
     // ]}
 
-    tracker.terminate();
+    await tracker.terminate();
 
     var jsonOutput = json.decode(File(tracker.jsonFileName).readAsStringSync());
     expect(jsonOutput['records'].length, equals(2));
