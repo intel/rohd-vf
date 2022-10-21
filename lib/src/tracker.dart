@@ -12,7 +12,17 @@ import 'dart:io';
 import 'dart:math';
 
 /// Selection of how to align text in a column.
-enum Justify { right, left, center }
+enum Justify {
+  /// Right-justify, text is aligned with no space on the right.
+  right,
+
+  /// Left-justify, text is aligned with no space on the left.
+  left,
+
+  /// Centered, text is centered with equal space on both the
+  /// left and the right.
+  center
+}
 
 /// A field or column in a [Tracker] log.
 class TrackerField {
@@ -28,27 +38,30 @@ class TrackerField {
   /// How the data should be aligned with a column of a [Tracker] log.
   final Justify justify;
 
-  /// If set to true, will not print as part of the table, but still be included in
-  /// the map outputs.
+  /// If set to true, will not print as part of the table, but still be
+  /// included in the map outputs.
   final bool mapOnly;
 
+  /// Represents one field or column in the [Tracker] titled [title].
   const TrackerField(this.title, this.columnWidth,
       {this.emptyFill = '', this.justify = Justify.right, this.mapOnly = false})
-      : assert(columnWidth > 0);
+      : assert(columnWidth > 0, '`columnWidth` must be greater than 0.');
 }
 
 /// An interface for an object that can be tracked by a [Tracker].
 ///
 /// Any item that `implements` this class can be tracked.
+// ignore: one_member_abstracts
 abstract class Trackable {
   /// Returns a formatted [String] value associated with [field] in this object.
   String? trackerString(TrackerField field);
 }
 
-/// A logger that tracks a sequence of [Trackable] events into multiple output formats.
+/// A logger that tracks a sequence of [Trackable] events into multiple output
+/// formats.
 ///
-/// By default, [Tracker] outputs to both a ASCII table format (<name>.tracker.log) and a
-/// JSON format (<name>.tracker.json).
+/// By default, [Tracker] outputs to both a ASCII table format
+/// (<name>.tracker.log) and a JSON format (<name>.tracker.json).
 class Tracker<TrackableType extends Trackable> {
   /// An optional output directory for the logs.
   ///
@@ -66,7 +79,7 @@ class Tracker<TrackableType extends Trackable> {
   String get _fileNameStart {
     var fileNameStart = name;
     if (outputFolder != null) {
-      fileNameStart = outputFolder! + '/' + fileNameStart;
+      fileNameStart = '${outputFolder!}/$fileNameStart';
     }
     return fileNameStart;
   }
@@ -83,8 +96,17 @@ class Tracker<TrackableType extends Trackable> {
   /// A [List] of all [_TrackerDumper]s which are enabled for output dumping.
   late final List<_TrackerDumper<TrackableType>> _dumpers;
 
-  //TODO: constructor doc comments
-
+  /// Constructs a [Tracker] named [name] with the provided [fields].
+  ///
+  /// In the table view, the [spacer] is used to separate columns, the
+  /// [separator] is used to separate the headers from the data, and the
+  /// [overflow] is used to show that a value is exceeding the width of
+  /// the column.  Tables will only dump if [dumpTable] is true.
+  ///
+  /// JSON files will only dump if [dumpJson] is true.
+  ///
+  /// All outputs are dumped to [outputFolder] if it is provided, otherwise
+  /// they are dumepd in the current working directory.
   Tracker(this.name, List<TrackerField> fields,
       {String spacer = ' | ',
       String separator = '-',
@@ -94,7 +116,7 @@ class Tracker<TrackableType extends Trackable> {
       this.dumpJson = true}) {
     var fileNameStart = name;
     if (outputFolder != null) {
-      fileNameStart = outputFolder! + '/' + fileNameStart;
+      fileNameStart = '${outputFolder!}/$fileNameStart';
     }
     _dumpers = [
       if (dumpJson) _JsonDumper<TrackableType>(jsonFileName, fields),
@@ -110,7 +132,7 @@ class Tracker<TrackableType extends Trackable> {
   /// the value from [defaults] will be used (key=title), if present.
   void record(TrackableType trackable,
       {Map<String, String?> defaults = const {}}) {
-    for (var dumper in _dumpers) {
+    for (final dumper in _dumpers) {
       dumper.record(trackable);
     }
   }
@@ -119,6 +141,9 @@ class Tracker<TrackableType extends Trackable> {
   ///
   /// If this is not called, the logs may be left in an
   /// incomplete/invalid format.
+  ///
+  /// Usually, a reasonable place to put this is in ROHD's
+  /// `Simulator.registerEndOfSimulationAction`.
   Future<void> terminate() async {
     await Future.wait(_dumpers.map((dumper) => dumper.terminate()));
   }
@@ -136,7 +161,8 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
   /// A sink to write contents into [_file].
   late final IOSink _fileSink;
 
-  /// Constructs a new [_TrackerDumper], erasing any existing file with the same name.
+  /// Constructs a new [_TrackerDumper], erasing any existing file with the
+  /// same name.
   _TrackerDumper(String fileName, List<TrackerField> fields)
       : _fields = List.from(fields),
         _file = File(fileName) {
@@ -149,7 +175,7 @@ abstract class _TrackerDumper<TrackableType extends Trackable> {
     if (_hasTerminated) {
       throw Exception('Log has already terminated, cannot log more!');
     }
-    _fileSink.write(message + '\n');
+    _fileSink.write('$message\n');
   }
 
   /// Logs [trackable] into the log controlled by this [_TrackerDumper].
@@ -178,9 +204,8 @@ class _TableDumper<TrackableType extends Trackable>
   final String spacer;
   final String separator;
   final String overflow;
-  _TableDumper(String fileName, List<TrackerField> fields,
-      {required this.spacer, required this.separator, required this.overflow})
-      : super(fileName, fields) {
+  _TableDumper(super.fileName, super.fields,
+      {required this.spacer, required this.separator, required this.overflow}) {
     _recordHeader();
   }
 
@@ -195,15 +220,14 @@ class _TableDumper<TrackableType extends Trackable>
 
   /// Prints the table header with vertically printed titles and separators.
   void _recordHeader() {
-    var headerFields = _fields.where((element) => !element.mapOnly);
-    var headerHeight = headerFields
-        .map((field) => field.title.length)
-        .reduce((a, b) => max(a, b));
+    final headerFields = _fields.where((element) => !element.mapOnly);
+    final headerHeight =
+        headerFields.map((field) => field.title.length).reduce(max);
 
     _recordSeparator();
     for (var charIdx = 0; charIdx < headerHeight; charIdx++) {
-      var entry = <TrackerField, String>{};
-      for (var field in headerFields) {
+      final entry = <TrackerField, String>{};
+      for (final field in headerFields) {
         if (charIdx < field.title.length) {
           entry[field] = field.title[charIdx].toUpperCase();
         }
@@ -227,10 +251,10 @@ class _TableDumper<TrackableType extends Trackable>
 
   void _recordLine(Map<TrackerField, String?> entry,
       {Justify? justify, String? emptyFill, bool includeMap = true}) {
-    var headerFields = _fields.where((element) => !element.mapOnly);
-    var fieldVals = headerFields.map((field) {
+    final headerFields = _fields.where((element) => !element.mapOnly);
+    final fieldVals = headerFields.map((field) {
       var value = entry[field] ?? emptyFill ?? field.emptyFill;
-      var fieldJustify = justify ?? field.justify;
+      final fieldJustify = justify ?? field.justify;
 
       if (value.length > field.columnWidth) {
         if (overflow.length > field.columnWidth) {
@@ -241,8 +265,9 @@ class _TableDumper<TrackableType extends Trackable>
         }
       }
 
-      int leftPadding = 0, rightPadding = 0;
-      var totalPadding = field.columnWidth - value.length;
+      var leftPadding = 0;
+      var rightPadding = 0;
+      final totalPadding = field.columnWidth - value.length;
 
       if (fieldJustify == Justify.left) {
         rightPadding = totalPadding;
@@ -252,13 +277,14 @@ class _TableDumper<TrackableType extends Trackable>
         leftPadding = totalPadding ~/ 2;
         rightPadding = totalPadding - leftPadding;
       }
-      var leftPaddingStr = List.generate(leftPadding, (index) => ' ').join();
-      var rightPaddingStr = List.generate(rightPadding, (index) => ' ').join();
+      final leftPaddingStr = List.generate(leftPadding, (index) => ' ').join();
+      final rightPaddingStr =
+          List.generate(rightPadding, (index) => ' ').join();
       return leftPaddingStr + value + rightPaddingStr;
     });
 
-    var map = {for (var field in _fields) field.title: entry[field]};
-    var line = [
+    final map = {for (var field in _fields) field.title: entry[field]};
+    final line = [
       ...fieldVals,
       if (includeMap) map.toString() else '',
     ].join(spacer);
@@ -269,8 +295,7 @@ class _TableDumper<TrackableType extends Trackable>
 /// A dumper for JSON files.
 class _JsonDumper<TrackableType extends Trackable>
     extends _TrackerDumper<TrackableType> {
-  _JsonDumper(String fileName, List<TrackerField> fields)
-      : super(fileName, fields) {
+  _JsonDumper(super.fileName, super.fields) {
     _recordStart();
   }
 
@@ -286,9 +311,9 @@ class _JsonDumper<TrackableType extends Trackable>
   @override
   void record(TrackableType trackable,
       {Map<String, String?> defaults = const {}}) {
-    var start = _isFirst ? ' ' : ',';
+    final start = _isFirst ? ' ' : ',';
     _isFirst = false;
-    var map = {
+    final map = {
       for (var field in _fields)
         '"${field.title}"':
             '"${trackable.trackerString(field) ?? defaults[field.title]}"'

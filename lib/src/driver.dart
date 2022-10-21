@@ -18,7 +18,8 @@ import 'package:rohd_vf/rohd_vf.dart';
 abstract class Driver<SequenceItemType extends SequenceItem> extends Component {
   /// The sequencer from which this [Driver] acquires new items to drive.
   ///
-  /// [Driver] implementations should listen to [sequencer]'s [Sequencer.stream].
+  /// [Driver] implementations should listen to [sequencer]'s
+  /// [Sequencer.stream].
   /// For example:
   /// ```dart
   /// @override
@@ -31,6 +32,8 @@ abstract class Driver<SequenceItemType extends SequenceItem> extends Component {
   /// ```
   final Sequencer<SequenceItemType> sequencer;
 
-  Driver(String name, Component? parent, {required this.sequencer})
-      : super(name, parent);
+  /// Constructs a [Driver] named [name] with parent [parent].
+  ///
+  /// The driver should receive [SequenceItem]s from [sequencer].
+  Driver(super.name, super.parent, {required this.sequencer});
 }

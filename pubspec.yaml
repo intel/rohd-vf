@@ -7,13 +7,12 @@ issue_tracker: https://github.com/intel/rohd-vf/issues
 documentation: https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html
 
 environment:
-  sdk: '>=2.14.0 <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
+  logging: ^1.0.1
   meta: ^1.3.0
   rohd: ^0.3.0
-  logging: ^1.0.1
 
 dev_dependencies:
-  lints: ^1.0.1
   test: ^1.17.3

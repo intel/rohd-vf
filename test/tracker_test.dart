@@ -8,6 +8,8 @@
 /// Author: Max Korbel <max.korbel@intel.com>
 ///
 
+// ignore_for_file: lines_longer_than_80_chars, avoid_dynamic_calls
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -40,19 +42,18 @@ class FruitEvent implements Trackable {
 
 void main() {
   test('tracker test', () async {
-    var tracker = Tracker(
+    final tracker = Tracker(
       'testTracker',
       [
-        TrackerField('Apple', 10),
-        TrackerField('Banana', 5),
-        TrackerField('Carrot', 12, justify: Justify.center),
-        TrackerField('Durian', 12, mapOnly: true)
+        const TrackerField('Apple', 10),
+        const TrackerField('Banana', 5),
+        const TrackerField('Carrot', 12, justify: Justify.center),
+        const TrackerField('Durian', 12, mapOnly: true)
       ],
-    );
-
-    tracker.record(FruitEvent(LogicValue.ofString('1x0'), 'banana', 25));
-    tracker.record(
-        FruitEvent(LogicValue.ofString('1x01111000011010101'), 'aaa', 5));
+    )
+      ..record(FruitEvent(LogicValue.ofString('1x0'), 'banana', 25))
+      ..record(
+          FruitEvent(LogicValue.ofString('1x01111000011010101'), 'aaa', 5));
 
     // Expect JSON log to look like:
     // {"records":[
@@ -62,7 +63,8 @@ void main() {
 
     await tracker.terminate();
 
-    var jsonOutput = json.decode(File(tracker.jsonFileName).readAsStringSync());
+    final jsonOutput =
+        json.decode(File(tracker.jsonFileName).readAsStringSync());
     expect(jsonOutput['records'].length, equals(2));
     expect(jsonOutput['records'][0]['Banana'], equals('banana'));
     expect(jsonOutput['records'][1]['Durian'], equals('a'));
@@ -79,7 +81,7 @@ void main() {
     //  |     3'b1x0 | bana* |      25      | {Apple: 3'b1x0, Banana: banana, Carrot: 25, Durian: 32}
     //  | 19'b1x011* |   aaa |      5       | {Apple: 19'b1x01111000011010101, Banana: aaa, Carrot: 5, Durian: a}
 
-    var logOutput = File(tracker.tableFileName).readAsStringSync();
+    final logOutput = File(tracker.tableFileName).readAsStringSync();
     expect(logOutput.contains('bana*'), equals(true));
     expect(logOutput.split('\n')[1].split('|').length, equals(5));
 

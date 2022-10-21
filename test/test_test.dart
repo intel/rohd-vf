@@ -23,9 +23,7 @@ class ForeverObjectionTest extends Test {
     unawaited(super.run(phase));
     phase.raiseObjection('objectionNeverCloses');
     SimpleClockGenerator(10);
-    Simulator.registerAction(100, () {
-      Simulator.endSimulation();
-    });
+    Simulator.registerAction(100, Simulator.endSimulation);
   }
 }
 
@@ -34,11 +32,9 @@ class NormalTest extends Test {
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
-    var obj = phase.raiseObjection('obj');
+    final obj = phase.raiseObjection('obj');
     SimpleClockGenerator(10);
-    Simulator.registerAction(100, () {
-      obj.drop();
-    });
+    Simulator.registerAction(100, obj.drop);
   }
 }
 
@@ -47,9 +43,7 @@ void main() {
     Logger.root.level = Level.OFF;
   });
 
-  tearDown(() {
-    Simulator.reset();
-  });
+  tearDown(Simulator.reset);
 
   test('Test does not wait for objections if simulation ends', () async {
     await ForeverObjectionTest().start();
