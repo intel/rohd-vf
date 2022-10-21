@@ -67,7 +67,7 @@ parent <a href="../../rohd_vf/Component/parent.html">parent</a>.</p>
   <pre class="language-dart"><code class="language-dart">Component(this.name, this.parent) {
   parent?._components.add(this);
 
-  Simulator.simulationEnded.then((value) =&gt; check());
+  unawaited(Simulator.simulationEnded.then((value) =&gt; check()));
 }</code></pre>
 </section>
 

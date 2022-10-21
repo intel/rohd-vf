@@ -68,9 +68,8 @@ as the last element of the <a href="https://api.dart.dev/stable/2.18.3/dart-core
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">List&lt;Component&gt; hierarchy() {
-  return (parent == null ? &lt;Component&gt;[] : parent!.hierarchy())..add(this);
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">List&lt;Component&gt; hierarchy() =&gt;
+    (parent == null ? &lt;Component&gt;[] : parent!.hierarchy())..add(this);</code></pre>
 </section>
 
 

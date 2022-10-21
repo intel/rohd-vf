@@ -82,7 +82,7 @@ Future&lt;void&gt; run(Phase phase) async {
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@mustCallSuper
 Future&lt;void&gt; run(Phase phase) async {
-  for (var component in _components) {
+  for (final component in _components) {
     unawaited(component.run(phase));
   }
 }</code></pre>

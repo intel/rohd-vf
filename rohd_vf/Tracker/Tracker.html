@@ -61,6 +61,16 @@
     </section>
 
     
+<section class="desc markdown">
+  <p>Constructs a <a href="../../rohd_vf/Tracker-class.html">Tracker</a> named <a href="../../rohd_vf/Tracker/name.html">name</a> with the provided <code>fields</code>.</p>
+<p>In the table view, the <code>spacer</code> is used to separate columns, the
+<code>separator</code> is used to separate the headers from the data, and the
+<code>overflow</code> is used to show that a value is exceeding the width of
+the column.  Tables will only dump if <a href="../../rohd_vf/Tracker/dumpTable.html">dumpTable</a> is true.</p>
+<p>JSON files will only dump if <a href="../../rohd_vf/Tracker/dumpJson.html">dumpJson</a> is true.</p>
+<p>All outputs are dumped to <a href="../../rohd_vf/Tracker/outputFolder.html">outputFolder</a> if it is provided, otherwise
+they are dumepd in the current working directory.</p>
+</section>
 
 
     
@@ -75,7 +85,7 @@
     this.dumpJson = true}) {
   var fileNameStart = name;
   if (outputFolder != null) {
-    fileNameStart = outputFolder! + &#39;&#47;&#39; + fileNameStart;
+    fileNameStart = &#39;${outputFolder!}&#47;$fileNameStart&#39;;
   }
   _dumpers = [
     if (dumpJson) _JsonDumper&lt;TrackableType&gt;(jsonFileName, fields),

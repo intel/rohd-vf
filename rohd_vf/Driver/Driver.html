@@ -56,13 +56,16 @@
     </section>
 
     
+<section class="desc markdown">
+  <p>Constructs a <a href="../../rohd_vf/Driver-class.html">Driver</a> named <a href="../../rohd_vf/Component/name.html">name</a> with parent <a href="../../rohd_vf/Component/parent.html">parent</a>.</p>
+<p>The driver should receive <a href="../../rohd_vf/SequenceItem-class.html">SequenceItem</a>s from <a href="../../rohd_vf/Driver/sequencer.html">sequencer</a>.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Driver(String name, Component? parent, {required this.sequencer})
-    : super(name, parent);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Driver(super.name, super.parent, {required this.sequencer});</code></pre>
 </section>
 
 

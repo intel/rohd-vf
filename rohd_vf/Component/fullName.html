@@ -64,7 +64,8 @@
     </section>
     
 <section class="desc markdown">
-  <p>A descriptive name including the full hierarchical path of this <a href="../../rohd_vf/Component-class.html">Component</a>.</p>
+  <p>A descriptive name including the full hierarchical path of
+this <a href="../../rohd_vf/Component-class.html">Component</a>.</p>
 </section>
 
 
@@ -72,9 +73,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-String fullName() {
-  return hierarchy().map((e) =&gt; e.name).join(&#39;.&#39;);
-}</code></pre>
+String fullName() =&gt; hierarchy().map((e) =&gt; e.name).join(&#39;.&#39;);</code></pre>
 </section>
 
 

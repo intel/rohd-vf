@@ -72,7 +72,7 @@ the value from <code>defaults</code> will be used (key=title), if present.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void record(TrackableType trackable,
     {Map&lt;String, String?&gt; defaults = const {}}) {
-  for (var dumper in _dumpers) {
+  for (final dumper in _dumpers) {
     dumper.record(trackable);
   }
 }</code></pre>

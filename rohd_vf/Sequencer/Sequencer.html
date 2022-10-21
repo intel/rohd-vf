@@ -56,15 +56,16 @@
 
     
 <section class="desc markdown">
-  <p>Constructs a basic <a href="../../rohd_vf/Sequencer-class.html">Sequencer</a> of <code>SequenceItemType</code> named <code>name</code>
-which passes items directly through without additional processing to <a href="../../rohd_vf/Sequencer/stream.html">stream</a>.</p>
+  <p>Constructs a basic <a href="../../rohd_vf/Sequencer-class.html">Sequencer</a> of <code>SequenceItemType</code> named <a href="../../rohd_vf/Component/name.html">name</a>
+which passes items directly through without additional processing to
+<a href="../../rohd_vf/Sequencer/stream.html">stream</a>.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Sequencer(String name, Component? parent) : super(name, parent);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Sequencer(super.name, super.parent);</code></pre>
 </section>
 
 

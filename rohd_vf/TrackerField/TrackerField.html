@@ -58,6 +58,9 @@
     </section>
 
     
+<section class="desc markdown">
+  <p>Represents one field or column in the <a href="../../rohd_vf/Tracker-class.html">Tracker</a> titled <a href="../../rohd_vf/TrackerField/title.html">title</a>.</p>
+</section>
 
 
     
@@ -65,7 +68,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">const TrackerField(this.title, this.columnWidth,
     {this.emptyFill = &#39;&#39;, this.justify = Justify.right, this.mapOnly = false})
-    : assert(columnWidth &gt; 0);</code></pre>
+    : assert(columnWidth &gt; 0, &#39;`columnWidth` must be greater than 0.&#39;);</code></pre>
 </section>
 
 

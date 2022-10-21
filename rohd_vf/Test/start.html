@@ -70,7 +70,7 @@ all objections have dropped.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; start() async {
   build();
-  var runPhase = Phase();
+  final runPhase = Phase();
   unawaited(run(runPhase));
   if (!Simulator.hasStepsRemaining()) {
     logger.warning(&#39;Simulator has no registered events.&#39;);
