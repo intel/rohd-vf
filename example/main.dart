@@ -21,7 +21,7 @@ Future<void> main({Level loggerLevel = Level.FINER}) async {
   Logger.root.level = loggerLevel;
 
   // Create the testbench
-  var tb = TopTB();
+  final tb = TopTB();
 
   // Build the DUT
   await tb.counter.build();
@@ -33,7 +33,7 @@ Future<void> main({Level loggerLevel = Level.FINER}) async {
   Simulator.setMaxSimTime(300);
 
   // Create and start the test!
-  var test = CounterTest(tb.counter);
+  final test = CounterTest(tb.counter);
   await test.start();
 }
 
@@ -47,7 +47,7 @@ class TopTB {
 
   TopTB() {
     // Build an instance of the interface for the Counter
-    var intf = CounterInterface(width: width);
+    final intf = CounterInterface();
 
     // Connect a generated clock to the interface
     intf.clk <= SimpleClockGenerator(10).clk;
@@ -87,7 +87,7 @@ class CounterTest extends Test {
 
     // Raise an objection at the start of the test so that the
     // simulation doesn't end before stimulus is injected
-    var obj = phase.raiseObjection('counter_test');
+    final obj = phase.raiseObjection('counter_test');
 
     logger.info('Running the test...');
 
@@ -186,10 +186,11 @@ class CounterSequence extends Sequence {
 
   @override
   Future<void> body(Sequencer sequencer) async {
-    var counterSequencer = sequencer as CounterSequencer;
+    final counterSequencer = sequencer as CounterSequencer;
     for (var i = 0; i < numRepeat; i++) {
-      counterSequencer.add(CounterSeqItem(true));
-      counterSequencer.add(CounterSeqItem(false));
+      counterSequencer
+        ..add(CounterSeqItem(true))
+        ..add(CounterSeqItem(false));
     }
   }
 }
@@ -197,6 +198,8 @@ class CounterSequence extends Sequence {
 /// A simple [SequenceItem] that maps a boolean to an int.
 class CounterSeqItem extends SequenceItem {
   final bool _enable;
+
+  // ignore: avoid_positional_boolean_parameters
   CounterSeqItem(this._enable);
 
   int get en => _enable ? 1 : 0;
@@ -210,7 +213,7 @@ class CounterDriver extends Driver<CounterSeqItem> {
   final CounterInterface intf;
 
   // Keep a queue of items from the sequencer to be driven when desired
-  final Queue _pendingItems = Queue<CounterSeqItem>();
+  final Queue<CounterSeqItem> _pendingItems = Queue<CounterSeqItem>();
 
   Objection? _driverObjection;
 
@@ -232,7 +235,7 @@ class CounterDriver extends Driver<CounterSeqItem> {
     // Every clock negative edge, drive the next pending item if it exists
     intf.clk.negedge.listen((args) {
       if (_pendingItems.isNotEmpty) {
-        var nextItem = _pendingItems.removeFirst();
+        final nextItem = _pendingItems.removeFirst();
         drive(nextItem);
         if (_pendingItems.isEmpty) {
           _driverObjection?.drop();
@@ -303,7 +306,8 @@ class CounterScoreboard extends Component {
   /// A stream which pops out a `true` every time enable is high.
   final Stream<bool> enableStream;
 
-  /// A stream which sends out the current value out of the counter once per cycle.
+  /// A stream which sends out the current value out of the counter once
+  /// per cycle.
   final Stream<LogicValue> valueStream;
 
   /// An instance of the interface to the [Counter].
@@ -355,7 +359,7 @@ class CounterScoreboard extends Component {
           expected = _lastSeenValue + 1;
         }
 
-        var matchesExpectations = _seenValue == expected;
+        final matchesExpectations = _seenValue == expected;
 
         if (!matchesExpectations) {
           logger.severe('Expected $expected but saw $_seenValue');

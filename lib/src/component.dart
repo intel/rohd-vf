@@ -40,26 +40,24 @@ abstract class Component extends ROHDVFObject {
   Component(this.name, this.parent) {
     parent?._components.add(this);
 
-    Simulator.simulationEnded.then((value) => check());
+    unawaited(Simulator.simulationEnded.then((value) => check()));
   }
 
   /// Returns a [List] of [Component]s representing the full hierarchy
   /// of this [Component], with the top-most parent at index 0 and this
   /// as the last element of the [List].
-  List<Component> hierarchy() {
-    return (parent == null ? <Component>[] : parent!.hierarchy())..add(this);
-  }
+  List<Component> hierarchy() =>
+      (parent == null ? <Component>[] : parent!.hierarchy())..add(this);
 
-  /// A descriptive name including the full hierarchical path of this [Component].
+  /// A descriptive name including the full hierarchical path of
+  /// this [Component].
   @override
-  String fullName() {
-    return hierarchy().map((e) => e.name).join('.');
-  }
+  String fullName() => hierarchy().map((e) => e.name).join('.');
 
   /// Performs additional build-related activities required before [run].
   @mustCallSuper
   void build() {
-    for (var component in _components) {
+    for (final component in _components) {
       component.build();
     }
   }
@@ -77,15 +75,10 @@ abstract class Component extends ROHDVFObject {
   /// ```
   @mustCallSuper
   Future<void> run(Phase phase) async {
-    for (var component in _components) {
+    for (final component in _components) {
       unawaited(component.run(phase));
     }
   }
-
-  //TODO: add a simple and easy mechanism to add arbitrary phases
-  // maybe via futures that can be listened to?  Components
-  // should be able to detect if a desired phase never got registered?
-  // should it be part of run phase always?
 
   /// Performs additional checks at the end of the simulation.
   ///

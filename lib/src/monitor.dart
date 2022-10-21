@@ -19,14 +19,16 @@ abstract class Monitor<MonitorItem> extends Component {
   final StreamController<MonitorItem> _streamController =
       StreamController<MonitorItem>.broadcast(sync: true);
 
-  /// A [Stream] of items that this [Monitor] has detected and shared with listeners.
+  /// A [Stream] of items that this [Monitor] has detected and shared with
+  /// listeners.
   ///
-  /// The stream is a broadcast stream, meaning it can have many listeners, and if
-  /// nobody is listening the events will just be dropped.  The stream will not catch
-  /// up any late listeners who missed earlier events.
+  /// The stream is a broadcast stream, meaning it can have many listeners, and
+  /// if nobody is listening the events will just be dropped.  The stream will
+  /// not catch up any late listeners who missed earlier events.
   Stream<MonitorItem> get stream => _streamController.stream;
 
-  Monitor(String name, Component? parent) : super(name, parent);
+  /// Constructs a [Monitor] named [name] with parent [parent].
+  Monitor(super.name, super.parent);
 
   /// Sends [item] out on [stream] to all listeners.
   @protected

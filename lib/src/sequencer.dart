@@ -20,8 +20,9 @@ import 'package:rohd_vf/rohd_vf.dart';
 /// passes items directly through to the output [stream].
 class Sequencer<SequenceItemType extends SequenceItem> extends Component {
   /// Constructs a basic [Sequencer] of [SequenceItemType] named [name]
-  /// which passes items directly through without additional processing to [stream].
-  Sequencer(String name, Component? parent) : super(name, parent);
+  /// which passes items directly through without additional processing to
+  /// [stream].
+  Sequencer(super.name, super.parent);
 
   /// A controller for the output [stream] of this [Sequencer].
   final StreamController<SequenceItemType> _streamController =

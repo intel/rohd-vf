@@ -27,21 +27,23 @@ class Objection {
 
   /// Keeps track of whether this [isRaised] and
   /// alerts listeners of [dropped].
-  final Completer _completer = Completer();
+  final Completer<void> _completer = Completer<void>();
 
   /// Returns `true` iff this [Objection] is still
   /// raised and trying to prevent the phase from ending.
   bool get isRaised => !_completer.isCompleted;
 
   /// A [Future] which completes when the [Objection] is dropped.
-  Future get dropped => _completer.future;
+  Future<void> get dropped => _completer.future;
 
   Objection._(this.name, this.phase);
 
   /// Drops this [Objection] on [phase], allowing it to progress
   /// if nothing else is holding it from completing.
   void drop() {
-    if (!isRaised) throw Exception('Objection already dropped');
+    if (!isRaised) {
+      throw Exception('Objection already dropped');
+    }
     phase._dropObjection(this);
     _completer.complete();
   }
@@ -62,7 +64,7 @@ class Phase {
 
   /// Creates and returns a new objection named [name] applied to this [Phase].
   Objection raiseObjection([String name = '']) {
-    var newObjection = Objection._(name, this);
+    final newObjection = Objection._(name, this);
     _objections.add(newObjection);
     return newObjection;
   }
@@ -79,7 +81,7 @@ class Phase {
   /// raised objections on this [Phase].
   Future<void> allObjectionsDropped() async {
     while (_objections.isNotEmpty) {
-      var nextObjection = _objections.first;
+      final nextObjection = _objections.first;
       await nextObjection.dropped;
       _objections.remove(nextObjection);
     }

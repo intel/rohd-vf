@@ -15,5 +15,6 @@ import 'package:rohd_vf/rohd_vf.dart';
 /// An [Env] could contain one or more agents, configuration objects,
 /// checkers, scoreboards, coordination, interfaces, etc.
 abstract class Env extends Component {
-  Env(String name, Component? parent) : super(name, parent);
+  /// Constructs an [Env] named [name] with parent [parent].
+  Env(super.name, super.parent);
 }

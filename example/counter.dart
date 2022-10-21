@@ -53,7 +53,7 @@ class Counter extends Module {
   }
 
   void _buildLogic() {
-    var nextVal = Logic(name: 'nextVal', width: intf.width);
+    final nextVal = Logic(name: 'nextVal', width: intf.width);
 
     nextVal <= val + 1;
 

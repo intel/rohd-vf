@@ -32,8 +32,6 @@ abstract class Test extends Component {
   /// reproduced by setting the same seed again.
   static Random get random => instance._random;
 
-  //TODO: make this always return a Random, even if no test
-
   /// The minimum level that should immediately kill the test.
   ///
   /// This level should be greater than or equal to [failLevel].
@@ -73,21 +71,23 @@ abstract class Test extends Component {
     configureLogger();
   }
 
-  //TODO: make it print the random seed
-
   /// Configures the root logger to provide information about
   /// log messages.
+  ///
+  /// By default, this `print`s information out to stdout.
   @protected
   void configureLogger() {
     Logger.root.onRecord.listen((record) {
-      print(
-          '[${record.level.name}] @ ${Simulator.time} | ${record.loggerName}: ${record.message}');
+      // ignore: avoid_print
+      print('[${record.level.name}] @ ${Simulator.time}'
+          ' | ${record.loggerName}: ${record.message}');
 
       if (record.level >= killLevel) {
         failureDetected = true;
         throw Exception('Test killed due to failure.');
       } else if (record.level >= failLevel) {
         if (!failureDetected) {
+          // ignore: avoid_print
           print('Test failure detected, but continuing to run to end.');
         }
         failureDetected = true;
@@ -108,7 +108,7 @@ abstract class Test extends Component {
   /// all objections have dropped.
   Future<void> start() async {
     build();
-    var runPhase = Phase();
+    final runPhase = Phase();
     unawaited(run(runPhase));
     if (!Simulator.hasStepsRemaining()) {
       logger.warning('Simulator has no registered events.');

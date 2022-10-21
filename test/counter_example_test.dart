@@ -14,9 +14,7 @@ import 'package:test/test.dart';
 import '../example/main.dart' as example;
 
 void main() {
-  tearDown(() {
-    Simulator.reset();
-  });
+  tearDown(Simulator.reset);
 
   test('counter example test', () async {
     await example.main(loggerLevel: Level.OFF);
