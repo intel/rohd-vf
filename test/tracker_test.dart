@@ -45,10 +45,10 @@ void main() {
     final tracker = Tracker(
       'testTracker',
       [
-        const TrackerField('Apple', 10),
-        const TrackerField('Banana', 5),
-        const TrackerField('Carrot', 12, justify: Justify.center),
-        const TrackerField('Durian', 12, mapOnly: true)
+        const TrackerField('Apple', columnWidth: 10),
+        const TrackerField('Banana', columnWidth: 5),
+        const TrackerField('Carrot', columnWidth: 12, justify: Justify.center),
+        const TrackerField('Durian', columnWidth: 12, mapOnly: true)
       ],
     )
       ..record(FruitEvent(LogicValue.ofString('1x0'), 'banana', 25))

@@ -43,9 +43,13 @@ class TrackerField {
   final bool mapOnly;
 
   /// Represents one field or column in the [Tracker] titled [title].
-  const TrackerField(this.title, this.columnWidth,
-      {this.emptyFill = '', this.justify = Justify.right, this.mapOnly = false})
-      : assert(columnWidth > 0, '`columnWidth` must be greater than 0.');
+  const TrackerField(
+    this.title, {
+    this.columnWidth = 3,
+    this.emptyFill = '',
+    this.justify = Justify.right,
+    this.mapOnly = false,
+  }) : assert(columnWidth > 0, '`columnWidth` must be greater than 0.');
 }
 
 /// An interface for an object that can be tracked by a [Tracker].
