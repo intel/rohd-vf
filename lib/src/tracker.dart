@@ -137,7 +137,7 @@ class Tracker<TrackableType extends Trackable> {
   void record(TrackableType trackable,
       {Map<String, String?> defaults = const {}}) {
     for (final dumper in _dumpers) {
-      dumper.record(trackable);
+      dumper.record(trackable, defaults: defaults);
     }
   }
 
