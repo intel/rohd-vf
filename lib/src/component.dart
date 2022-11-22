@@ -9,8 +9,8 @@
 ///
 
 import 'dart:async';
+import 'dart:collection';
 import 'package:meta/meta.dart';
-import 'package:rohd/rohd.dart';
 import 'package:rohd_vf/rohd_vf.dart';
 
 /// The base class for any component in ROHD-VF.
@@ -33,14 +33,14 @@ abstract class Component extends ROHDVFObject {
   final Component? parent;
 
   /// A [List] of all children [Component]s.
+  UnmodifiableListView<Component> get components =>
+      UnmodifiableListView(_components);
   final List<Component> _components = [];
 
   /// Constructs an instance of this [Component] named [name] and with
   /// parent [parent].
   Component(this.name, this.parent) {
     parent?._components.add(this);
-
-    unawaited(Simulator.simulationEnded.then((value) => check()));
   }
 
   /// Returns a [List] of [Component]s representing the full hierarchy

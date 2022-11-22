@@ -9,6 +9,7 @@
 ///
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:math';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
@@ -57,6 +58,14 @@ abstract class Test extends Component {
   /// The [Random] object for this [Test].
   final Random _random;
 
+  /// The minimum [Level] which should be printed out to `stdout`.
+  ///
+  /// Note that this is independent of the [Logger]'s level, which
+  /// controls whether the [Test] receives messages at all.  If the
+  /// [Logger]'s level is above [killLevel] and/or [failLevel], then
+  /// the [Test] will not fail when those messages are emitted.
+  Level printLevel;
+
   /// Constructs a new [Test] named [name].
   ///
   /// Only one [Test] should be created per simulation.  It will set
@@ -64,12 +73,16 @@ abstract class Test extends Component {
   /// as the seed.  If no [randomSeed] is specified, a random seed
   /// will be selected.  To rerun a test with the same randomized behavior,
   /// pass the same [randomSeed] as the previous run.
-  Test(String name, {int? randomSeed})
+  Test(String name, {int? randomSeed, this.printLevel = Level.ALL})
       : _random = Random(randomSeed),
         super(name, null) {
     instance = this;
     configureLogger();
   }
+
+  /// A handle to the subscription to the root [Logger], so that it
+  /// can be cancelled at the end of the test.
+  late final StreamSubscription<LogRecord> _loggerSubscription;
 
   /// Configures the root logger to provide information about
   /// log messages.
@@ -77,18 +90,31 @@ abstract class Test extends Component {
   /// By default, this `print`s information out to stdout.
   @protected
   void configureLogger() {
-    Logger.root.onRecord.listen((record) {
-      // ignore: avoid_print
-      print('[${record.level.name}] @ ${Simulator.time}'
-          ' | ${record.loggerName}: ${record.message}');
+    _loggerSubscription = Logger.root.onRecord.listen((record) {
+      if (record.level >= printLevel) {
+        // ignore: avoid_print
+        print('[${record.level.name}] @ ${Simulator.time}'
+            ' | ${record.loggerName}: ${record.message}');
+        if (record.error != null) {
+          // ignore: avoid_print
+          print('> Error: ${record.error}');
+        }
+        if (record.stackTrace != null) {
+          // ignore: avoid_print
+          print('> Stack trace: \n${record.stackTrace}');
+        }
+      }
 
       if (record.level >= killLevel) {
         failureDetected = true;
-        throw Exception('Test killed due to failure.');
+        Simulator.endSimulation();
+        // throw Exception('Test killed due to failure.');
       } else if (record.level >= failLevel) {
         if (!failureDetected) {
-          // ignore: avoid_print
-          print('Test failure detected, but continuing to run to end.');
+          if (record.level >= printLevel) {
+            // ignore: avoid_print
+            print('Test failure detected, but continuing to run to end.');
+          }
         }
         failureDetected = true;
       }
@@ -97,6 +123,12 @@ abstract class Test extends Component {
 
   @override
   void check() {
+    final checkQueue = Queue.of(components);
+    while (checkQueue.isNotEmpty) {
+      final component = checkQueue.removeFirst();
+      checkQueue.addAll(component.components);
+      component.check();
+    }
     if (failureDetected) {
       throw Exception('Test failed.');
     }
@@ -113,11 +145,10 @@ abstract class Test extends Component {
     if (!Simulator.hasStepsRemaining()) {
       logger.warning('Simulator has no registered events.');
     }
-    unawaited(Simulator.run());
     logger.finest('Waiting for objections to finish...');
 
     await Future.any([
-      Simulator.simulationEnded,
+      Simulator.run(),
       runPhase.allObjectionsDropped(),
     ]);
 
@@ -133,6 +164,11 @@ abstract class Test extends Component {
       await Simulator.simulationEnded;
     }
 
+    logger.finest('Running end of test checks.');
+    check();
+
     logger.finest('Simulation ended, test complete.');
+
+    await _loggerSubscription.cancel();
   }
 }
