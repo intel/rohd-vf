@@ -107,8 +107,13 @@ abstract class Test extends Component {
 
       if (record.level >= killLevel) {
         failureDetected = true;
+
+        if (record.level >= printLevel) {
+          // ignore: avoid_print
+          print('Killing test due to detected failure.');
+        }
+
         Simulator.endSimulation();
-        // throw Exception('Test killed due to failure.');
       } else if (record.level >= failLevel) {
         if (!failureDetected) {
           if (record.level >= printLevel) {
