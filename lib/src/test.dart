@@ -127,6 +127,7 @@ abstract class Test extends Component {
   }
 
   @override
+  @mustCallSuper
   void check() {
     final checkQueue = Queue.of(components);
     while (checkQueue.isNotEmpty) {

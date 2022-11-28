@@ -66,6 +66,22 @@ class LogTypeTest extends Test {
   }
 }
 
+class CheckPhaseFailureTest extends Test {
+  CheckPhaseFailureTest()
+      : super('checkPhaseFailureTest', printLevel: Level.OFF) {
+    FailingSubComponent(this);
+  }
+}
+
+class FailingSubComponent extends Component {
+  FailingSubComponent(Component parent) : super('failingSubComponent', parent);
+
+  @override
+  void check() {
+    logger.severe('Failure during check');
+  }
+}
+
 void main() {
   setUp(() {
     Logger.root.level = Level.WARNING;
@@ -112,5 +128,17 @@ void main() {
 
   test('Logger normal message passes', () async {
     await LogTypeTest(Level.WARNING).start();
+  });
+
+  test('Failure during check causes test failure', () async {
+    var sawError = false;
+
+    try {
+      await CheckPhaseFailureTest().start();
+    } on Exception {
+      sawError = true;
+    }
+
+    expect(sawError, isTrue);
   });
 }
