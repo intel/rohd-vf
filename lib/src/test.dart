@@ -84,6 +84,14 @@ abstract class Test extends Component {
   /// can be cancelled at the end of the test.
   late final StreamSubscription<LogRecord> _loggerSubscription;
 
+  /// Prints a message to `stdout`, guarded by the [printLevel].
+  void _testPrint(String message, Level messageLevel) {
+    if (messageLevel >= printLevel) {
+      // ignore: avoid_print
+      print(message);
+    }
+  }
+
   /// Configures the root logger to provide information about
   /// log messages.
   ///
@@ -91,35 +99,28 @@ abstract class Test extends Component {
   @protected
   void configureLogger() {
     _loggerSubscription = Logger.root.onRecord.listen((record) {
-      if (record.level >= printLevel) {
-        // ignore: avoid_print
-        print('[${record.level.name}] @ ${Simulator.time}'
-            ' | ${record.loggerName}: ${record.message}');
-        if (record.error != null) {
-          // ignore: avoid_print
-          print('> Error: ${record.error}');
-        }
-        if (record.stackTrace != null) {
-          // ignore: avoid_print
-          print('> Stack trace: \n${record.stackTrace}');
-        }
+      _testPrint(
+        '[${record.level.name}] @ ${Simulator.time}'
+        ' | ${record.loggerName}: ${record.message}',
+        record.level,
+      );
+      if (record.error != null) {
+        _testPrint('> Error: ${record.error}', record.level);
+      }
+      if (record.stackTrace != null) {
+        _testPrint('> Stack trace: \n${record.stackTrace}', record.level);
       }
 
       if (record.level >= killLevel) {
         failureDetected = true;
 
-        if (record.level >= printLevel) {
-          // ignore: avoid_print
-          print('Killing test due to detected failure.');
-        }
+        _testPrint('Killing test due to detected failure.', record.level);
 
         Simulator.endSimulation();
       } else if (record.level >= failLevel) {
         if (!failureDetected) {
-          if (record.level >= printLevel) {
-            // ignore: avoid_print
-            print('Test failure detected, but continuing to run to end.');
-          }
+          _testPrint('Test failure detected, but continuing to run to end.',
+              record.level);
         }
         failureDetected = true;
       }
