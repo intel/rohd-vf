@@ -51,7 +51,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.18.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.18.5/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
 <span class="name ">start</span>(<wbr>)
 
       
@@ -75,11 +75,10 @@ all objections have dropped.</p>
   if (!Simulator.hasStepsRemaining()) {
     logger.warning(&#39;Simulator has no registered events.&#39;);
   }
-  unawaited(Simulator.run());
   logger.finest(&#39;Waiting for objections to finish...&#39;);
 
   await Future.any([
-    Simulator.simulationEnded,
+    Simulator.run(),
     runPhase.allObjectionsDropped(),
   ]);
 
@@ -95,7 +94,12 @@ all objections have dropped.</p>
     await Simulator.simulationEnded;
   }
 
+  logger.finest(&#39;Running end of test checks.&#39;);
+  check();
+
   logger.finest(&#39;Simulation ended, test complete.&#39;);
+
+  await _loggerSubscription.cancel();
 }</code></pre>
 </section>
 
@@ -127,14 +131,16 @@ all objections have dropped.</p>
     <li class="section-title">
       <a href="../../rohd_vf/Test-class.html#instance-properties">Properties</a>
     </li>
+    <li class="inherited"><a href="../../rohd_vf/Component/components.html">components</a></li>
     <li><a href="../../rohd_vf/Test/failLevel.html">failLevel</a></li>
     <li><a href="../../rohd_vf/Test/failureDetected.html">failureDetected</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../rohd_vf/Test/killLevel.html">killLevel</a></li>
     <li class="inherited"><a href="../../rohd_vf/ROHDVFObject/logger.html">logger</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/name.html">name</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/parent.html">parent</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../../rohd_vf/Test/printLevel.html">printLevel</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../../rohd_vf/Test-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/build.html">build</a></li>
@@ -142,13 +148,13 @@ all objections have dropped.</p>
     <li><a href="../../rohd_vf/Test/configureLogger.html">configureLogger</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/fullName.html">fullName</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/hierarchy.html">hierarchy</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/run.html">run</a></li>
     <li><a href="../../rohd_vf/Test/start.html">start</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../../rohd_vf/Test-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
         <li class="section-title"><a href="../../rohd_vf/Test-class.html#static-properties">Static properties</a></li>

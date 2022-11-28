@@ -75,18 +75,36 @@ log messages.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@protected
 void configureLogger() {
-  Logger.root.onRecord.listen((record) {
-    &#47;&#47; ignore: avoid_print
-    print(&#39;[${record.level.name}] @ ${Simulator.time}&#39;
-        &#39; | ${record.loggerName}: ${record.message}&#39;);
+  _loggerSubscription = Logger.root.onRecord.listen((record) {
+    if (record.level &gt;= printLevel) {
+      &#47;&#47; ignore: avoid_print
+      print(&#39;[${record.level.name}] @ ${Simulator.time}&#39;
+          &#39; | ${record.loggerName}: ${record.message}&#39;);
+      if (record.error != null) {
+        &#47;&#47; ignore: avoid_print
+        print(&#39;&gt; Error: ${record.error}&#39;);
+      }
+      if (record.stackTrace != null) {
+        &#47;&#47; ignore: avoid_print
+        print(&#39;&gt; Stack trace: \n${record.stackTrace}&#39;);
+      }
+    }
 
     if (record.level &gt;= killLevel) {
       failureDetected = true;
-      throw Exception(&#39;Test killed due to failure.&#39;);
+
+      if (record.level &gt;= printLevel) {
+        &#47;&#47; ignore: avoid_print
+        print(&#39;Killing test due to detected failure.&#39;);
+      }
+
+      Simulator.endSimulation();
     } else if (record.level &gt;= failLevel) {
       if (!failureDetected) {
-        &#47;&#47; ignore: avoid_print
-        print(&#39;Test failure detected, but continuing to run to end.&#39;);
+        if (record.level &gt;= printLevel) {
+          &#47;&#47; ignore: avoid_print
+          print(&#39;Test failure detected, but continuing to run to end.&#39;);
+        }
       }
       failureDetected = true;
     }
@@ -122,14 +140,16 @@ void configureLogger() {
     <li class="section-title">
       <a href="../../rohd_vf/Test-class.html#instance-properties">Properties</a>
     </li>
+    <li class="inherited"><a href="../../rohd_vf/Component/components.html">components</a></li>
     <li><a href="../../rohd_vf/Test/failLevel.html">failLevel</a></li>
     <li><a href="../../rohd_vf/Test/failureDetected.html">failureDetected</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../rohd_vf/Test/killLevel.html">killLevel</a></li>
     <li class="inherited"><a href="../../rohd_vf/ROHDVFObject/logger.html">logger</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/name.html">name</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/parent.html">parent</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../../rohd_vf/Test/printLevel.html">printLevel</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../../rohd_vf/Test-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/build.html">build</a></li>
@@ -137,13 +157,13 @@ void configureLogger() {
     <li><a href="../../rohd_vf/Test/configureLogger.html">configureLogger</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/fullName.html">fullName</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/hierarchy.html">hierarchy</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li class="inherited"><a href="../../rohd_vf/Component/run.html">run</a></li>
     <li><a href="../../rohd_vf/Test/start.html">start</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../../rohd_vf/Test-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.5/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
         <li class="section-title"><a href="../../rohd_vf/Test-class.html#static-properties">Static properties</a></li>

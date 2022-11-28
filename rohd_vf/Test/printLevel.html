@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the check method from the Test class, for the Dart programming language.">
-  <title>check method - Test class - rohd_vf library - Dart API</title>
+  <meta name="description" content="API docs for the printLevel property from the Test class, for the Dart programming language.">
+  <title>printLevel property - Test class - rohd_vf library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/Test-class.html">Test</a></li>
-    <li class="self-crumb">check method</li>
+    <li class="self-crumb">printLevel property</li>
   </ol>
-  <div class="self-name">check</div>
+  <div class="self-name">printLevel</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -44,49 +44,31 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-method">check</span> method 
+<h1><span class="kind-property">printLevel</span> property 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
-    <section class="multi-line-signature">
-      
-<div>
-  <ol class="annotation-list">
-    <li>@<a href="https://api.dart.dev/stable/2.18.5/dart-core/override-constant.html">override</a></li>
-    <li>@<a href="https://pub.dev/documentation/meta/1.8.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
-  </ol>
-</div>
+        <section class="multi-line-signature">
+          <a href="https://pub.dev/documentation/logging/1.1.0/logging/Level-class.html">Level</a>
+          <span class="name ">printLevel</span>
+          <div class="features">read / write</div>
 
-<span class="returntype">void</span>
-<span class="name ">check</span>(<wbr>)
-
-      <div class="features">@<a href="https://pub.dev/documentation/meta/1.8.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, override</div>
-
-    </section>
-    
+        </section>
+        
 <section class="desc markdown">
-  <p>Performs additional checks at the end of the simulation.</p>
-<p>This is a good place to search for any incomplete flows or
-compare final states with expected states.</p>
+  <p>The minimum <a href="https://pub.dev/documentation/logging/1.1.0/logging/Level-class.html">Level</a> which should be printed out to <code>stdout</code>.</p>
+<p>Note that this is independent of the <a href="https://pub.dev/documentation/logging/1.1.0/logging/Logger-class.html">Logger</a>'s level, which
+controls whether the <a href="../../rohd_vf/Test-class.html">Test</a> receives messages at all.  If the
+<a href="https://pub.dev/documentation/logging/1.1.0/logging/Logger-class.html">Logger</a>'s level is above <a href="../../rohd_vf/Test/killLevel.html">killLevel</a> and/or <a href="../../rohd_vf/Test/failLevel.html">failLevel</a>, then
+the <a href="../../rohd_vf/Test-class.html">Test</a> will not fail when those messages are emitted.</p>
 </section>
 
-
-    
+        
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-@mustCallSuper
-void check() {
-  final checkQueue = Queue.of(components);
-  while (checkQueue.isNotEmpty) {
-    final component = checkQueue.removeFirst();
-    checkQueue.addAll(component.components);
-    component.check();
-  }
-  if (failureDetected) {
-    throw Exception(&#39;Test failed.&#39;);
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">Level printLevel;
+
+</code></pre>
 </section>
 
 
@@ -103,7 +85,7 @@ void check() {
   <li><a href="../../index.html">rohd_vf</a></li>
   <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
   <li><a href="../../rohd_vf/Test-class.html">Test</a></li>
-  <li class="self-crumb">check method</li>
+  <li class="self-crumb">printLevel property</li>
 </ol>
 
 
