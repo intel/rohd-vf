@@ -76,35 +76,28 @@ log messages.</p>
   <pre class="language-dart"><code class="language-dart">@protected
 void configureLogger() {
   _loggerSubscription = Logger.root.onRecord.listen((record) {
-    if (record.level &gt;= printLevel) {
-      &#47;&#47; ignore: avoid_print
-      print(&#39;[${record.level.name}] @ ${Simulator.time}&#39;
-          &#39; | ${record.loggerName}: ${record.message}&#39;);
-      if (record.error != null) {
-        &#47;&#47; ignore: avoid_print
-        print(&#39;&gt; Error: ${record.error}&#39;);
-      }
-      if (record.stackTrace != null) {
-        &#47;&#47; ignore: avoid_print
-        print(&#39;&gt; Stack trace: \n${record.stackTrace}&#39;);
-      }
+    _testPrint(
+      &#39;[${record.level.name}] @ ${Simulator.time}&#39;
+      &#39; | ${record.loggerName}: ${record.message}&#39;,
+      record.level,
+    );
+    if (record.error != null) {
+      _testPrint(&#39;&gt; Error: ${record.error}&#39;, record.level);
+    }
+    if (record.stackTrace != null) {
+      _testPrint(&#39;&gt; Stack trace: \n${record.stackTrace}&#39;, record.level);
     }
 
     if (record.level &gt;= killLevel) {
       failureDetected = true;
 
-      if (record.level &gt;= printLevel) {
-        &#47;&#47; ignore: avoid_print
-        print(&#39;Killing test due to detected failure.&#39;);
-      }
+      _testPrint(&#39;Killing test due to detected failure.&#39;, record.level);
 
       Simulator.endSimulation();
     } else if (record.level &gt;= failLevel) {
       if (!failureDetected) {
-        if (record.level &gt;= printLevel) {
-          &#47;&#47; ignore: avoid_print
-          print(&#39;Test failure detected, but continuing to run to end.&#39;);
-        }
+        _testPrint(&#39;Test failure detected, but continuing to run to end.&#39;,
+            record.level);
       }
       failureDetected = true;
     }
