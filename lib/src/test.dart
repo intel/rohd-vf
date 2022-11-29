@@ -127,10 +127,8 @@ abstract class Test extends Component {
     });
   }
 
-  @override
-  @mustCallSuper
-  void check() {
-    final checkQueue = Queue.of(components);
+  void _checkAll() {
+    final checkQueue = Queue.of([this, ...components]);
     while (checkQueue.isNotEmpty) {
       final component = checkQueue.removeFirst();
       checkQueue.addAll(component.components);
@@ -172,7 +170,7 @@ abstract class Test extends Component {
     }
 
     logger.finest('Running end of test checks.');
-    check();
+    _checkAll();
 
     logger.finest('Simulation ended, test complete.');
 
