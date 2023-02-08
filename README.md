@@ -1,14 +1,14 @@
 [![Tests](https://github.com/intel/rohd-vf/actions/workflows/test.yml/badge.svg)](https://github.com/intel/rohd-vf/actions/workflows/test.yml)
 [![Docs](https://github.com/intel/rohd-vf/actions/workflows/docs.yml/badge.svg)](https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html)
 [![License](https://img.shields.io/badge/License-BSD--3-blue)](https://github.com/intel/rohd-vf/blob/main/LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-1.4-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/intel/rohd-cosim/blob/main/CODE_OF_CONDUCT.md)
 
 ROHD Verification Framework
 ===========================
 
 The ROHD Verification Framework (ROHD-VF) is a verification framework built upon the [Rapid Open Hardware Development (ROHD) framework](https://www.github.com/intel/rohd).  It enables testbench organization in a way similar to [UVM](https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.1.pdf).  A key motivation behind it is that hardware testbenches are really just software, and verification engineers should be empowered to write them as great software.  The ROHD Verification Framework enables development of a testbench in a *modern* programming language, taking advantage of recent innovations in the software industry.
 
-With ROHD and ROHD-VF, your testbench and hardware execute natively in Dart in a single fully-debuggable process.  There is no black-box vendor simulator to interact with, just execute your software.  You can leverage the cosimulation functionality of ROHD to build ROHD-VF testbenches for designs that include (or are entirely) written in other languages (e.g. SystemVerilog).
+With ROHD and ROHD-VF, your testbench and hardware execute natively in Dart in a single fully-debuggable process.  There is no black-box vendor simulator to interact with, just execute your software.  You can leverage the cosimulation functionality of ROHD (see [ROHD Cosim](https://github.com/intel/rohd-cosim)) to build ROHD-VF testbenches for designs that include (or are entirely) written in other languages (e.g. SystemVerilog).
 
 The ROHD Verification Framework does *not* implement exactly the same API as UVM.  Rather, it takes some key concepts that are useful for testbench design and omits features that are rarely used, present to work around language limitations in SystemVerilog, encourage outdated or overly opinionated design patterns, or otherwise don't add significant value.  **The ROHD Verification Framework eliminates the macros and boilerplate that are associated with UVM.**
 
