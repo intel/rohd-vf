@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 6.0.0">
+  <meta name="generator" content="made with love by dartdoc 6.1.5">
   <meta name="description" content="rohd_vf API docs, for the Dart programming language.">
   <title>rohd_vf - Dart API docs</title>
 
@@ -12,7 +12,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="static-assets/github.css?v1">
   <link rel="stylesheet" href="static-assets/styles.css?v1">
@@ -22,12 +22,12 @@
 </head>
 
 
-<body data-base-href="" data-using-base-href="false">
+<body data-base-href="" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="https://www.github.com/intel/rohd-vf">rohd_vf package</a></li>
   </ol>
@@ -35,10 +35,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       
@@ -46,10 +52,10 @@
   <p><a href="https://github.com/intel/rohd-vf/actions/workflows/test.yml"><img src="https://github.com/intel/rohd-vf/actions/workflows/test.yml/badge.svg" alt="Tests"></a>
 <a href="https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html"><img src="https://github.com/intel/rohd-vf/actions/workflows/docs.yml/badge.svg" alt="Docs"></a>
 <a href="https://github.com/intel/rohd-vf/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-BSD--3-blue" alt="License"></a>
-<a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-1.4-4baaaa.svg" alt="Contributor Covenant"></a></p>
+<a href="https://github.com/intel/rohd-cosim/blob/main/CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg" alt="Contributor Covenant"></a></p>
 <h1 id="rohd-verification-framework">ROHD Verification Framework</h1>
 <p>The ROHD Verification Framework (ROHD-VF) is a verification framework built upon the <a href="https://www.github.com/intel/rohd">Rapid Open Hardware Development (ROHD) framework</a>.  It enables testbench organization in a way similar to <a href="https://www.accellera.org/images/downloads/standards/uvm/uvm_users_guide_1.1.pdf">UVM</a>.  A key motivation behind it is that hardware testbenches are really just software, and verification engineers should be empowered to write them as great software.  The ROHD Verification Framework enables development of a testbench in a <em>modern</em> programming language, taking advantage of recent innovations in the software industry.</p>
-<p>With ROHD and ROHD-VF, your testbench and hardware execute natively in Dart in a single fully-debuggable process.  There is no black-box vendor simulator to interact with, just execute your software.  You can leverage the cosimulation functionality of ROHD to build ROHD-VF testbenches for designs that include (or are entirely) written in other languages (e.g. SystemVerilog).</p>
+<p>With ROHD and ROHD-VF, your testbench and hardware execute natively in Dart in a single fully-debuggable process.  There is no black-box vendor simulator to interact with, just execute your software.  You can leverage the cosimulation functionality of ROHD (see <a href="https://github.com/intel/rohd-cosim">ROHD Cosim</a>) to build ROHD-VF testbenches for designs that include (or are entirely) written in other languages (e.g. SystemVerilog).</p>
 <p>The ROHD Verification Framework does <em>not</em> implement exactly the same API as UVM.  Rather, it takes some key concepts that are useful for testbench design and omits features that are rarely used, present to work around language limitations in SystemVerilog, encourage outdated or overly opinionated design patterns, or otherwise don't add significant value.  <strong>The ROHD Verification Framework eliminates the macros and boilerplate that are associated with UVM.</strong></p>
 <p>The ROHD Verification Framework offers a simple, clean, and scalable methodology for developing testbenches with moderate to high complexity.  Verifying a very small and simple design may be easier with a "peek &amp; poke" type methodology using  <code>Logic.value</code> and <code>Logic.inject</code> directly on the DUT interfaces.  A "peek &amp; poke" methodology for a larger, more complex design is usually not a scalable approach.  The "startup cost" associated with building a full testbench with the ROHD Verification Framework is drastically lower than one might traditionally expect if they had experience with UVM in the past.</p>
 <h2 id="testbenches">Testbenches</h2>
@@ -116,7 +122,7 @@
 <hr>
 <p>2021 November 9<br>
 Author: Max Korbel &lt;<a href="mailto:max.korbel@intel.com">max.korbel@intel.com</a>&gt;</p>
-<p>Copyright (C) 2021 Intel Corporation<br>
+<p>Copyright (C) 2021-2023 Intel Corporation<br>
 SPDX-License-Identifier: BSD-3-Clause</p>
 </section>
 
