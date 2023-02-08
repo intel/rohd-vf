@@ -7,9 +7,14 @@ Anyone interested in participating in ROHD-VF is more than welcome to help!
 
 ## Code of Conduct
 
-ROHD-VF adopts the Contributor Covenant v1.4 for the code of conduct.  It can be accessed [here](CODE_OF_CONDUCT.md).
+ROHD-VF adopts the Contributor Covenant v2.1 for the code of conduct.  It can be accessed [here](https://github.com/intel/rohd-vf/blob/main/CODE_OF_CONDUCT.md).
 
 ## Getting Help
+### Chat on Discord
+Discord is a free online instant messaging app which you can use directly in your web browser or install to your device.  Feel free to join to look around at the conversations and have a real-time discussion with the ROHD community.  This a great place to ask questions, get help, engage with the rest of the community, and discuss new ideas.
+
+Join the Discord server here: https://discord.com/invite/jubxF84yGw
+
 ### Issues
 If something doesn't seem right, you're stuck, there's a critical feature/enhancement missing, you find a bug, etc. then filing an issue on the GitHub repository is a great option.  Please try to provide as much detail as possible.  Complete, stand-alone reproduction instructions are extremely helpful for bugs!
 
@@ -23,6 +28,9 @@ You can access the discussions area here: https://github.com/intel/rohd-vf/discu
 ### StackOverflow
 StackOverflow.com is a great tool to ask questions and get answers from the community.  Use the `rohd` and/or `rohd-vf` tag when asking your question so that others in the community who subscribe to that tag can find and answer your question more quickly!
 
+### Meetings in the ROHD Forum
+The [ROHD Forum](https://github.com/intel/rohd/wiki/ROHD-Forum) is a periodic virtual meeting for developers and users of ROHD that anyone can join.  Feel free to join the call!
+
 ## Getting Started
 
 ### Requirements
@@ -30,18 +38,27 @@ You must have [Dart](https://dart.dev/) installed on your system to use ROHD and
 https://dart.dev/get-dart
 
 ### Setup Recommendations
+
+#### On your own system
 [Visual Studio Code (vscode)](https://code.visualstudio.com/) is a great IDE for development.  You can find installation instructions for vscode here: https://code.visualstudio.com/Download
 
 If you're developing on a remote host, vscode has a Remote SSH extension that can help: https://code.visualstudio.com/blogs/2019/07/25/remote-ssh
 
 If you're on Microsoft Windows, you may want to consider developing with Ubuntu WSL for a Linux environment: https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
+#### In a GitHub Codespace
+[GitHub Codespaces](https://github.com/features/codespaces) are a great feature provided by GitHub allowing you to get into a development environment based on a pre-configured container very quickly!  You can use them for a limited number of hours per month for free.  ROHD has set up GitHub Codespaces so that you can immediately start running examples and developing.
+
+The below button will allow you to create a GitHub Codespace with ROHD already cloned and ready to roll.  You can clone the ROHD-VF repository in this Codespace to get started with ROHD-VF.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=409325108)
+
 ### Cloning and Running the Tests
 Once requirements are installed, you can clone and run the test suite.
 ```
 git clone https://github.com/intel/rohd-vf.git
 cd rohd-vf
-dart run test
+dart pub get
+dart test
 ```
 ## How to Contribute
 ### Reporting Bugs

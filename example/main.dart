@@ -1,4 +1,4 @@
-/// Copyright (C) 2021 Intel Corporation
+/// Copyright (C) 2021-2023 Intel Corporation
 /// SPDX-License-Identifier: BSD-3-Clause
 ///
 /// main.dart
@@ -368,7 +368,7 @@ class CounterScoreboard extends Component {
         }
       }
       _sawEnable = false;
-      _lastSeenValue = _seenValue!;
+      _lastSeenValue = _seenValue ?? 0;
     });
   }
 }
