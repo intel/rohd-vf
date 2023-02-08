@@ -368,7 +368,7 @@ class CounterScoreboard extends Component {
         }
       }
       _sawEnable = false;
-      _lastSeenValue = _seenValue!;
+      _lastSeenValue = _seenValue ?? 0;
     });
   }
 }
