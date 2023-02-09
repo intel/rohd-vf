@@ -1,3 +1,5 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=426054568)
+
 [![Tests](https://github.com/intel/rohd-vf/actions/workflows/test.yml/badge.svg)](https://github.com/intel/rohd-vf/actions/workflows/test.yml)
 [![Docs](https://github.com/intel/rohd-vf/actions/workflows/docs.yml/badge.svg)](https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html)
 [![License](https://img.shields.io/badge/License-BSD--3-blue)](https://github.com/intel/rohd-vf/blob/main/LICENSE)
