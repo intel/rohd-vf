@@ -47,10 +47,10 @@ If you're developing on a remote host, vscode has a Remote SSH extension that ca
 If you're on Microsoft Windows, you may want to consider developing with Ubuntu WSL for a Linux environment: https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 #### In a GitHub Codespace
-[GitHub Codespaces](https://github.com/features/codespaces) are a great feature provided by GitHub allowing you to get into a development environment based on a pre-configured container very quickly!  You can use them for a limited number of hours per month for free.  ROHD has set up GitHub Codespaces so that you can immediately start running examples and developing.
+[GitHub Codespaces](https://github.com/features/codespaces) are a great feature provided by GitHub allowing you to get into a development environment based on a pre-configured container very quickly!  You can use them for a limited number of hours per month for free.  ROHD-VF has set up GitHub Codespaces so that you can immediately start running examples and developing.
 
-The below button will allow you to create a GitHub Codespace with ROHD already cloned and ready to roll.  You can clone the ROHD-VF repository in this Codespace to get started with ROHD-VF.
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=409325108)
+The below button will allow you to create a GitHub Codespace with ROHD-VF already cloned and ready to roll.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=426054568)
 
 ### Cloning and Running the Tests
 Once requirements are installed, you can clone and run the test suite.
