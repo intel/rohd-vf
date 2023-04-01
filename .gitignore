@@ -14,3 +14,6 @@ doc/api/
 .vscode/
 *.tracker.json
 *.tracker.log
+
+# Exceptions
+!.vscode/extensions.json
