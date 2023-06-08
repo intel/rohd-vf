@@ -82,15 +82,17 @@ void main() {
     clk = SimpleClockGenerator(10).clk;
   });
 
+  tearDown(() async {
+    await Simulator.reset();
+  });
+
   test('pending driver simple', () async {
-    Logger.root.level = Level.ALL;
     await MyTest(clk: clk!).start();
 
     expect(Simulator.time, 1005);
   });
 
   test('pending driver with delay', () async {
-    Logger.root.level = Level.ALL;
     await MyTest(clk: clk!, dropDelay: () async => waitCycles(clk!, 10))
         .start();
 
@@ -98,7 +100,6 @@ void main() {
   });
 
   test('pending driver with delay and sometimes empty queue', () async {
-    Logger.root.level = Level.ALL;
     await MyTest(
       clk: clk!,
       dropDelay: () async => waitCycles(clk!, 10),

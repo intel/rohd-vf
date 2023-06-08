@@ -7,6 +7,7 @@ export 'src/env.dart';
 export 'src/monitor.dart';
 export 'src/pending_driver.dart';
 export 'src/phase.dart';
+export 'src/quiesce_objector.dart';
 export 'src/rohdvf_object.dart';
 export 'src/sequence.dart';
 export 'src/sequence_item.dart';
