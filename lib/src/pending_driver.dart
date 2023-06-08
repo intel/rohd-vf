@@ -31,7 +31,14 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
   /// If the test ends and this is not empty, a `SEVERE` will be raised.
   late final Queue<SequenceItemType> pendingSeqItems;
 
+  /// A function called each time there is something added or removed from the
+  /// [pendingSeqItems], and if it completes before an objection is dropped or
+  /// some further activity occurs, an error is flagged.
   final Future<void> Function()? timeout;
+
+  /// A function called each time an objection would drop due to an empty
+  /// [pendingSeqItems], but the objection will only be dropped if there is no
+  /// further activity before it completes.
   final Future<void> Function()? dropDelay;
 
   /// Creates a new [PendingDriver] attached to [sequencer].
@@ -68,8 +75,7 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
   }
 }
 
-/// A special version of [ListQueue] that considers whether an [Objection]
-/// should be raised on [phase] each time something is added or removed.
+/// A special version of [ListQueue] that uses a [QuiesceObjector].
 class _PendingQueue<E> extends ListQueue<E> {
   final Component parent;
 

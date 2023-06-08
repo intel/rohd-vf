@@ -19,8 +19,8 @@ class QuiesceObjector extends Component {
   Objection? _objection;
 
   /// A function called each time there is activity being considered, and if
-  /// it completes before an objection is dropped, then an error will be
-  /// flagged.
+  /// it completes before an objection is dropped or there is further activity,
+  /// then an error will be flagged.
   final Future<void> Function()? timeout;
 
   /// A function called each time an objection would drop due to lack of
