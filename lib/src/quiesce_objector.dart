@@ -22,12 +22,12 @@ class QuiesceObjector extends Component {
   /// A function which returns true if there's something worth objecting about.
   final bool Function() isActive;
 
-  final Phase phase;
+  /// Pointer to the phase passed in by [run] for later.
+  Phase? _runPhase;
 
   ///TODO
   QuiesceObjector(
     this.isActive, {
-    required this.phase,
     required Component parent,
     String name = 'quiesceObjector',
     this.timeout,
@@ -50,6 +50,12 @@ class QuiesceObjector extends Component {
     } else {
       dropObjection();
     }
+  }
+
+  @override
+  Future<void> run(Phase phase) async {
+    unawaited(super.run(phase));
+    _runPhase = phase;
   }
 
   void _doDrop() {
@@ -81,11 +87,15 @@ class QuiesceObjector extends Component {
   ///
   /// Will time out pending [timeout], if it is provided.
   void raiseObjection() {
+    if (_runPhase == null) {
+      throw Exception('Cannot raise exception before run phase.');
+    }
+
     // ignore: discarded_futures
     _pendingDrop?.cancel();
     _pendingDrop = null;
 
-    _objection ??= phase.raiseObjection('quiesce')
+    _objection ??= _runPhase!.raiseObjection('quiesce')
       // ignore: discarded_futures
       ..dropped.then((value) => logger.finest('Quiesce objection dropped'));
 

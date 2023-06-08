@@ -36,19 +36,18 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
 
   /// Creates a new [PendingDriver] attached to [sequencer].
   PendingDriver(super.name, super.parent,
-      {required super.sequencer, this.timeout, this.dropDelay});
+      {required super.sequencer, this.timeout, this.dropDelay}) {
+    pendingSeqItems = _PendingQueue<SequenceItemType>(
+      parent: this,
+      timeout: timeout,
+      dropDelay: dropDelay,
+    );
+  }
 
   @override
   @mustCallSuper
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
-
-    pendingSeqItems = _PendingQueue<SequenceItemType>(
-      phase: phase,
-      parent: this,
-      timeout: timeout,
-      dropDelay: dropDelay,
-    );
 
     sequencer.stream.listen((item) {
       logger.finest('Added item to pending queue: $item');
@@ -72,27 +71,24 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
 /// A special version of [ListQueue] that considers whether an [Objection]
 /// should be raised on [phase] each time something is added or removed.
 class _PendingQueue<E> extends ListQueue<E> {
-  final Phase phase;
   final Component parent;
 
   final Future<void> Function()? timeout;
   final Future<void> Function()? dropDelay;
 
-  late final QuiesceObjector _quiesceObjector = QuiesceObjector(
-    () => isNotEmpty,
-    phase: phase,
-    timeout: timeout,
-    dropDelay: dropDelay,
-    parent: parent,
-    name: 'pendingQueueQuiesce',
-  );
+  late final QuiesceObjector _quiesceObjector;
 
   _PendingQueue({
-    required this.phase,
     required this.parent,
     required this.timeout,
     required this.dropDelay,
-  });
+  }) {
+    _quiesceObjector = QuiesceObjector(() => isNotEmpty,
+        timeout: timeout,
+        dropDelay: dropDelay,
+        parent: parent,
+        name: 'pendingQueueQuiesce');
+  }
 
   void _reconsiderObjection() {
     _quiesceObjector.consider();
