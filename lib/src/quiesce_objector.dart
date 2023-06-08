@@ -12,11 +12,20 @@ import 'dart:async';
 import 'package:async/async.dart';
 import 'package:rohd_vf/rohd_vf.dart';
 
+/// Maintains an [Objection] based on whether an entity [isActive], optionally
+/// with [dropDelay] before dropping and a [timeout].
 class QuiesceObjector extends Component {
   /// The main [Objection] for this objector.
   Objection? _objection;
 
+  /// A function called each time there is activity being considered, and if
+  /// it completes before an objection is dropped, then an error will be
+  /// flagged.
   final Future<void> Function()? timeout;
+
+  /// A function called each time an objection would drop due to lack of
+  /// activity, but the objection will only be dropped if there is no further
+  /// activity before it completes.
   final Future<void> Function()? dropDelay;
 
   /// A function which returns true if there's something worth objecting about.
@@ -25,7 +34,13 @@ class QuiesceObjector extends Component {
   /// Pointer to the phase passed in by [run] for later.
   Phase? _runPhase;
 
-  ///TODO
+  /// Constructs a new [QuiesceObjector] based on [isActive].
+  ///
+  /// If [timeout] is provided, then if there is no activity before it
+  /// completes, then it will flag an error.
+  ///
+  /// If [dropDelay] is provided, then there will be a delay on dropping an
+  /// objection until it completes.
   QuiesceObjector(
     this.isActive, {
     required Component parent,
@@ -34,7 +49,10 @@ class QuiesceObjector extends Component {
     this.dropDelay,
   }) : super(name, parent);
 
+  /// An objection drop that is pending.
   CancelableOperation<void>? _pendingDrop;
+
+  /// A timeout that is pending.
   CancelableOperation<void>? _pendingTimeout;
 
   /// Considers whether or not the objection should be dropped.
@@ -58,6 +76,7 @@ class QuiesceObjector extends Component {
     _runPhase = phase;
   }
 
+  /// Actually drop the objection, with whatever bookkeeping is required.
   void _doDrop() {
     // ignore: discarded_futures
     _pendingTimeout?.cancel();
@@ -104,6 +123,7 @@ class QuiesceObjector extends Component {
       _pendingTimeout?.cancel();
       // ignore: discarded_futures
       _pendingTimeout = CancelableOperation<void>.fromFuture(
+        // ignore: discarded_futures
         timeout!(),
         // onCancel: () => logger.finest('Timeout avoided!'),
       );
