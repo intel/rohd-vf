@@ -35,6 +35,7 @@ class QuiesceObjector extends Component {
   }) : super(name, parent);
 
   CancelableOperation<void>? _pendingDrop;
+  CancelableOperation<void>? _pendingTimeout;
 
   /// Considers whether or not the objection should be dropped.
   ///
@@ -43,12 +44,21 @@ class QuiesceObjector extends Component {
   void consider() {
     if (isActive()) {
       if (_objection == null) {
-        raiseObjection();
         logger.finest('Raised objection due to activity.');
       }
+      raiseObjection();
     } else {
       dropObjection();
     }
+  }
+
+  void _doDrop() {
+    // ignore: discarded_futures
+    _pendingTimeout?.cancel();
+    _pendingTimeout = null;
+
+    _objection?.drop();
+    _objection = null;
   }
 
   /// Drop the objection, pending a [dropDelay] if it is provided.
@@ -61,11 +71,9 @@ class QuiesceObjector extends Component {
       // ignore: discarded_futures
       _pendingDrop = CancelableOperation<void>.fromFuture(dropDelay!(),
           onCancel: () => logger.finest('Cancelling objection drop.'));
-      _pendingDrop!.then((value) {
-        _objection?.drop();
-      });
+      _pendingDrop!.then((_) => _doDrop());
     } else {
-      _objection?.drop();
+      _doDrop();
     }
   }
 
@@ -80,5 +88,16 @@ class QuiesceObjector extends Component {
     _objection ??= phase.raiseObjection('quiesce')
       // ignore: discarded_futures
       ..dropped.then((value) => logger.finest('Quiesce objection dropped'));
+
+    if (timeout != null) {
+      // ignore: discarded_futures
+      _pendingTimeout?.cancel();
+      // ignore: discarded_futures
+      _pendingTimeout = CancelableOperation<void>.fromFuture(
+        timeout!(),
+        // onCancel: () => logger.finest('Timeout avoided!'),
+      );
+      _pendingTimeout!.then((_) => logger.severe('Objection has timed out!'));
+    }
   }
 }

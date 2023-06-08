@@ -50,7 +50,10 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
       dropDelay: dropDelay,
     );
 
-    sequencer.stream.listen(pendingSeqItems.add);
+    sequencer.stream.listen((item) {
+      logger.finest('Added item to pending queue: $item');
+      pendingSeqItems.add(item);
+    });
   }
 
   @override

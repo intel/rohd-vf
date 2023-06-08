@@ -109,4 +109,31 @@ void main() {
 
     expect(Simulator.time, 420);
   });
+
+  test('pending driver never timeout', () async {
+    await MyTest(
+      clk: clk!,
+      dropDelay: () async => waitCycles(clk!, 9),
+      timeout: () async => waitCycles(clk!, 10),
+      interAddDelay: 8,
+      numItems: 5,
+    ).start();
+  });
+
+  test('pending driver times out', () async {
+    final myTest = MyTest(
+      clk: clk!,
+      dropDelay: () async => waitCycles(clk!, 30),
+      timeout: () async => waitCycles(clk!, 10),
+      interAddDelay: 20,
+      numItems: 5,
+    )..printLevel = Level.OFF;
+
+    try {
+      await myTest.start();
+      fail('Did not see severe');
+    } on Exception catch (_) {
+      expect(myTest.failureDetected, true);
+    }
+  });
 }
