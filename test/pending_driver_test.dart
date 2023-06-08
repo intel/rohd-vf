@@ -18,44 +18,94 @@ class MySeqItem extends SequenceItem {}
 
 class MyPendingDriver extends PendingDriver<MySeqItem> {
   final Logic clk;
-  MyPendingDriver(this.clk,
-      {required Component parent, required super.sequencer})
-      : super('myPendingDriver', parent);
+  MyPendingDriver(
+    this.clk, {
+    required Component parent,
+    required super.sequencer,
+    super.timeout,
+    super.dropDelay,
+  }) : super('myPendingDriver', parent);
 
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
     clk.negedge.listen((event) {
-      pendingSeqItems.removeFirst();
+      if (pendingSeqItems.isNotEmpty) {
+        pendingSeqItems.removeFirst();
+      }
     });
   }
 }
 
 class MyTest extends Test {
   late final Sequencer<MySeqItem> seqr;
-  MyTest([super.name = 'myTest']) {
-    final clk = SimpleClockGenerator(10).clk;
 
+  final Logic clk;
+
+  final int interAddDelay;
+
+  final int numItems;
+
+  MyTest({
+    required this.clk,
+    Future<void> Function()? timeout,
+    Future<void> Function()? dropDelay,
+    this.interAddDelay = 0,
+    this.numItems = 100,
+  }) : super('myTest') {
     seqr = Sequencer<MySeqItem>('seqr', this);
-    MyPendingDriver(clk, parent: this, sequencer: seqr);
+    MyPendingDriver(clk,
+        parent: this, sequencer: seqr, timeout: timeout, dropDelay: dropDelay);
   }
 
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < numItems; i++) {
       seqr.add(MySeqItem());
+      await waitCycles(clk, interAddDelay);
     }
   }
 }
 
+Future<void> waitCycles(Logic clk, [int numCycles = 1]) async {
+  for (var i = 0; i < numCycles; i++) {
+    await clk.nextPosedge;
+  }
+}
+
 void main() {
-  test('pending driver', () async {
+  Logic? clk;
+  setUp(() {
+    clk = SimpleClockGenerator(10).clk;
+  });
+
+  test('pending driver simple', () async {
     Logger.root.level = Level.ALL;
-    await MyTest().start();
+    await MyTest(clk: clk!).start();
 
     expect(Simulator.time, 1005);
+  });
+
+  test('pending driver with delay', () async {
+    Logger.root.level = Level.ALL;
+    await MyTest(clk: clk!, dropDelay: () async => waitCycles(clk!, 10))
+        .start();
+
+    expect(Simulator.time, 1100);
+  });
+
+  test('pending driver with delay and sometimes empty queue', () async {
+    Logger.root.level = Level.ALL;
+    await MyTest(
+      clk: clk!,
+      dropDelay: () async => waitCycles(clk!, 10),
+      interAddDelay: 8,
+      numItems: 5,
+    ).start();
+
+    expect(Simulator.time, 420);
   });
 }

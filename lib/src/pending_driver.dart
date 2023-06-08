@@ -10,6 +10,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:async/async.dart';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:rohd_vf/rohd_vf.dart';
@@ -20,25 +21,55 @@ class _PendingQueue<E> extends ListQueue<E> {
   final Phase phase;
   final Logger logger;
 
-  _PendingQueue(this.phase, this.logger);
+  final Future<void> Function()? timeout;
+  final Future<void> Function()? dropDelay;
+
+  _PendingQueue({
+    required this.phase,
+    required this.logger,
+    required this.timeout,
+    required this.dropDelay,
+  });
 
   Objection? _pendingObjection;
 
+  CancelableOperation<void>? pendingDrop;
+
   void dropObjection() {
-    _pendingObjection?.drop();
+    if (dropDelay != null) {
+      // ignore: discarded_futures
+      pendingDrop?.cancel();
+      logger.finest(
+          'Planning to drop objection after delay if nothing stops it.');
+      // ignore: discarded_futures
+      pendingDrop = CancelableOperation<void>.fromFuture(dropDelay!(),
+          onCancel: () => logger.finest('Cancelling objection drop.'));
+      pendingDrop!.then((value) {
+        _pendingObjection?.drop();
+      });
+    } else {
+      _pendingObjection?.drop();
+    }
+  }
+
+  void raiseObjection() {
+    // ignore: discarded_futures
+    pendingDrop?.cancel();
+    pendingDrop = null;
+
+    _pendingObjection ??= phase.raiseObjection('pendingItems')
+      // ignore: discarded_futures
+      ..dropped.then((value) => logger.finest('Pending objection dropped'));
   }
 
   void _reconsiderObjection() {
     if (isNotEmpty) {
       if (_pendingObjection == null) {
-        _pendingObjection ??= phase.raiseObjection('pendingItems')
-          // ignore: discarded_futures
-          ..dropped.then((value) => logger.finest('Pending objection dropped'));
-
+        raiseObjection();
         logger.finest('Raised objection due to pending items.');
       }
     } else {
-      _pendingObjection?.drop();
+      dropObjection();
     }
   }
 
@@ -124,15 +155,24 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
   /// If the test ends and this is not empty, a `SEVERE` will be raised.
   late final Queue<SequenceItemType> pendingSeqItems;
 
+  final Future<void> Function()? timeout;
+  final Future<void> Function()? dropDelay;
+
   /// Creates a new [PendingDriver] attached to [sequencer].
-  PendingDriver(super.name, super.parent, {required super.sequencer});
+  PendingDriver(super.name, super.parent,
+      {required super.sequencer, this.timeout, this.dropDelay});
 
   @override
   @mustCallSuper
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
-    pendingSeqItems = _PendingQueue<SequenceItemType>(phase, logger);
+    pendingSeqItems = _PendingQueue<SequenceItemType>(
+      phase: phase,
+      logger: logger,
+      timeout: timeout,
+      dropDelay: dropDelay,
+    );
 
     sequencer.stream.listen(pendingSeqItems.add);
   }
