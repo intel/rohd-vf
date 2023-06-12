@@ -14,3 +14,7 @@ A `PendingDriver` is a flavor of `Driver` that takes care of some bookkeeping au
 - Automatically pulls items from the `sequencer` into a queue `pendingSeqItems`.
 - Maintains an objection, including with drop delays and timeouts (via a `QuiesceObjector`) based on the occupancy of the queue.
 - Checks that the queue is empty at the end of the test.
+
+### Pending Clocked Driver
+
+Because it is common to want to wait for a certain number of cycles of a clock, the `PendingClockedDriver` offers a way to wait for a number of cycles using the `waitCycles` function automatically.

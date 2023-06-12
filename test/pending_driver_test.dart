@@ -16,14 +16,13 @@ import 'package:test/test.dart';
 
 class MySeqItem extends SequenceItem {}
 
-class MyPendingDriver extends PendingDriver<MySeqItem> {
-  final Logic clk;
-  MyPendingDriver(
-    this.clk, {
+class MyPendingDriver extends PendingClockedDriver<MySeqItem> {
+  MyPendingDriver({
     required Component parent,
     required super.sequencer,
-    super.timeout,
-    super.dropDelay,
+    required super.clk,
+    super.timeoutCycles,
+    super.dropDelayCycles,
   }) : super('myPendingDriver', parent);
 
   @override
@@ -49,14 +48,18 @@ class MyTest extends Test {
 
   MyTest({
     required this.clk,
-    Future<void> Function()? timeout,
-    Future<void> Function()? dropDelay,
+    int? timeout,
+    int? dropDelay,
     this.interAddDelay = 0,
     this.numItems = 100,
   }) : super('myTest') {
     seqr = Sequencer<MySeqItem>('seqr', this);
-    MyPendingDriver(clk,
-        parent: this, sequencer: seqr, timeout: timeout, dropDelay: dropDelay);
+    MyPendingDriver(
+        clk: clk,
+        parent: this,
+        sequencer: seqr,
+        timeoutCycles: timeout,
+        dropDelayCycles: dropDelay);
   }
 
   @override
@@ -67,12 +70,6 @@ class MyTest extends Test {
       seqr.add(MySeqItem());
       await waitCycles(clk, interAddDelay);
     }
-  }
-}
-
-Future<void> waitCycles(Logic clk, [int numCycles = 1]) async {
-  for (var i = 0; i < numCycles; i++) {
-    await clk.nextPosedge;
   }
 }
 
@@ -93,8 +90,7 @@ void main() {
   });
 
   test('pending driver with delay', () async {
-    await MyTest(clk: clk!, dropDelay: () async => waitCycles(clk!, 10))
-        .start();
+    await MyTest(clk: clk!, dropDelay: 10).start();
 
     expect(Simulator.time, 1100);
   });
@@ -102,7 +98,7 @@ void main() {
   test('pending driver with delay and sometimes empty queue', () async {
     await MyTest(
       clk: clk!,
-      dropDelay: () async => waitCycles(clk!, 10),
+      dropDelay: 10,
       interAddDelay: 8,
       numItems: 5,
     ).start();
@@ -113,8 +109,8 @@ void main() {
   test('pending driver never timeout', () async {
     await MyTest(
       clk: clk!,
-      dropDelay: () async => waitCycles(clk!, 9),
-      timeout: () async => waitCycles(clk!, 10),
+      dropDelay: 9,
+      timeout: 10,
       interAddDelay: 8,
       numItems: 5,
     ).start();
@@ -123,8 +119,8 @@ void main() {
   test('pending driver times out', () async {
     final myTest = MyTest(
       clk: clk!,
-      dropDelay: () async => waitCycles(clk!, 30),
-      timeout: () async => waitCycles(clk!, 10),
+      dropDelay: 30,
+      timeout: 10,
       interAddDelay: 20,
       numItems: 5,
     )..printLevel = Level.OFF;
