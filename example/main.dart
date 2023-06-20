@@ -75,7 +75,7 @@ class CounterTest extends Test {
 
   // A "time consuming" method, similar to `task` in SystemVerilog, which
   // waits for a given number of cycles before completing.
-  Future<void> waitCycles(int numCycles) async {
+  Future<void> waitNegedges(int numCycles) async {
     for (var i = 0; i < numCycles; i++) {
       await dut.clk.nextNegedge;
     }
@@ -109,7 +109,7 @@ class CounterTest extends Test {
     await dut.intf.reset.nextNegedge;
 
     // Wait 3 more cycles
-    await waitCycles(3);
+    await waitNegedges(3);
 
     // Kick off a sequence on the sequencer
     await _counterSequencer.start(CounterSequence(5));
