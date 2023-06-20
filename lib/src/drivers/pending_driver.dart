@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // pending_driver.dart
-// A driver that keeps a queue of pending packets
+// A driver that keeps a queue of pending items
 //
 // 2023 June 8
 // Author: Max Korbel <max.korbel@intel.com>
@@ -65,8 +65,7 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
   @override
   void check() {
     if (pendingSeqItems.isNotEmpty) {
-      logger
-          .severe('At end of test, there were still pending packets to send.');
+      logger.severe('At end of test, there were still pending items to send.');
 
       for (final seqItem in pendingSeqItems) {
         logger.finer('Pending item: $seqItem');

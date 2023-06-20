@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // pending_cyles_driver.dart
-// A driver that keeps a queue of pending packets and can count cycles.
+// A driver that keeps a queue of pending items and can count cycles.
 //
 // 2023 June 12
 // Author: Max Korbel <max.korbel@intel.com>
@@ -17,7 +17,7 @@ abstract class PendingClockedDriver<SequenceItemType extends SequenceItem>
   /// Number of cycles before triggering a timeout error.
   final int? timeoutCycles;
 
-  /// Number of cycles to hold an objection even when no packets are pending.
+  /// Number of cycles to hold an objection even when no items are pending.
   final int? dropDelayCycles;
 
   /// The clock for this driver.

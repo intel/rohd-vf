@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // quiesce_objector.dart
-// A driver that keeps a queue of pending packets
+// An component that objects until quiescence.
 //
 // 2023 June 8
 // Author: Max Korbel <max.korbel@intel.com>
