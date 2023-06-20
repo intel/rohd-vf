@@ -117,6 +117,24 @@ interesting events as items to listeners.
   Represents an objection to the test completing.
 </dd>
 
+        <dt id="PendingClockedDriver">
+  <span class="name "><a href="../rohd_vf/PendingClockedDriver-class.html">PendingClockedDriver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A type of <a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a> that requires a <a href="../rohd_vf/PendingClockedDriver/clk.html">clk</a> and will wait for cycles
+on that clock for timeouts and drop delays.
+</dd>
+
+        <dt id="PendingDriver">
+  <span class="name "><a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A special type of <a href="../rohd_vf/Driver-class.html">Driver</a> which automatically pulls items out of
+the <a href="../rohd_vf/Driver/sequencer.html">sequencer</a> and into a queue of <a href="../rohd_vf/PendingDriver/pendingSeqItems.html">pendingSeqItems</a>.
+</dd>
+
         <dt id="Phase">
   <span class="name "><a href="../rohd_vf/Phase-class.html">Phase</a></span> 
 
@@ -124,6 +142,15 @@ interesting events as items to listeners.
 <dd>
   A object responsible for controlling a period of time during the test
 which can be prevented from ending.
+</dd>
+
+        <dt id="QuiesceObjector">
+  <span class="name "><a href="../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></span> 
+
+</dt>
+<dd>
+  Maintains an <a href="../rohd_vf/Objection-class.html">Objection</a> based on whether an entity <a href="../rohd_vf/QuiesceObjector/isActive.html">isActive</a>, optionally
+with <a href="../rohd_vf/QuiesceObjector/dropDelay.html">dropDelay</a> before dropping and a <a href="../rohd_vf/QuiesceObjector/timeout.html">timeout</a>.
 </dd>
 
         <dt id="ROHDVFObject">
@@ -198,6 +225,21 @@ formats.
     </section>
 
 
+    <section class="summary offset-anchor" id="extensions">
+      <h2>Extensions</h2>
+
+      <dl>
+        <dt id="LogicWaiter">
+    <span class="name "><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></span> 
+
+</dt>
+<dd>
+    An <code>extension</code> on <a href="https://pub.dev/documentation/rohd/0.4.2/rohd/Logic-class.html">Logic</a> for waiting for things.
+</dd>
+
+
+      </dl>
+    </section>
 
 
 
@@ -206,6 +248,14 @@ formats.
       <h2>Enums</h2>
 
       <dl>
+        <dt id="Edge">
+  <span class="name "><a href="../rohd_vf/Edge.html">Edge</a></span> 
+
+</dt>
+<dd>
+  A type of edge on a signal.
+</dd>
+
         <dt id="Justify">
   <span class="name "><a href="../rohd_vf/Justify.html">Justify</a></span> 
 
@@ -252,7 +302,10 @@ formats.
         <li><a href="../rohd_vf/Env-class.html">Env</a></li>
         <li><a href="../rohd_vf/Monitor-class.html">Monitor</a></li>
         <li><a href="../rohd_vf/Objection-class.html">Objection</a></li>
+        <li><a href="../rohd_vf/PendingClockedDriver-class.html">PendingClockedDriver</a></li>
+        <li><a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a></li>
         <li><a href="../rohd_vf/Phase-class.html">Phase</a></li>
+        <li><a href="../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></li>
         <li><a href="../rohd_vf/ROHDVFObject-class.html">ROHDVFObject</a></li>
         <li><a href="../rohd_vf/Sequence-class.html">Sequence</a></li>
         <li><a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></li>
@@ -262,12 +315,15 @@ formats.
         <li><a href="../rohd_vf/Tracker-class.html">Tracker</a></li>
         <li><a href="../rohd_vf/TrackerField-class.html">TrackerField</a></li>
 
+      <li class="section-title"><a href="../rohd_vf/rohd_vf-library.html#extensions">Extensions</a></li>
+        <li><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></li>
 
 
 
 
 
       <li class="section-title"><a href="../rohd_vf/rohd_vf-library.html#enums">Enums</a></li>
+        <li><a href="../rohd_vf/Edge.html">Edge</a></li>
         <li><a href="../rohd_vf/Justify.html">Justify</a></li>
 
 
