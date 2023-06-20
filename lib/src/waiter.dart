@@ -18,24 +18,32 @@ enum Edge {
   neg,
 
   /// Either a positive or negative edge.
-  both
+  any
 }
 
-/// Returns a [Future] which completes after the specified [numCycles],
-/// where each cycle is defined as the next occurence of the specified [edge].
-Future<void> waitCycles(Logic clk, int numCycles,
-    {Edge edge = Edge.pos}) async {
-  for (var i = 0; i < numCycles; i++) {
-    switch (edge) {
-      case Edge.pos:
-        await clk.nextPosedge;
-        break;
-      case Edge.neg:
-        await clk.nextNegedge;
-        break;
-      case Edge.both:
-        await clk.nextChanged;
-        break;
+/// An `extension` on [Logic] for waiting for things.
+extension LogicWaiter on Logic {
+  /// Returns a [Future] which completes after the specified [numCycles],
+  /// where each cycle is defined as the next occurence of the specified [edge].
+  ///
+  /// [width] must be 1 or an [Exception] will be thrown.
+  Future<void> waitCycles(int numCycles, {Edge edge = Edge.pos}) async {
+    if (width != 1) {
+      throw Exception('Must be a 1-bit signal, but was $width bits.');
+    }
+
+    for (var i = 0; i < numCycles; i++) {
+      switch (edge) {
+        case Edge.pos:
+          await nextPosedge;
+          break;
+        case Edge.neg:
+          await nextNegedge;
+          break;
+        case Edge.any:
+          await nextChanged;
+          break;
+      }
     }
   }
 }

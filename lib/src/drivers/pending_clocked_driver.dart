@@ -40,12 +40,12 @@ abstract class PendingClockedDriver<SequenceItemType extends SequenceItem>
   }) : super(
           timeout: timeoutCycles != null
               ? () async {
-                  await waitCycles(clk, timeoutCycles, edge: waitEdge);
+                  await clk.waitCycles(timeoutCycles, edge: waitEdge);
                 }
               : null,
           dropDelay: dropDelayCycles != null
               ? () async {
-                  await waitCycles(clk, dropDelayCycles, edge: waitEdge);
+                  await clk.waitCycles(dropDelayCycles, edge: waitEdge);
                 }
               : null,
         );

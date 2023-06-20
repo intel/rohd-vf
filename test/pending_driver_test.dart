@@ -68,7 +68,7 @@ class MyTest extends Test {
 
     for (var i = 0; i < numItems; i++) {
       seqr.add(MySeqItem());
-      await waitCycles(clk, interAddDelay);
+      await clk.waitCycles(interAddDelay);
     }
   }
 }
