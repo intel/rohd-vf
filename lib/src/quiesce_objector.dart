@@ -107,7 +107,7 @@ class QuiesceObjector extends Component {
   /// Will time out pending [timeout], if it is provided.
   void raiseObjection() {
     if (_runPhase == null) {
-      throw Exception('Cannot raise exception before run phase.');
+      throw Exception('Cannot raise objection before run phase.');
     }
 
     // ignore: discarded_futures
