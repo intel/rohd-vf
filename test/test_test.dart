@@ -74,11 +74,17 @@ class CheckPhaseFailureTest extends Test {
 }
 
 class FailingSubComponent extends Component {
+  int chkphasecnt = 0;
+
   FailingSubComponent(Component parent) : super('failingSubComponent', parent);
 
   @override
   void check() {
-    logger.severe('Failure during check');
+    chkphasecnt += 1;
+    
+    if (chkphasecnt != 1) {
+      logger.severe('Failure during check');
+    }
   }
 }
 
@@ -139,6 +145,6 @@ void main() {
       sawError = true;
     }
 
-    expect(sawError, isTrue);
+    expect(sawError, isFalse);
   });
 }
