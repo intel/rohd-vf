@@ -74,15 +74,15 @@ class CheckPhaseFailureTest extends Test {
 }
 
 class FailingSubComponent extends Component {
-  int chkphasecnt = 0;
+  int checkPhaseCount = 0;
 
   FailingSubComponent(Component parent) : super('failingSubComponent', parent);
 
   @override
   void check() {
-    chkphasecnt += 1;
+    checkPhaseCount += 1;
     
-    if (chkphasecnt != 1) {
+    if (checkPhaseCount != 1) {
       logger.severe('Failure during check');
     }
   }
