@@ -82,6 +82,28 @@ class FailingSubComponent extends Component {
   }
 }
 
+class CheckPhaseCalledOnceTest extends Test {
+  CheckPhaseCalledOnceTest()
+      : super('checkPhaseCalledOnceTest', printLevel: Level.OFF) {
+    CheckPhaseFailingSubComponent(this);
+  }
+}
+
+class CheckPhaseFailingSubComponent extends Component {
+  int checkPhaseCount = 0;
+
+  CheckPhaseFailingSubComponent(Component parent)
+      : super('checkPhaseFailingSubComponent', parent);
+
+  @override
+  void check() {
+    checkPhaseCount += 1;
+    if (checkPhaseCount > 1) {
+      logger.severe('Check Phase called $checkPhaseCount times');
+    }
+  }
+}
+
 void main() {
   setUp(() {
     Logger.root.level = Level.WARNING;
@@ -140,5 +162,17 @@ void main() {
     }
 
     expect(sawError, isTrue);
+  });
+
+  test('Check is only called once on components directly under Test', () async {
+    var sawError = false;
+
+    try {
+      await CheckPhaseCalledOnceTest().start();
+    } on Exception {
+      sawError = true;
+    }
+
+    expect(sawError, isFalse);
   });
 }
