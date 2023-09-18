@@ -37,6 +37,7 @@ abstract class PendingClockedDriver<SequenceItemType extends SequenceItem>
     this.timeoutCycles,
     this.dropDelayCycles,
     this.waitEdge = Edge.pos,
+    super.enableEndOfTestEmptyCheck,
   }) : super(
           timeout: timeoutCycles != null
               ? () async {
