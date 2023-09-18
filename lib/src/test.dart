@@ -128,7 +128,7 @@ abstract class Test extends Component {
   }
 
   void _checkAll() {
-    final checkQueue = Queue.of([this, ...components]);
+    final checkQueue = Queue<Component>.of([this]);
     while (checkQueue.isNotEmpty) {
       final component = checkQueue.removeFirst();
       checkQueue.addAll(component.components);
