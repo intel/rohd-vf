@@ -1,5 +1,6 @@
-/// Copyright (C) 2021 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
+// Copyright (C) 2021 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+
 export 'src/agent.dart';
 export 'src/component.dart';
 export 'src/drivers/driver.dart';

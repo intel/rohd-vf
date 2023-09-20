@@ -1,12 +1,11 @@
-/// Copyright (C) 2021 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
-///
-/// sequence.dart
-/// Base sequence for ROHD-VF
-///
-/// 2021 May 11
-/// Author: Max Korbel <max.korbel@intel.com>
-///
+// Copyright (C) 2021-2023 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+//
+// sequence.dart
+// Base sequence for ROHD-VF
+//
+// 2021 May 11
+// Author: Max Korbel <max.korbel@intel.com>
 
 import 'package:rohd_vf/rohd_vf.dart';
 
