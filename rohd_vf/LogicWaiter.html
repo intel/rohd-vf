@@ -49,8 +49,11 @@
   </div>
 </header>
 <main>
-
-<div id="dartdoc-main-content" class="main-content">
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="rohd_vf&#47;rohd_vf-library-sidebar.html"
+    data-below-sidebar="rohd_vf&#47;LogicWaiter-extension-sidebar.html">
     <div>
 <h1><span class="kind-class">LogicWaiter</span> extension 
  
@@ -83,14 +86,14 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="waitCycles" class="callable">
-  <span class="name"><a href="../rohd_vf/LogicWaiter/waitCycles.html">waitCycles</a></span><span class="signature">(<wbr><span class="parameter" id="waitCycles-param-numCycles"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.5/dart-core/int-class.html">int</a></span> <span class="parameter-name">numCycles</span>, </span><span class="parameter" id="waitCycles-param-edge">{<span class="type-annotation"><a href="../rohd_vf/Edge.html">Edge</a></span> <span class="parameter-name">edge</span> = <span class="default-value">Edge.pos</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.5/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  <span class="name"><a href="../rohd_vf/LogicWaiter/waitCycles.html">waitCycles</a></span><span class="signature">(<wbr><span class="parameter" id="waitCycles-param-numCycles"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">numCycles</span>, </span><span class="parameter" id="waitCycles-param-edge">{<span class="type-annotation"><a href="../rohd_vf/Edge.html">Edge</a></span> <span class="parameter-name">edge</span> = <span class="default-value">Edge.pos</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
-  Returns a <a href="https://api.dart.dev/stable/3.0.5/dart-async/Future-class.html">Future</a> which completes after the specified <code>numCycles</code>,
+  Returns a <a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a> which completes after the specified <code>numCycles</code>,
 where each cycle is defined as the next occurence of the specified <code>edge</code>.
   
 
@@ -107,72 +110,24 @@ where each cycle is defined as the next occurence of the specified <code>edge</c
 </div> <!-- /.main-content -->
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <header id="header-search-sidebar" class="hidden-l">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-  <li><a href="../index.html">rohd_vf</a></li>
-  <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
-  <li class="self-crumb">LogicWaiter extension</li>
+    <li><a href="../index.html">rohd_vf</a></li>
+    <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li class="self-crumb">LogicWaiter extension</li>
 </ol>
 
 
     <h5>rohd_vf library</h5>
-    <ol>
-      <li class="section-title"><a href="../rohd_vf/rohd_vf-library.html#classes">Classes</a></li>
-        <li><a href="../rohd_vf/Agent-class.html">Agent</a></li>
-        <li><a href="../rohd_vf/Component-class.html">Component</a></li>
-        <li><a href="../rohd_vf/Driver-class.html">Driver</a></li>
-        <li><a href="../rohd_vf/Env-class.html">Env</a></li>
-        <li><a href="../rohd_vf/Monitor-class.html">Monitor</a></li>
-        <li><a href="../rohd_vf/Objection-class.html">Objection</a></li>
-        <li><a href="../rohd_vf/PendingClockedDriver-class.html">PendingClockedDriver</a></li>
-        <li><a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a></li>
-        <li><a href="../rohd_vf/Phase-class.html">Phase</a></li>
-        <li><a href="../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></li>
-        <li><a href="../rohd_vf/ROHDVFObject-class.html">ROHDVFObject</a></li>
-        <li><a href="../rohd_vf/Sequence-class.html">Sequence</a></li>
-        <li><a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></li>
-        <li><a href="../rohd_vf/Sequencer-class.html">Sequencer</a></li>
-        <li><a href="../rohd_vf/Test-class.html">Test</a></li>
-        <li><a href="../rohd_vf/Trackable-class.html">Trackable</a></li>
-        <li><a href="../rohd_vf/Tracker-class.html">Tracker</a></li>
-        <li><a href="../rohd_vf/TrackerField-class.html">TrackerField</a></li>
-
-      <li class="section-title"><a href="../rohd_vf/rohd_vf-library.html#extensions">Extensions</a></li>
-        <li><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></li>
-
-
-
-
-
-      <li class="section-title"><a href="../rohd_vf/rohd_vf-library.html#enums">Enums</a></li>
-        <li><a href="../rohd_vf/Edge.html">Edge</a></li>
-        <li><a href="../rohd_vf/Justify.html">Justify</a></li>
-
-
-</ol>
-
 </div>
 
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-    <ol>
-
-
-
-
-
-        <li class="section-title"><a href="../rohd_vf/LogicWaiter.html#instance-methods">Methods</a></li>
-          <li><a href="../rohd_vf/LogicWaiter/waitCycles.html">waitCycles</a></li>
-
-
-
-
-</ol>
-
 </div><!--/.sidebar-offcanvas-->
 
 </main>
