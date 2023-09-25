@@ -108,7 +108,9 @@ void main() {
     Logger.root.level = Level.WARNING;
   });
 
-  tearDown(Simulator.reset);
+  tearDown(() async {
+    await Simulator.reset();
+  });
 
   test('Test does not wait for objections if simulation ends', () async {
     await ForeverObjectionTest().start();
