@@ -41,9 +41,19 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
   /// further activity before it completes.
   final Future<void> Function()? dropDelay;
 
+  /// If `true`, will [check] at the end of the test that there are no pending
+  /// items remaining to be driven.
+  final bool enableEndOfTestEmptyCheck;
+
   /// Creates a new [PendingDriver] attached to [sequencer].
-  PendingDriver(super.name, super.parent,
-      {required super.sequencer, this.timeout, this.dropDelay}) {
+  PendingDriver(
+    super.name,
+    super.parent, {
+    required super.sequencer,
+    this.timeout,
+    this.dropDelay,
+    this.enableEndOfTestEmptyCheck = true,
+  }) {
     pendingSeqItems = _PendingQueue<SequenceItemType>(
       parent: this,
       timeout: timeout,
@@ -64,7 +74,7 @@ abstract class PendingDriver<SequenceItemType extends SequenceItem>
 
   @override
   void check() {
-    if (pendingSeqItems.isNotEmpty) {
+    if (pendingSeqItems.isNotEmpty && enableEndOfTestEmptyCheck) {
       logger.severe('At end of test, there were still pending items to send.');
 
       for (final seqItem in pendingSeqItems) {
