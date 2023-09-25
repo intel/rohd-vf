@@ -1,12 +1,11 @@
-/// Copyright (C) 2021-2023 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
-///
-/// main.dart
-/// Example of a complete ROHD-VF testbench
-///
-/// 2021 May 11
-/// Author: Max Korbel <max.korbel@intel.com>
-///
+// Copyright (C) 2021-2023 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+//
+// main.dart
+// Example of a complete ROHD-VF testbench
+//
+// 2021 May 11
+// Author: Max Korbel <max.korbel@intel.com>
 
 import 'dart:async';
 import 'dart:collection';
