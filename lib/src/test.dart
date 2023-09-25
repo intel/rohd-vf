@@ -1,12 +1,11 @@
-/// Copyright (C) 2021 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
-///
-/// test.dart
-/// Base Test for ROHD-VF
-///
-/// 2021 May 11
-/// Author: Max Korbel <max.korbel@intel.com>
-///
+// Copyright (C) 2021-2023 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+//
+// test.dart
+// Base Test for ROHD-VF
+//
+// 2021 May 11
+// Author: Max Korbel <max.korbel@intel.com>
 
 import 'dart:async';
 import 'dart:collection';
@@ -128,7 +127,7 @@ abstract class Test extends Component {
   }
 
   void _checkAll() {
-    final checkQueue = Queue.of([this, ...components]);
+    final checkQueue = Queue<Component>.of([this]);
     while (checkQueue.isNotEmpty) {
       final component = checkQueue.removeFirst();
       checkQueue.addAll(component.components);

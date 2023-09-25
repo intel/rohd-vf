@@ -23,6 +23,7 @@ class MyPendingDriver extends PendingClockedDriver<MySeqItem> {
     required super.clk,
     super.timeoutCycles,
     super.dropDelayCycles,
+    super.enableEndOfTestEmptyCheck,
   }) : super('myPendingDriver', parent);
 
   @override
@@ -52,14 +53,17 @@ class MyTest extends Test {
     int? dropDelay,
     this.interAddDelay = 0,
     this.numItems = 100,
+    bool enableEndOfTestEmptyCheck = true,
   }) : super('myTest') {
     seqr = Sequencer<MySeqItem>('seqr', this);
     MyPendingDriver(
-        clk: clk,
-        parent: this,
-        sequencer: seqr,
-        timeoutCycles: timeout,
-        dropDelayCycles: dropDelay);
+      clk: clk,
+      parent: this,
+      sequencer: seqr,
+      timeoutCycles: timeout,
+      dropDelayCycles: dropDelay,
+      enableEndOfTestEmptyCheck: enableEndOfTestEmptyCheck,
+    );
   }
 
   @override
@@ -131,5 +135,31 @@ void main() {
     } on Exception catch (_) {
       expect(myTest.failureDetected, true);
     }
+  });
+
+  group('end of test empty check', () {
+    test('not empty at end of test fails', () async {
+      // end the test prematurely
+      Simulator.registerAction(200, Simulator.endSimulation);
+
+      final myTest = MyTest(clk: clk!)..printLevel = Level.OFF;
+      try {
+        await myTest.start();
+      } on Exception catch (_) {
+        expect(myTest.failureDetected, true);
+      }
+    });
+
+    test('disable end of test empty check', () async {
+      // end the test prematurely
+      Simulator.registerAction(200, Simulator.endSimulation);
+
+      final myTest = MyTest(
+        clk: clk!,
+        enableEndOfTestEmptyCheck: false,
+      )..printLevel = Level.OFF;
+
+      await myTest.start();
+    });
   });
 }

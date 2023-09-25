@@ -1,12 +1,11 @@
-/// Copyright (C) 2022 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
-///
-/// test_test.dart
-/// Tests for `Test`
-///
-/// 2022 August 19
-/// Author: Max Korbel <max.korbel@intel.com>
-///
+// Copyright (C) 2022-2023 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+//
+// test_test.dart
+// Tests for `Test`
+//
+// 2022 August 19
+// Author: Max Korbel <max.korbel@intel.com>
 
 import 'dart:async';
 import 'package:logging/logging.dart';
@@ -82,6 +81,28 @@ class FailingSubComponent extends Component {
   }
 }
 
+class CheckPhaseCalledOnceTest extends Test {
+  CheckPhaseCalledOnceTest()
+      : super('checkPhaseCalledOnceTest', printLevel: Level.OFF) {
+    CheckPhaseFailingSubComponent(this);
+  }
+}
+
+class CheckPhaseFailingSubComponent extends Component {
+  int checkPhaseCount = 0;
+
+  CheckPhaseFailingSubComponent(Component parent)
+      : super('checkPhaseFailingSubComponent', parent);
+
+  @override
+  void check() {
+    checkPhaseCount += 1;
+    if (checkPhaseCount > 1) {
+      logger.severe('Check Phase called $checkPhaseCount times');
+    }
+  }
+}
+
 void main() {
   setUp(() {
     Logger.root.level = Level.WARNING;
@@ -140,5 +161,17 @@ void main() {
     }
 
     expect(sawError, isTrue);
+  });
+
+  test('Check is only called once on components directly under Test', () async {
+    var sawError = false;
+
+    try {
+      await CheckPhaseCalledOnceTest().start();
+    } on Exception {
+      sawError = true;
+    }
+
+    expect(sawError, isFalse);
   });
 }

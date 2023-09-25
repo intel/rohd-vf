@@ -1,12 +1,11 @@
-/// Copyright (C) 2021 Intel Corporation
-/// SPDX-License-Identifier: BSD-3-Clause
-///
-/// tracker.dart
-/// A tracker to generate pretty and convenient logs from events
-///
-/// 2021 December 7
-/// Author: Max Korbel <max.korbel@intel.com>
-///
+// Copyright (C) 2021-2023 Intel Corporation
+// SPDX-License-Identifier: BSD-3-Clause
+//
+// tracker.dart
+// A tracker to generate pretty and convenient logs from events
+//
+// 2021 December 7
+// Author: Max Korbel <max.korbel@intel.com>
 
 import 'dart:io';
 import 'dart:math';
@@ -217,7 +216,7 @@ class _TableDumper<TrackableType extends Trackable>
   void record(TrackableType trackable,
       {Map<String, String?> defaults = const {}}) {
     _recordLine({
-      for (var field in _fields)
+      for (final field in _fields)
         field: trackable.trackerString(field) ?? defaults[field.title]
     });
   }
@@ -287,7 +286,7 @@ class _TableDumper<TrackableType extends Trackable>
       return leftPaddingStr + value + rightPaddingStr;
     });
 
-    final map = {for (var field in _fields) field.title: entry[field]};
+    final map = {for (final field in _fields) field.title: entry[field]};
     final line = [
       ...fieldVals,
       if (includeMap) map.toString() else '',
@@ -318,7 +317,7 @@ class _JsonDumper<TrackableType extends Trackable>
     final start = _isFirst ? ' ' : ',';
     _isFirst = false;
     final map = {
-      for (var field in _fields)
+      for (final field in _fields)
         '"${field.title}"':
             '"${trackable.trackerString(field) ?? defaults[field.title]}"'
     };
