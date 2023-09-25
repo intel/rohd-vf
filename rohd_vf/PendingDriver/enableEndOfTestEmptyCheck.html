@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the check method from the PendingDriver class, for the Dart programming language.">
-  <title>check method - PendingDriver class - rohd_vf library - Dart API</title>
+  <meta name="description" content="API docs for the enableEndOfTestEmptyCheck property from the PendingDriver class, for the Dart programming language.">
+  <title>enableEndOfTestEmptyCheck property - PendingDriver class - rohd_vf library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/PendingDriver-class.html">PendingDriver<span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends SequenceItem</span>&gt;</span></a></li>
-    <li class="self-crumb">check method</li>
+    <li class="self-crumb">enableEndOfTestEmptyCheck property</li>
   </ol>
-  <div class="self-name">check</div>
+  <div class="self-name">enableEndOfTestEmptyCheck</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,44 +57,26 @@
       data-above-sidebar="rohd_vf&#47;PendingDriver-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-method">check</span> method 
+<h1><span class="kind-property">enableEndOfTestEmptyCheck</span> property 
 </h1></div>
 
-    <section class="multi-line-signature">
-      
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.1.2/dart-core/override-constant.html">override</a></li>
-    </ol>
-  </div>
+        <section class="multi-line-signature">
+          
+          <a href="https://api.dart.dev/stable/3.1.2/dart-core/bool-class.html">bool</a>
+          <span class="name ">enableEndOfTestEmptyCheck</span>
+          <div class="features"><span class="feature">final</span></div>
 
-<span class="returntype">void</span>
-<span class="name ">check</span>(<wbr>)
-
-      <div class="features"><span class="feature">override</span></div>
-
-    </section>
-    
+        </section>
+        
 <section class="desc markdown">
-  <p>Performs additional checks at the end of the simulation.</p>
-<p>This is a good place to search for any incomplete flows or
-compare final states with expected states.</p>
+  <p>If <code>true</code>, will <a href="../../rohd_vf/PendingDriver/check.html">check</a> at the end of the test that there are no pending
+items remaining to be driven.</p>
 </section>
 
-
-    
+        
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-void check() {
-  if (pendingSeqItems.isNotEmpty &amp;&amp; enableEndOfTestEmptyCheck) {
-    logger.severe(&#39;At end of test, there were still pending items to send.&#39;);
-
-    for (final seqItem in pendingSeqItems) {
-      logger.finer(&#39;Pending item: $seqItem&#39;);
-    }
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">final bool enableEndOfTestEmptyCheck;</code></pre>
 </section>
 
 
@@ -112,7 +94,7 @@ void check() {
     <li><a href="../../index.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
     <li><a href="../../rohd_vf/PendingDriver-class.html">PendingDriver<span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends SequenceItem</span>&gt;</span></a></li>
-    <li class="self-crumb">check method</li>
+    <li class="self-crumb">enableEndOfTestEmptyCheck property</li>
 </ol>
 
 

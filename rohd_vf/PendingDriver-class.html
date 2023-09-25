@@ -105,7 +105,7 @@ and ensuring that the queue is empty at the end of the test.</p>
 
     <dl class="constructor-summary-list">
         <dt id="PendingDriver" class="callable">
-          <span class="name"><a href="../rohd_vf/PendingDriver/PendingDriver.html">PendingDriver</a></span><span class="signature">(<span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-parent"><span class="type-annotation"><a href="../rohd_vf/Component-class.html">Component</a>?</span> <span class="parameter-name">parent</span>, </span><span class="parameter" id="-param-sequencer">{<span>required</span> <span class="type-annotation"><a href="../rohd_vf/Sequencer-class.html">Sequencer</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType</span>&gt;</span></span> <span class="parameter-name">sequencer</span>, </span><span class="parameter" id="-param-timeout"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">timeout</span>()?, </span><span class="parameter" id="-param-dropDelay"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">dropDelay</span>()?}</span>)</span>
+          <span class="name"><a href="../rohd_vf/PendingDriver/PendingDriver.html">PendingDriver</a></span><span class="signature">(<span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-parent"><span class="type-annotation"><a href="../rohd_vf/Component-class.html">Component</a>?</span> <span class="parameter-name">parent</span>, </span><span class="parameter" id="-param-sequencer">{<span>required</span> <span class="type-annotation"><a href="../rohd_vf/Sequencer-class.html">Sequencer</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType</span>&gt;</span></span> <span class="parameter-name">sequencer</span>, </span><span class="parameter" id="-param-timeout"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">timeout</span>()?, </span><span class="parameter" id="-param-dropDelay"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">dropDelay</span>()?, </span><span class="parameter" id="-param-enableEndOfTestEmptyCheck"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">enableEndOfTestEmptyCheck</span> = <span class="default-value">true</span>}</span>)</span>
         </dt>
         <dd>
           Creates a new <a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a> attached to <a href="../rohd_vf/Driver/sequencer.html">sequencer</a>.
@@ -137,6 +137,18 @@ and ensuring that the queue is empty at the end of the test.</p>
   A function called each time an objection would drop due to an empty
 <a href="../rohd_vf/PendingDriver/pendingSeqItems.html">pendingSeqItems</a>, but the objection will only be dropped if there is no
 further activity before it completes.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="enableEndOfTestEmptyCheck" class="property">
+  <span class="name"><a href="../rohd_vf/PendingDriver/enableEndOfTestEmptyCheck.html">enableEndOfTestEmptyCheck</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.2/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+  If <code>true</code>, will <a href="../rohd_vf/PendingDriver/check.html">check</a> at the end of the test that there are no pending
+items remaining to be driven.
   <div class="features"><span class="feature">final</span></div>
 
 </dd>
