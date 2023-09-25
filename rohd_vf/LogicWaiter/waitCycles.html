@@ -76,6 +76,9 @@
   <p>Returns a <a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a> which completes after the specified <code>numCycles</code>,
 where each cycle is defined as the next occurence of the specified <code>edge</code>.</p>
 <p><a href="https://pub.dev/documentation/rohd/0.4.2/rohd/Logic/width.html">width</a> must be 1 or an <a href="https://api.dart.dev/stable/3.1.2/dart-core/Exception-class.html">Exception</a> will be thrown.</p>
+<p>Like <a href="https://pub.dev/documentation/rohd/0.4.2/rohd/Logic/nextNegedge.html">nextNegedge</a> and <a href="https://pub.dev/documentation/rohd/0.4.2/rohd/Logic/nextPosedge.html">nextPosedge</a>, this will only detect valid edge
+transitions. If the value is invalid (<code>x</code> or <code>z</code>) before or after the
+transition, it will not count as a cycle.</p>
 </section>
 
 
@@ -96,7 +99,10 @@ where each cycle is defined as the next occurence of the specified <code>edge</c
         await nextNegedge;
         break;
       case Edge.any:
-        await nextChanged;
+        await Future.any([
+          nextPosedge,
+          nextNegedge,
+        ]);
         break;
     }
   }
