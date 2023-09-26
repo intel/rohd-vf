@@ -30,6 +30,8 @@ abstract class Test extends Component {
   /// which can be manually overriden.  If all random behavior in
   /// the test derives from [random] object, then tests can be
   /// reproduced by setting the same seed again.
+  ///
+  /// This is `null` if [instance] is `null`.
   static Random? get random => instance?._random;
 
   /// The minimum level that should immediately kill the test.
@@ -51,7 +53,10 @@ abstract class Test extends Component {
   /// [Exception].
   bool failureDetected = false;
 
-  /// The singleton Test for this simulation.
+  /// The singleton [Test] for this simulation.
+  ///
+  /// It is `null` if there is no currently active [Test].  It is set back to
+  /// `null` after a it is finished running.
   static Test? get instance => _instance;
   static Test? _instance;
 
