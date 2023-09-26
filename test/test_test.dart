@@ -109,7 +109,7 @@ void main() {
   });
 
   tearDown(() async {
-    await Simulator.reset();
+    await Test.reset();
   });
 
   test('Test does not wait for objections if simulation ends', () async {

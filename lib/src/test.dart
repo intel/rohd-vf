@@ -98,6 +98,20 @@ abstract class Test extends Component {
     configureLogger();
   }
 
+  /// Resets static awareness of the [Simulator] and [Test] to a safe initial
+  /// state.
+  ///
+  /// This includes a call to [Simulator.reset] and clearing the [instance]
+  /// reference to `null`.
+  ///
+  /// This is important, for example, if you're running a variety of tests in
+  /// unit test suite.
+  static Future<void> reset() async {
+    await Simulator.reset();
+
+    _instance = null;
+  }
+
   /// A handle to the subscription to the root [Logger], so that it
   /// can be cancelled at the end of the test.
   late final StreamSubscription<LogRecord> _loggerSubscription;

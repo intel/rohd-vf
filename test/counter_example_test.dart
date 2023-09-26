@@ -9,12 +9,13 @@
 
 import 'package:logging/logging.dart';
 import 'package:rohd/rohd.dart';
+import 'package:rohd_vf/rohd_vf.dart';
 import 'package:test/test.dart';
 import '../example/main.dart' as example;
 
 void main() {
   tearDown(() async {
-    await Simulator.reset();
+    await Test.reset();
   });
 
   test('counter example test', () async {
