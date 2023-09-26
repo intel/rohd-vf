@@ -11,7 +11,7 @@ doc/api/
 
 # Other stuff
 *.vcd
-.vscode/
+.vscode/*
 *.tracker.json
 *.tracker.log
 

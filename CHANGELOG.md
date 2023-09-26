@@ -1,3 +1,13 @@
+## 0.5.0
+
+- Updates ROHD dependency to at least v0.5.0
+- Breaking: `Test.instance` is now nullable and `null` when no `Test` is active, which also impacts `Test.random`. Use `Test.reset` instead of `Simulator.reset` in ROHD-VF testbenches to reset.
+- Added `QuesceObjector`, `PendingDriver`, and `PendingClockedDriver` to make it easier to develop typical drivers.
+- Added `waitCycles` function as an extension to `Logic` to make it easier to wait for a variable number of clock edges.
+- Fixed a bug where `Component`s directly under the `Test` could run the `check` phase multiple times (<https://github.com/intel/rohd-vf/issues/45>).
+- Updated the example, leveraging some new APIs in ROHD-VF and ROHD and demonstrating best practices.
+- Exposed `randomSeed` accessor in `Test` to make it easier to reproduce randomized tests.
+
 ## 0.4.1
 
 - Fix a bug where `defaults` were not used in `Tracker.record` (<https://github.com/intel/rohd-vf/pull/27>).
