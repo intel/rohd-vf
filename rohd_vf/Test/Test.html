@@ -64,7 +64,9 @@
       
       <span class="name ">Test</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
 <li><span class="parameter" id="-param-randomSeed">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">randomSeed</span>, </span></li>
-<li><span class="parameter" id="-param-printLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">printLevel</span> = <span class="default-value">Level.ALL</span>}</span></li>
+<li><span class="parameter" id="-param-printLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">printLevel</span> = <span class="default-value">Level.ALL</span>, </span></li>
+<li><span class="parameter" id="-param-failLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">failLevel</span> = <span class="default-value">Level.SEVERE</span>, </span></li>
+<li><span class="parameter" id="-param-killLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">killLevel</span> = <span class="default-value">Level.SHOUT</span>}</span></li>
 </ol>)
     </section>
 
@@ -72,10 +74,10 @@
 <section class="desc markdown">
   <p>Constructs a new <a href="../../rohd_vf/Test-class.html">Test</a> named <code>name</code>.</p>
 <p>Only one <a href="../../rohd_vf/Test-class.html">Test</a> should be created per simulation.  It will set
-the value of <a href="../../rohd_vf/Test/random.html">random</a> to a new <a href="https://api.dart.dev/stable/3.1.2/dart-math/Random-class.html">Random</a> object with <code>randomSeed</code>
-as the seed.  If no <code>randomSeed</code> is specified, a random seed
+the value of <a href="../../rohd_vf/Test/random.html">random</a> to a new <a href="https://api.dart.dev/stable/3.1.2/dart-math/Random-class.html">Random</a> object with <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a>
+as the seed.  If no <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a> is specified, a random seed
 will be selected.  To rerun a test with the same randomized behavior,
-pass the same <code>randomSeed</code> as the previous run.</p>
+pass the same <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a> as the previous run.</p>
 </section>
 
 

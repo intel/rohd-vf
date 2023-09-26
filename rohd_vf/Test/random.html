@@ -66,7 +66,7 @@
 
 <section class="multi-line-signature">
   
-  <span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-math/Random-class.html">Random</a></span>
+  <span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-math/Random-class.html">Random</a>?</span>
   <span class="name ">random</span>
   
 
@@ -80,12 +80,13 @@ time randomization is required in this test.</p>
 which can be manually overriden.  If all random behavior in
 the test derives from <a href="../../rohd_vf/Test/random.html">random</a> object, then tests can be
 reproduced by setting the same seed again.</p>
+<p>This is <code>null</code> if <a href="../../rohd_vf/Test/instance.html">instance</a> is <code>null</code>.</p>
 </section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Random get random =&gt; instance._random;</code></pre>
+  <pre class="language-dart"><code class="language-dart">static Random? get random =&gt; instance?._random;</code></pre>
 </section>
 
 </section>
