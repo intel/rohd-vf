@@ -84,7 +84,7 @@ void main() {
   });
 
   tearDown(() async {
-    await Simulator.reset();
+    await Test.reset();
   });
 
   test('pending driver simple', () async {

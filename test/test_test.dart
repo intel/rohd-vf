@@ -26,7 +26,7 @@ class ForeverObjectionTest extends Test {
 }
 
 class NormalTest extends Test {
-  NormalTest() : super('normalTest');
+  NormalTest() : super('normalTest', randomSeed: 123);
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
@@ -109,7 +109,7 @@ void main() {
   });
 
   tearDown(() async {
-    await Simulator.reset();
+    await Test.reset();
   });
 
   test('Test does not wait for objections if simulation ends', () async {
@@ -175,5 +175,24 @@ void main() {
     }
 
     expect(sawError, isFalse);
+  });
+
+  group('Test.instance', () {
+    test('test already created', () async {
+      NormalTest();
+
+      expect(Test.instance, isNotNull);
+      expect(Test.random, isNotNull);
+      expect(Test.instance!.randomSeed, 123);
+
+      await Test.instance!.start();
+
+      expect(Test.instance, isNull);
+    });
+
+    test('test not created', () {
+      expect(Test.instance, isNull);
+      expect(Test.random, isNull);
+    });
   });
 }

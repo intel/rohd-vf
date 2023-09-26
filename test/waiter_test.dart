@@ -10,7 +10,7 @@
 import 'dart:async';
 
 import 'package:rohd/rohd.dart';
-import 'package:rohd_vf/src/waiter.dart';
+import 'package:rohd_vf/rohd_vf.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -21,7 +21,7 @@ void main() {
   });
 
   tearDown(() async {
-    await Simulator.reset();
+    await Test.reset();
   });
 
   test('0 cycles is instant', () async {
