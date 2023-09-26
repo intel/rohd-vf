@@ -32,7 +32,7 @@ Future<void> main({Level loggerLevel = Level.FINER}) async {
   Simulator.setMaxSimTime(300);
 
   // Create and start the test!
-  final test = CounterTest(tb.counter);
+  final test = CounterTest(tb.intf);
   await test.start();
 }
 
@@ -44,10 +44,10 @@ class TopTB {
   // A constant value for the width to use in this testbench
   static const int width = 8;
 
-  TopTB() {
-    // Build an instance of the interface for the Counter
-    final intf = CounterInterface();
+  // Build an instance of the interface for the Counter
+  final CounterInterface intf = CounterInterface();
 
+  TopTB() {
     // Connect a generated clock to the interface
     intf.clk <= SimpleClockGenerator(10).clk;
 
@@ -58,17 +58,17 @@ class TopTB {
 
 /// A simple test that brings the [Counter] out of reset and wiggles the enable.
 class CounterTest extends Test {
-  /// The [Counter] device under test.
-  final Counter dut;
+  /// The [CounterInterface] to the [Counter] device under test (DUT).
+  final CounterInterface intf;
 
-  /// The test environment for [dut].
+  /// The test environment for the DUT.
   late final CounterEnv env;
 
   /// A private, local pointer to the test environment's [Sequencer].
   late final CounterSequencer _counterSequencer;
 
-  CounterTest(this.dut, {String name = 'counterTest'}) : super(name) {
-    env = CounterEnv(dut.intf, this);
+  CounterTest(this.intf, {String name = 'counterTest'}) : super(name) {
+    env = CounterEnv(intf, this);
     _counterSequencer = env.agent.sequencer;
   }
 
@@ -76,7 +76,7 @@ class CounterTest extends Test {
   // waits for a given number of cycles before completing.
   Future<void> waitNegedges(int numCycles) async {
     for (var i = 0; i < numCycles; i++) {
-      await dut.clk.nextNegedge;
+      await intf.clk.nextNegedge;
     }
   }
 
@@ -92,20 +92,20 @@ class CounterTest extends Test {
 
     // Add some simple reset behavior at specified timestamps
     Simulator.registerAction(1, () {
-      dut.intf.reset.put(0);
+      intf.reset.put(0);
     });
     Simulator.registerAction(3, () {
-      dut.intf.reset.put(1);
+      intf.reset.put(1);
     });
     Simulator.registerAction(35, () {
-      dut.intf.reset.put(0);
+      intf.reset.put(0);
     });
 
     // Add an individual SequenceItem to set enable to 0 at the start
     _counterSequencer.add(CounterSeqItem(false));
 
     // Wait for the next negative edge of reset
-    await dut.intf.reset.nextNegedge;
+    await intf.reset.nextNegedge;
 
     // Wait 3 more cycles
     await waitNegedges(3);
@@ -267,9 +267,13 @@ class CounterValueMonitor extends Monitor<LogicValue> {
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
+    // wait for reset before monitoring
+    await intf.reset.nextNegedge;
+
     // Every positive edge of the clock
     intf.clk.posedge.listen((event) {
       // Send out an event with the value of the counter
+      // Use `value` to look at the value after the positive edge
       add(intf.val.value);
     });
   }
@@ -288,13 +292,14 @@ class CounterEnableMonitor extends Monitor<CounterSeqItem> {
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
 
+    // wait for reset before monitoring
+    await intf.reset.nextNegedge;
+
     // Every positive edge of the clock
     intf.clk.posedge.listen((event) {
       // If the enable bit on the interface is 1
-      if (intf.en.value == LogicValue.one) {
-        // Send out an event with `true` out of this Monitor
-        add(CounterSeqItem(true));
-      }
+      // Use `previousValue` to look at the enable sampled as a flop would
+      add(CounterSeqItem(intf.en.previousValue == LogicValue.one));
     });
   }
 }
@@ -323,18 +328,11 @@ class CounterScoreboard extends Component {
   /// The most recent value recieved on [valueStream].
   int? _seenValue;
 
-  /// The value seen last time from [valueStream].
-  int _lastSeenValue = 0;
+  int? _previousValue;
 
   @override
   Future<void> run(Phase phase) async {
     unawaited(super.run(phase));
-
-    intf.reset.posedge.listen((event) {
-      _lastSeenValue = 0;
-    });
-
-    await intf.reset.nextNegedge;
 
     // record if we've seen an enable this cycle
     enableStream.listen((event) {
@@ -343,21 +341,26 @@ class CounterScoreboard extends Component {
 
     // record the value we saw this cycle
     valueStream.listen((event) {
+      _previousValue = _seenValue;
       _seenValue = event.toInt();
     });
 
-    // check values on negative edge
+    // check values on negative edge, since both monitors are on posedge
     intf.clk.negedge.listen((event) {
-      if (_sawEnable) {
-        int expected;
+      // by default, we expect the same value
+      var expected = _previousValue;
 
+      // if there was an enable, we expect it to increment
+      if (_sawEnable && _previousValue != null) {
         // handle counter overflow
-        if (_lastSeenValue == (1 << intf.width) - 1) {
+        if (_seenValue == (1 << intf.width) - 1) {
           expected = 0;
         } else {
-          expected = _lastSeenValue + 1;
+          expected = _previousValue! + 1;
         }
+      }
 
+      if (expected != null) {
         final matchesExpectations = _seenValue == expected;
 
         if (!matchesExpectations) {
@@ -366,8 +369,6 @@ class CounterScoreboard extends Component {
           logger.finest('Counter value matches expectations with $_seenValue');
         }
       }
-      _sawEnable = false;
-      _lastSeenValue = _seenValue ?? 0;
     });
   }
 }

@@ -32,14 +32,9 @@ class CounterInterface extends Interface<CounterDirection> {
   }
 }
 
-/// A simple counter which increments once per [clk] edge whenever
-/// [en] is high, and [reset]s to 0, with output [val].
+/// A simple counter which increments once per `clk` edge whenever
+/// `en` is high, and `reset`s to 0, with output `val`.
 class Counter extends Module {
-  Logic get clk => input('clk');
-  Logic get en => input('en');
-  Logic get reset => input('reset');
-  Logic get val => output('val');
-
   late final CounterInterface intf;
 
   Counter(CounterInterface intf) : super(name: 'counter') {
@@ -54,14 +49,10 @@ class Counter extends Module {
   void _buildLogic() {
     final nextVal = Logic(name: 'nextVal', width: intf.width);
 
-    nextVal <= val + 1;
+    nextVal <= intf.val + 1;
 
-    Sequential(clk, [
-      If(reset, then: [
-        val < 0
-      ], orElse: [
-        If(en, then: [val < nextVal])
-      ])
+    Sequential(intf.clk, reset: intf.reset, [
+      If(intf.en, then: [intf.val < nextVal])
     ]);
   }
 }
