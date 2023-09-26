@@ -30,18 +30,18 @@ abstract class Test extends Component {
   /// which can be manually overriden.  If all random behavior in
   /// the test derives from [random] object, then tests can be
   /// reproduced by setting the same seed again.
-  static Random get random => instance._random;
+  static Random? get random => instance?._random;
 
   /// The minimum level that should immediately kill the test.
   ///
   /// This level should be greater than or equal to [failLevel].
-  Level killLevel = Level.SHOUT;
+  Level killLevel;
 
   /// The minimum level that should cause the test to fail after completing.
   ///
   /// A failed test will continue to run, then throw an Exception.  This level
   /// should be less than or equal to [killLevel].
-  Level failLevel = Level.SEVERE;
+  Level failLevel;
 
   /// Stores whether a failure has been detected in this test.
   ///
@@ -52,7 +52,8 @@ abstract class Test extends Component {
   bool failureDetected = false;
 
   /// The singleton Test for this simulation.
-  static late Test instance;
+  static Test? get instance => _instance;
+  static Test? _instance;
 
   /// The [Random] object for this [Test].
   final Random _random;
@@ -65,6 +66,10 @@ abstract class Test extends Component {
   /// the [Test] will not fail when those messages are emitted.
   Level printLevel;
 
+  /// If selected at [Test] construction, this is the seed provided for
+  /// the [random] object.
+  final int? randomSeed;
+
   /// Constructs a new [Test] named [name].
   ///
   /// Only one [Test] should be created per simulation.  It will set
@@ -72,10 +77,19 @@ abstract class Test extends Component {
   /// as the seed.  If no [randomSeed] is specified, a random seed
   /// will be selected.  To rerun a test with the same randomized behavior,
   /// pass the same [randomSeed] as the previous run.
-  Test(String name, {int? randomSeed, this.printLevel = Level.ALL})
-      : _random = Random(randomSeed),
+  Test(
+    String name, {
+    this.randomSeed,
+    this.printLevel = Level.ALL,
+    this.failLevel = Level.SEVERE,
+    this.killLevel = Level.SHOUT,
+  })  : _random = Random(randomSeed),
         super(name, null) {
-    instance = this;
+    if (_instance != null) {
+      throw Exception('Instance of `Test` is already running!');
+    }
+
+    _instance = this;
     configureLogger();
   }
 
@@ -174,5 +188,7 @@ abstract class Test extends Component {
     logger.finest('Simulation ended, test complete.');
 
     await _loggerSubscription.cancel();
+
+    _instance = null;
   }
 }
