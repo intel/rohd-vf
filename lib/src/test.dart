@@ -148,7 +148,7 @@ abstract class Test extends Component {
 
         _testPrint('Killing test due to detected failure.', record.level);
 
-        Simulator.endSimulation();
+        unawaited(Simulator.endSimulation());
       } else if (record.level >= failLevel) {
         if (!failureDetected) {
           _testPrint('Test failure detected, but continuing to run to end.',
@@ -194,7 +194,7 @@ abstract class Test extends Component {
           .warning('Simulation has ended before all objections were dropped!');
     } else {
       logger.finest('Objections completed, ending simulation.');
-      Simulator.endSimulation();
+      unawaited(Simulator.endSimulation());
     }
 
     if (!Simulator.simulationHasEnded) {
