@@ -140,7 +140,7 @@ void main() {
   group('end of test empty check', () {
     test('not empty at end of test fails', () async {
       // end the test prematurely
-      Simulator.registerAction(200, Simulator.endSimulation);
+      Simulator.registerAction(200, () => unawaited(Simulator.endSimulation()));
 
       final myTest = MyTest(clk: clk!)..printLevel = Level.OFF;
       try {
@@ -152,7 +152,7 @@ void main() {
 
     test('disable end of test empty check', () async {
       // end the test prematurely
-      Simulator.registerAction(200, Simulator.endSimulation);
+      Simulator.registerAction(200, () => unawaited(Simulator.endSimulation()));
 
       final myTest = MyTest(
         clk: clk!,
