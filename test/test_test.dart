@@ -21,7 +21,7 @@ class ForeverObjectionTest extends Test {
     unawaited(super.run(phase));
     phase.raiseObjection('objectionNeverCloses');
     SimpleClockGenerator(10);
-    Simulator.registerAction(100, Simulator.endSimulation);
+    Simulator.registerAction(100, () => unawaited(Simulator.endSimulation()));
   }
 }
 
