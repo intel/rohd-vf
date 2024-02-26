@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
     <li><a href="../../rohd_vf/Test-class.html">Test</a></li>
     <li class="self-crumb">start method</li>
   </ol>
@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.2.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.3.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
 <span class="name ">start</span>(<wbr>)
 
       
@@ -71,7 +71,7 @@
     </section>
     
 <section class="desc markdown">
-  <p>Starts the test on the <a href="https://pub.dev/documentation/rohd/0.5.1/rohd/Simulator-class.html">Simulator</a>.</p>
+  <p>Starts the test on the <a href="https://pub.dev/documentation/rohd/0.5.2/rohd/Simulator-class.html">Simulator</a>.</p>
 <p>It will kick off the run phase and continue to run until
 all objections have dropped.</p>
 </section>
@@ -99,7 +99,7 @@ all objections have dropped.</p>
         .warning(&#39;Simulation has ended before all objections were dropped!&#39;);
   } else {
     logger.finest(&#39;Objections completed, ending simulation.&#39;);
-    Simulator.endSimulation();
+    unawaited(Simulator.endSimulation());
   }
 
   if (!Simulator.simulationHasEnded) {

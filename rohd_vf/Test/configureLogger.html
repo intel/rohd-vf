@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
     <li><a href="../../rohd_vf/Test-class.html">Test</a></li>
     <li class="self-crumb">configureLogger method</li>
   </ol>
@@ -64,7 +64,7 @@
       
   <div>
     <ol class="annotation-list">
-        <li>@<a href="https://pub.dev/documentation/meta/1.11.0/meta/protected-constant.html">protected</a></li>
+        <li>@<a href="https://pub.dev/documentation/meta/1.12.0/meta/protected-constant.html">protected</a></li>
     </ol>
   </div>
 
@@ -105,7 +105,7 @@ void configureLogger() {
 
       _testPrint(&#39;Killing test due to detected failure.&#39;, record.level);
 
-      Simulator.endSimulation();
+      unawaited(Simulator.endSimulation());
     } else if (record.level &gt;= failLevel) {
       if (!failureDetected) {
         _testPrint(&#39;Test failure detected, but continuing to run to end.&#39;,

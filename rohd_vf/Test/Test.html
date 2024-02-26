@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
     <li><a href="../../rohd_vf/Test-class.html">Test</a></li>
     <li class="self-crumb">Test constructor</li>
   </ol>
@@ -62,8 +62,8 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">Test</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
-<li><span class="parameter" id="-param-randomSeed">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">randomSeed</span>, </span></li>
+      <span class="name ">Test</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
+<li><span class="parameter" id="-param-randomSeed">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">randomSeed</span>, </span></li>
 <li><span class="parameter" id="-param-printLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">printLevel</span> = <span class="default-value">Level.ALL</span>, </span></li>
 <li><span class="parameter" id="-param-failLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">failLevel</span> = <span class="default-value">Level.SEVERE</span>, </span></li>
 <li><span class="parameter" id="-param-killLevel"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.2.0/logging/Level-class.html">Level</a></span> <span class="parameter-name">killLevel</span> = <span class="default-value">Level.SHOUT</span>}</span></li>
@@ -74,7 +74,7 @@
 <section class="desc markdown">
   <p>Constructs a new <a href="../../rohd_vf/Test-class.html">Test</a> named <code>name</code>.</p>
 <p>Only one <a href="../../rohd_vf/Test-class.html">Test</a> should be created per simulation.  It will set
-the value of <a href="../../rohd_vf/Test/random.html">random</a> to a new <a href="https://api.dart.dev/stable/3.2.4/dart-math/Random-class.html">Random</a> object with <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a>
+the value of <a href="../../rohd_vf/Test/random.html">random</a> to a new <a href="https://api.dart.dev/stable/3.3.0/dart-math/Random-class.html">Random</a> object with <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a>
 as the seed.  If no <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a> is specified, a random seed
 will be selected.  To rerun a test with the same randomized behavior,
 pass the same <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a> as the previous run.</p>
@@ -84,7 +84,21 @@ pass the same <a href="../../rohd_vf/Test/randomSeed.html">randomSeed</a> as the
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Test</code></pre>
+  <pre class="language-dart"><code class="language-dart">Test(
+  String name, {
+  this.randomSeed,
+  this.printLevel = Level.ALL,
+  this.failLevel = Level.SEVERE,
+  this.killLevel = Level.SHOUT,
+})  : _random = Random(randomSeed),
+      super(name, null) {
+  if (_instance != null) {
+    throw Exception(&#39;Instance of `Test` is already running!&#39;);
+  }
+
+  _instance = this;
+  configureLogger();
+}</code></pre>
 </section>
 
 
