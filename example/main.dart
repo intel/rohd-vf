@@ -97,7 +97,7 @@ class CounterTest extends Test {
     Simulator.registerAction(3, () {
       intf.reset.put(1);
     });
-    Simulator.registerAction(35, () {
+    Simulator.registerAction(33, () {
       intf.reset.put(0);
     });
 
