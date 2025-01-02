@@ -34,7 +34,7 @@ void main() {
 
     await clk.waitCycles(0);
 
-    expect(Simulator.time, 5);
+    expect(Simulator.time, 0);
 
     await Simulator.simulationEnded;
   });

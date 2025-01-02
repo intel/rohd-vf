@@ -177,6 +177,31 @@ void main() {
     expect(sawError, isFalse);
   });
 
+  test('exception at end of sim action', () async {
+    final test = NormalTest()..printLevel = Level.OFF;
+
+    Object? seenError;
+    Logger.root.onRecord.listen((record) {
+      if (record.error != null) {
+        seenError = record.error;
+      }
+    });
+
+    Simulator.registerEndOfSimulationAction(() async {
+      throw Exception('endofsim');
+    });
+
+    try {
+      await test.start();
+      fail('Expected exception to be thrown.');
+    } on Exception catch (e) {
+      expect(e.toString(), contains('Test failed.'));
+    }
+
+    expect(seenError, isNotNull);
+    expect(seenError.toString(), contains('endofsim'));
+  });
+
   group('Test.instance', () {
     test('test already created', () async {
       NormalTest();

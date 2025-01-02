@@ -40,16 +40,13 @@ extension LogicWaiter on Logic {
       switch (edge) {
         case Edge.pos:
           await nextPosedge;
-          break;
         case Edge.neg:
           await nextNegedge;
-          break;
         case Edge.any:
           await Future.any([
             nextPosedge,
             nextNegedge,
           ]);
-          break;
       }
     }
   }

@@ -184,21 +184,31 @@ abstract class Test extends Component {
     }
     logger.finest('Waiting for objections to finish...');
 
+    (Object?, StackTrace)? simulatorError;
+    unawaited(Simulator.run().onError((e, s) {
+      simulatorError = (e, s);
+    }));
+
     await Future.any([
-      Simulator.run(),
+      Simulator.simulationEnded,
       runPhase.allObjectionsDropped(),
     ]);
 
     if (runPhase.objections.isNotEmpty) {
       logger
           .warning('Simulation has ended before all objections were dropped!');
-    } else {
+    } else if (!Simulator.simulationHasEnded) {
       logger.finest('Objections completed, ending simulation.');
       unawaited(Simulator.endSimulation());
     }
 
     if (!Simulator.simulationHasEnded) {
       await Simulator.simulationEnded;
+    }
+
+    if (simulatorError != null) {
+      logger.severe(
+          'Simulator error detected!', simulatorError!.$1, simulatorError!.$2);
     }
 
     logger.finest('Running end of test checks.');
