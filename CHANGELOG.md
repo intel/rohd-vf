@@ -1,6 +1,12 @@
+## 0.6.0
+
+- Updates ROHD dependency to at least v0.5.0.
+- Fixed a bug where exceptions triggered via the ROHD simulator could cause a `Test` to hang (<https://github.com/intel/rohd-vf/pull/59>).
+- Increased minimum Dart SDK version to 3.0.0.
+
 ## 0.5.0
 
-- Updates ROHD dependency to at least v0.5.0
+- Updates ROHD dependency to at least v0.5.0.
 - Breaking: `Test.instance` is now nullable and `null` when no `Test` is active, which also impacts `Test.random`. Use `Test.reset` instead of `Simulator.reset` in ROHD-VF testbenches to reset.
 - Added `QuiesceObjector`, `PendingDriver`, and `PendingClockedDriver` to make it easier to develop typical drivers.
 - Added `waitCycles` function as an extension to `Logic` to make it easier to wait for a variable number of clock edges.
@@ -20,7 +26,7 @@
 
 ## 0.4.0
 
-- Updates ROHD dependency to at least v0.4.0
+- Updates ROHD dependency to at least v0.4.0.
 - Breaking: made `columnWidth` an optional named argument in `TrackerField` (<https://github.com/intel/rohd-vf/issues/10>).
 - Increased minimum Dart SDK version to 2.18.0.
 - Upgraded and made lints more strict within ROHD-VF, leading to some quality and documentation improvements.
@@ -33,11 +39,11 @@
 
 ## 0.3.0
 
-- Updates ROHD dependency to at least v0.3.0
+- Updates ROHD dependency to at least v0.3.0.
 
 ## 0.2.0
 
-- Updates ROHD dependency to at least v0.2.0
+- Updates ROHD dependency to at least v0.2.0.
 - Adds `Tracker` to make logging events during a test simple for reading or parsing.
 
 ## 0.1.1
