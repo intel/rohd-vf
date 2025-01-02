@@ -11,20 +11,16 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
   <link rel="icon" href="../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
@@ -35,45 +31,43 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar=""
-      data-below-sidebar="rohd_vf&#47;rohd_vf-library-sidebar.html">
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar=""
+    data-below-sidebar="rohd_vf&#47;rohd_vf-library-sidebar.html">
+  
+    <div>
       
-      <div>
-        
 
-        <h1>
-          <span class="kind-library">rohd_vf</span>
-          library 
+      <h1>
+        <span class="kind-library">rohd_vf</span>
+        library 
  
 
-        </h1>
-      </div>
+      </h1>
+    </div>
 
     
 
 
     <section class="summary offset-anchor" id="classes">
       <h2>Classes</h2>
-
       <dl>
-        <dt id="Agent">
+          <dt id="Agent">
   <span class="name "><a href="../rohd_vf/Agent-class.html">Agent</a></span> 
 
 </dt>
@@ -82,7 +76,7 @@
 often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/Sequencer-class.html">Sequencer</a>, and a <a href="../rohd_vf/Monitor-class.html">Monitor</a>.
 </dd>
 
-        <dt id="Component">
+          <dt id="Component">
   <span class="name "><a href="../rohd_vf/Component-class.html">Component</a></span> 
 
 </dt>
@@ -90,7 +84,7 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
   The base class for any component in ROHD-VF.
 </dd>
 
-        <dt id="Driver">
+          <dt id="Driver">
   <span class="name "><a href="../rohd_vf/Driver-class.html">Driver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
 
 </dt>
@@ -98,7 +92,7 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
   A driver of stimulus to the DUT.
 </dd>
 
-        <dt id="Env">
+          <dt id="Env">
   <span class="name "><a href="../rohd_vf/Env-class.html">Env</a></span> 
 
 </dt>
@@ -106,7 +100,7 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
   A high level encapsulation of related functionality.
 </dd>
 
-        <dt id="Monitor">
+          <dt id="Monitor">
   <span class="name "><a href="../rohd_vf/Monitor-class.html">Monitor</a><span class="signature">&lt;<wbr><span class="type-parameter">MonitorItem</span>&gt;</span></span> 
 
 </dt>
@@ -115,7 +109,7 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
 interesting events as items to listeners.
 </dd>
 
-        <dt id="Objection">
+          <dt id="Objection">
   <span class="name "><a href="../rohd_vf/Objection-class.html">Objection</a></span> 
 
 </dt>
@@ -123,7 +117,7 @@ interesting events as items to listeners.
   Represents an objection to the test completing.
 </dd>
 
-        <dt id="PendingClockedDriver">
+          <dt id="PendingClockedDriver">
   <span class="name "><a href="../rohd_vf/PendingClockedDriver-class.html">PendingClockedDriver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
 
 </dt>
@@ -132,7 +126,7 @@ interesting events as items to listeners.
 on that clock for timeouts and drop delays.
 </dd>
 
-        <dt id="PendingDriver">
+          <dt id="PendingDriver">
   <span class="name "><a href="../rohd_vf/PendingDriver-class.html">PendingDriver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
 
 </dt>
@@ -141,7 +135,7 @@ on that clock for timeouts and drop delays.
 the <a href="../rohd_vf/Driver/sequencer.html">sequencer</a> and into a queue of <a href="../rohd_vf/PendingDriver/pendingSeqItems.html">pendingSeqItems</a>.
 </dd>
 
-        <dt id="Phase">
+          <dt id="Phase">
   <span class="name "><a href="../rohd_vf/Phase-class.html">Phase</a></span> 
 
 </dt>
@@ -150,7 +144,7 @@ the <a href="../rohd_vf/Driver/sequencer.html">sequencer</a> and into a queue of
 which can be prevented from ending.
 </dd>
 
-        <dt id="QuiesceObjector">
+          <dt id="QuiesceObjector">
   <span class="name "><a href="../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></span> 
 
 </dt>
@@ -159,7 +153,7 @@ which can be prevented from ending.
 with <a href="../rohd_vf/QuiesceObjector/dropDelay.html">dropDelay</a> before dropping and a <a href="../rohd_vf/QuiesceObjector/timeout.html">timeout</a>.
 </dd>
 
-        <dt id="ROHDVFObject">
+          <dt id="ROHDVFObject">
   <span class="name "><a href="../rohd_vf/ROHDVFObject-class.html">ROHDVFObject</a></span> 
 
 </dt>
@@ -168,7 +162,7 @@ with <a href="../rohd_vf/QuiesceObjector/dropDelay.html">dropDelay</a> before dr
 shared functionality.
 </dd>
 
-        <dt id="Sequence">
+          <dt id="Sequence">
   <span class="name "><a href="../rohd_vf/Sequence-class.html">Sequence</a><span class="signature">&lt;<wbr><span class="type-parameter">SequencerType extends <a href="../rohd_vf/Sequencer-class.html">Sequencer</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span>&gt;</span></span> 
 
 </dt>
@@ -176,7 +170,7 @@ shared functionality.
   A collection of operations to execute on a <a href="../rohd_vf/Sequencer-class.html">Sequencer</a>.
 </dd>
 
-        <dt id="SequenceItem">
+          <dt id="SequenceItem">
   <span class="name "><a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span> 
 
 </dt>
@@ -184,7 +178,7 @@ shared functionality.
   A single item that a <a href="../rohd_vf/Driver-class.html">Driver</a> would parse to be driven.
 </dd>
 
-        <dt id="Sequencer">
+          <dt id="Sequencer">
   <span class="name "><a href="../rohd_vf/Sequencer-class.html">Sequencer</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
 
 </dt>
@@ -194,7 +188,7 @@ properly forwards them to an output <a href="../rohd_vf/Sequencer/stream.html">s
 a <a href="../rohd_vf/Driver-class.html">Driver</a>.
 </dd>
 
-        <dt id="Test">
+          <dt id="Test">
   <span class="name "><a href="../rohd_vf/Test-class.html">Test</a></span> 
 
 </dt>
@@ -202,7 +196,7 @@ a <a href="../rohd_vf/Driver-class.html">Driver</a>.
   The top level object for an ROHD-VF test.
 </dd>
 
-        <dt id="Trackable">
+          <dt id="Trackable">
   <span class="name "><a href="../rohd_vf/Trackable-class.html">Trackable</a></span> 
 
 </dt>
@@ -210,7 +204,7 @@ a <a href="../rohd_vf/Driver-class.html">Driver</a>.
   An interface for an object that can be tracked by a <a href="../rohd_vf/Tracker-class.html">Tracker</a>.
 </dd>
 
-        <dt id="Tracker">
+          <dt id="Tracker">
   <span class="name "><a href="../rohd_vf/Tracker-class.html">Tracker</a><span class="signature">&lt;<wbr><span class="type-parameter">TrackableType extends <a href="../rohd_vf/Trackable-class.html">Trackable</a></span>&gt;</span></span> 
 
 </dt>
@@ -219,7 +213,7 @@ a <a href="../rohd_vf/Driver-class.html">Driver</a>.
 formats.
 </dd>
 
-        <dt id="TrackerField">
+          <dt id="TrackerField">
   <span class="name "><a href="../rohd_vf/TrackerField-class.html">TrackerField</a></span> 
 
 </dt>
@@ -230,32 +224,10 @@ formats.
       </dl>
     </section>
 
-
-    <section class="summary offset-anchor" id="extensions">
-      <h2>Extensions</h2>
-
-      <dl>
-        <dt id="LogicWaiter">
-    <span class="name "><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></span> 
-
-</dt>
-<dd>
-    An <code>extension</code> on <a href="https://pub.dev/documentation/rohd/0.5.2/rohd/Logic-class.html">Logic</a> for waiting for things.
-</dd>
-
-
-      </dl>
-    </section>
-
-
-
-
-
     <section class="summary offset-anchor" id="enums">
       <h2>Enums</h2>
-
       <dl>
-        <dt id="Edge">
+          <dt id="Edge">
   <span class="name "><a href="../rohd_vf/Edge.html">Edge</a></span> 
 
 </dt>
@@ -263,7 +235,7 @@ formats.
   A type of edge on a signal.
 </dd>
 
-        <dt id="Justify">
+          <dt id="Justify">
   <span class="name "><a href="../rohd_vf/Justify.html">Justify</a></span> 
 
 </dt>
@@ -276,8 +248,27 @@ formats.
 
 
 
-  </div> <!-- /.main-content -->
+    <section class="summary offset-anchor" id="extensions">
+      <h2>Extensions</h2>
+      <dl>
+          <dt id="LogicWaiter">
+  <span class="name "><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></span>
+  on <a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic-class.html">Logic</a>
+  
 
+</dt>
+<dd>
+  An <code>extension</code> on <a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic-class.html">Logic</a> for waiting for things.
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+
+  </div> <!-- /.main-content -->
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -285,12 +276,10 @@ formats.
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">rohd_vf</a></li>
     <li class="self-crumb">rohd_vf.dart</li>
 </ol>
-
 
     <h5><span class="package-name">rohd_vf</span> <span class="package-kind">package</span></h5>
     <ol>
@@ -299,30 +288,22 @@ formats.
 </ol>
 
   </div>
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <h5>rohd_vf library</h5>
   </div><!--/sidebar-offcanvas-right-->
-
 </main>
-
 <footer>
   <span class="no-break">
     rohd_vf
       0.5.0
   </span>
-
   
 </footer>
-
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
 <script src="../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
