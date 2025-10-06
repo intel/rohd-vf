@@ -1,4 +1,4 @@
-// Copyright (C) 2021-2023 Intel Corporation
+// Copyright (C) 2021-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // test.dart
@@ -119,6 +119,7 @@ abstract class Test extends Component {
   /// Prints a message to `stdout`, guarded by the [printLevel].
   void _testPrint(String message, Level messageLevel) {
     if (messageLevel >= printLevel) {
+      // This is for logging purposes, so we actually do want to print.
       // ignore: avoid_print
       print(message);
     }

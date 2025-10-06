@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Intel Corporation
+// Copyright (C) 2023-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // quiesce_objector.dart
@@ -78,8 +78,7 @@ class QuiesceObjector extends Component {
 
   /// Actually drop the objection, with whatever bookkeeping is required.
   void _doDrop() {
-    // ignore: discarded_futures
-    _pendingTimeout?.cancel();
+    unawaited(_pendingTimeout?.cancel());
     _pendingTimeout = null;
 
     _objection?.drop();
@@ -89,11 +88,9 @@ class QuiesceObjector extends Component {
   /// Drop the objection, pending a [dropDelay] if it is provided.
   void dropObjection() {
     if (dropDelay != null) {
-      // ignore: discarded_futures
-      _pendingDrop?.cancel();
+      unawaited(_pendingDrop?.cancel());
       logger.finest(
           'Planning to drop objection after delay if nothing stops it.');
-      // ignore: discarded_futures
       _pendingDrop = CancelableOperation<void>.fromFuture(dropDelay!(),
           onCancel: () => logger.finest('Cancelling objection drop.'));
       _pendingDrop!.then((_) => _doDrop());
@@ -110,22 +107,18 @@ class QuiesceObjector extends Component {
       throw Exception('Cannot raise objection before run phase.');
     }
 
-    // ignore: discarded_futures
-    _pendingDrop?.cancel();
+    unawaited(_pendingDrop?.cancel());
     _pendingDrop = null;
 
-    _objection ??= _runPhase!.raiseObjection('quiesce')
-      // ignore: discarded_futures
-      ..dropped.then((value) => logger.finest('Quiesce objection dropped'));
+    _objection ??= _runPhase!.raiseObjection('quiesce');
+
+    unawaited(_objection!.dropped
+        .then((value) => logger.finest('Quiesce objection dropped')));
 
     if (timeout != null) {
-      // ignore: discarded_futures
-      _pendingTimeout?.cancel();
-      // ignore: discarded_futures
+      unawaited(_pendingTimeout?.cancel());
       _pendingTimeout = CancelableOperation<void>.fromFuture(
-        // ignore: discarded_futures
         timeout!(),
-        // onCancel: () => logger.finest('Timeout avoided!'),
       );
       _pendingTimeout!.then((_) => logger.severe('Objection has timed out!'));
     }

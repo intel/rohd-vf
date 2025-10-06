@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Intel Corporation
+// Copyright (C) 2023-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // waiter_test.dart
@@ -44,10 +44,10 @@ void main() {
 
     Simulator.registerAction(18, () {
       // 25, 35, 45
-      clk.waitCycles(3).then((value) {
+      unawaited(clk.waitCycles(3).then((value) {
         expect(Simulator.time, 45);
         checkHappened = true;
-      });
+      }));
     });
 
     unawaited(Simulator.run());
@@ -62,10 +62,10 @@ void main() {
 
     Simulator.registerAction(18, () {
       // 20, 30, 40
-      clk.waitCycles(3, edge: Edge.neg).then((value) {
+      unawaited(clk.waitCycles(3, edge: Edge.neg).then((value) {
         expect(Simulator.time, 40);
         checkHappened = true;
-      });
+      }));
     });
 
     unawaited(Simulator.run());
@@ -80,10 +80,10 @@ void main() {
 
     Simulator.registerAction(18, () {
       // 20, 25, 30
-      clk.waitCycles(3, edge: Edge.any).then((value) {
+      unawaited(clk.waitCycles(3, edge: Edge.any).then((value) {
         expect(Simulator.time, 30);
         checkHappened = true;
-      });
+      }));
     });
 
     unawaited(Simulator.run());

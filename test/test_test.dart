@@ -1,4 +1,4 @@
-// Copyright (C) 2022-2023 Intel Corporation
+// Copyright (C) 2022-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // test_test.dart
@@ -187,7 +187,7 @@ void main() {
       }
     });
 
-    Simulator.registerEndOfSimulationAction(() async {
+    Simulator.registerEndOfSimulationAction(() {
       throw Exception('endofsim');
     });
 

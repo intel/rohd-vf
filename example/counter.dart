@@ -1,4 +1,4 @@
-// Copyright (C) 2021-2023 Intel Corporation
+// Copyright (C) 2021-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // counter.dart
@@ -20,16 +20,20 @@ class CounterInterface extends Interface<CounterDirection> {
 
   final int width;
   CounterInterface({this.width = 8}) {
-    setPorts([Port('en'), Port('reset')], [CounterDirection.inward]);
+    setPorts(
+        [Logic.port('en'), Logic.port('reset')], [CounterDirection.inward]);
 
     setPorts([
-      Port('val', width),
+      Logic.port('val', width),
     ], [
       CounterDirection.outward
     ]);
 
-    setPorts([Port('clk')], [CounterDirection.misc]);
+    setPorts([Logic.port('clk')], [CounterDirection.misc]);
   }
+
+  @override
+  CounterInterface clone() => CounterInterface(width: width);
 }
 
 /// A simple counter which increments once per `clk` edge whenever

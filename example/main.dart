@@ -1,4 +1,4 @@
-// Copyright (C) 2021-2023 Intel Corporation
+// Copyright (C) 2021-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // main.dart
@@ -198,6 +198,7 @@ class CounterSequence extends Sequence {
 class CounterSeqItem extends SequenceItem {
   final bool _enable;
 
+  // We use a positional bool since that's the whole value of this item.
   // ignore: avoid_positional_boolean_parameters
   CounterSeqItem(this._enable);
 
@@ -226,8 +227,11 @@ class CounterDriver extends Driver<CounterSeqItem> {
 
     // Listen to new items coming from the sequencer, and add them to a queue
     sequencer.stream.listen((newItem) {
-      _driverObjection ??= phase.raiseObjection('counter_driver')
-        ..dropped.then((value) => logger.fine('Driver objection dropped'));
+      _driverObjection ??= phase.raiseObjection('counter_driver');
+
+      unawaited(_driverObjection!.dropped
+          .then((value) => logger.fine('Driver objection dropped')));
+
       _pendingItems.add(newItem);
     });
 

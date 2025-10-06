@@ -1,4 +1,4 @@
-// Copyright (C) 2021-2023 Intel Corporation
+// Copyright (C) 2021-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // tracker.dart
@@ -64,7 +64,7 @@ abstract class Trackable {
 /// formats.
 ///
 /// By default, [Tracker] outputs to both a ASCII table format
-/// (<name>.tracker.log) and a JSON format (<name>.tracker.json).
+/// (`<name>.tracker.log`) and a JSON format (`<name>.tracker.json`).
 class Tracker<TrackableType extends Trackable> {
   /// An optional output directory for the logs.
   ///

@@ -1,4 +1,4 @@
-// Copyright (C) 2021-2023 Intel Corporation
+// Copyright (C) 2021-2025 Intel Corporation
 // SPDX-License-Identifier: BSD-3-Clause
 //
 // tracker_test.dart
@@ -7,6 +7,7 @@
 // 2021 December 6
 // Author: Max Korbel <max.korbel@intel.com>
 
+// We're dealing with and testing json long strings, so ignore these for here.
 // ignore_for_file: lines_longer_than_80_chars, avoid_dynamic_calls
 
 import 'dart:convert';
