@@ -34,6 +34,9 @@ jobs:
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
 
+      - name: Setup Pana source analysis
+        run: tool/gh_actions/install_pana.sh
+
       - name: Install project dependencies
         run: tool/gh_actions/install_dependencies.sh
 
@@ -42,6 +45,9 @@ jobs:
 
       - name: Analyze project source
         run: tool/gh_actions/analyze_source.sh
+
+      - name: Run Pana on project source
+        run: tool/gh_actions/pana_source.sh
 
       - name: Check project documentation
         run: tool/gh_actions/generate_documentation.sh

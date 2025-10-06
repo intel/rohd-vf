@@ -7,6 +7,7 @@
 // 2021 December 6
 // Author: Max Korbel <max.korbel@intel.com>
 
+// We're dealing with and testing json long strings, so ignore these for here.
 // ignore_for_file: lines_longer_than_80_chars, avoid_dynamic_calls
 
 import 'dart:convert';

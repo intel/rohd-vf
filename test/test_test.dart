@@ -187,7 +187,7 @@ void main() {
       }
     });
 
-    Simulator.registerEndOfSimulationAction(() async {
+    Simulator.registerEndOfSimulationAction(() {
       throw Exception('endofsim');
     });
 
