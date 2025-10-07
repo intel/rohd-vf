@@ -25,7 +25,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
+    <li><a href="../../rohd_vf/">rohd_vf.dart</a></li>
     <li><a href="../../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></li>
     <li class="self-crumb">raiseObjection method</li>
   </ol>
@@ -33,17 +33,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
 <div
@@ -78,22 +75,18 @@
     throw Exception(&#39;Cannot raise objection before run phase.&#39;);
   }
 
-  &#47;&#47; ignore: discarded_futures
-  _pendingDrop?.cancel();
+  unawaited(_pendingDrop?.cancel());
   _pendingDrop = null;
 
-  _objection ??= _runPhase!.raiseObjection(&#39;quiesce&#39;)
-    &#47;&#47; ignore: discarded_futures
-    ..dropped.then((value) =&gt; logger.finest(&#39;Quiesce objection dropped&#39;));
+  _objection ??= _runPhase!.raiseObjection(&#39;quiesce&#39;);
+
+  unawaited(_objection!.dropped
+      .then((value) =&gt; logger.finest(&#39;Quiesce objection dropped&#39;)));
 
   if (timeout != null) {
-    &#47;&#47; ignore: discarded_futures
-    _pendingTimeout?.cancel();
-    &#47;&#47; ignore: discarded_futures
+    unawaited(_pendingTimeout?.cancel());
     _pendingTimeout = CancelableOperation&lt;void&gt;.fromFuture(
-      &#47;&#47; ignore: discarded_futures
       timeout!(),
-      &#47;&#47; onCancel: () =&gt; logger.finest(&#39;Timeout avoided!&#39;),
     );
     _pendingTimeout!.then((_) =&gt; logger.severe(&#39;Objection has timed out!&#39;));
   }
@@ -111,7 +104,7 @@
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../../rohd_vf/">rohd_vf</a></li>
     <li><a href="../../rohd_vf/QuiesceObjector-class.html">QuiesceObjector</a></li>
     <li class="self-crumb">raiseObjection method</li>
 </ol>

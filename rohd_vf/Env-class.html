@@ -25,24 +25,21 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">rohd_vf</a></li>
-    <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
+    <li><a href="../rohd_vf/">rohd_vf.dart</a></li>
     <li class="self-crumb">Env class</li>
   </ol>
   <div class="self-name">Env</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
 <div
@@ -70,7 +67,7 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark clazz-relationships">
-      <li><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object-class.html">Object</a></li>
+      <li><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object-class.html">Object</a></li>
         <li><a href="../rohd_vf/ROHDVFObject-class.html">ROHDVFObject</a></li>
         <li><a href="../rohd_vf/Component-class.html">Component</a></li>
       <li>Env</li>
@@ -92,8 +89,8 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
   <section class="summary offset-anchor" id="constructors">
     <h2>Constructors</h2>
     <dl class="constructor-summary-list">
-        <dt id="Env" class="callable">
-          <span class="name"><a href="../rohd_vf/Env/Env.html">Env</a></span><span class="signature">(<span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-parent"><span class="type-annotation"><a href="../rohd_vf/Component-class.html">Component</a>?</span> <span class="parameter-name">parent</span></span>)</span>
+        <dt id="Env.new" class="callable">
+          <span class="name"><a href="../rohd_vf/Env/Env.html">Env.new</a></span><span class="signature">(<span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-parent"><span class="type-annotation"><a href="../rohd_vf/Component-class.html">Component</a>?</span> <span class="parameter-name">parent</span></span>)</span>
         </dt>
         <dd>
           Constructs an <a href="../rohd_vf/Env-class.html">Env</a> named <code>name</code> with parent <code>parent</code>.
@@ -108,19 +105,19 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
     <dl class="properties">
         <dt id="components" class="property inherited">
   <span class="name"><a href="../rohd_vf/Component/components.html">components</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.0/collection/UnmodifiableListView-class.html">UnmodifiableListView</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Component-class.html">Component</a></span>&gt;</span></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/collection/UnmodifiableListView-class.html">UnmodifiableListView</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Component-class.html">Component</a></span>&gt;</span></span>
   
 
 </dt>
 <dd class="inherited">
-  A <a href="https://api.dart.dev/stable/3.6.0/dart-core/List-class.html">List</a> of all children <a href="../rohd_vf/Component-class.html">Component</a>s.
+  A <a href="https://api.dart.dev/stable/3.9.4/dart-core/List-class.html">List</a> of all children <a href="../rohd_vf/Component-class.html">Component</a>s.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/int-class.html">int</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/int-class.html">int</a></span>
   
 
 </dt>
@@ -144,7 +141,7 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
 
         <dt id="name" class="property inherited">
   <span class="name"><a href="../rohd_vf/Component/name.html">name</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a></span>
   
 
 </dt>
@@ -167,8 +164,8 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/Type-class.html">Type</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/Type-class.html">Type</a></span>
   
 
 </dt>
@@ -215,7 +212,7 @@ checkers, scoreboards, coordination, interfaces, etc.</p>
 
         <dt id="fullName" class="callable inherited">
   <span class="name"><a href="../rohd_vf/Component/fullName.html">fullName</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -229,21 +226,21 @@ this <a href="../rohd_vf/Component-class.html">Component</a>.
 
         <dt id="hierarchy" class="callable inherited">
   <span class="name"><a href="../rohd_vf/Component/hierarchy.html">hierarchy</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Component-class.html">Component</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../rohd_vf/Component-class.html">Component</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Returns a <a href="https://api.dart.dev/stable/3.6.0/dart-core/List-class.html">List</a> of <a href="../rohd_vf/Component-class.html">Component</a>s representing the full hierarchy
+  Returns a <a href="https://api.dart.dev/stable/3.9.4/dart-core/List-class.html">List</a> of <a href="../rohd_vf/Component-class.html">Component</a>s representing the full hierarchy
 of this <a href="../rohd_vf/Component-class.html">Component</a>, with the top-most parent at index 0 and this
-as the last element of the <a href="https://api.dart.dev/stable/3.6.0/dart-core/List-class.html">List</a>.
+as the last element of the <a href="https://api.dart.dev/stable/3.9.4/dart-core/List-class.html">List</a>.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -257,7 +254,7 @@ as the last element of the <a href="https://api.dart.dev/stable/3.6.0/dart-core/
 
         <dt id="run" class="callable inherited">
   <span class="name"><a href="../rohd_vf/Component/run.html">run</a></span><span class="signature">(<wbr><span class="parameter" id="run-param-phase"><span class="type-annotation"><a href="../rohd_vf/Phase-class.html">Phase</a></span> <span class="parameter-name">phase</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
   </span>
   
 
@@ -269,8 +266,8 @@ as the last element of the <a href="https://api.dart.dev/stable/3.6.0/dart-core/
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -290,8 +287,8 @@ as the last element of the <a href="https://api.dart.dev/stable/3.6.0/dart-core/
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.0/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -318,7 +315,7 @@ as the last element of the <a href="https://api.dart.dev/stable/3.6.0/dart-core/
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">rohd_vf</a></li>
-    <li><a href="../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../rohd_vf/">rohd_vf</a></li>
     <li class="self-crumb">Env class</li>
 </ol>
 

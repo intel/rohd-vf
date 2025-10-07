@@ -25,7 +25,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf.dart</a></li>
+    <li><a href="../../rohd_vf/">rohd_vf.dart</a></li>
     <li><a href="../../rohd_vf/LogicWaiter.html">LogicWaiter</a></li>
     <li class="self-crumb">waitCycles method</li>
   </ol>
@@ -33,17 +33,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
 <div
@@ -57,8 +54,8 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-<span class="name ">waitCycles</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="waitCycles-param-numCycles"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/int-class.html">int</a></span> <span class="parameter-name">numCycles</span>, {</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">waitCycles</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="waitCycles-param-numCycles"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">numCycles</span>, {</span></li>
 <li><span class="parameter" id="waitCycles-param-edge"><span class="type-annotation"><a href="../../rohd_vf/Edge.html">Edge</a></span> <span class="parameter-name">edge</span> = <span class="default-value">Edge.pos</span>, </span></li>
 </ol>})
 
@@ -67,10 +64,10 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns a <a href="https://api.dart.dev/stable/3.6.0/dart-core/Future-class.html">Future</a> which completes after the specified <code>numCycles</code>,
+  <p>Returns a <a href="https://api.dart.dev/stable/3.9.4/dart-core/Future-class.html">Future</a> which completes after the specified <code>numCycles</code>,
 where each cycle is defined as the next occurence of the specified <code>edge</code>.</p>
-<p><a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic/width.html">width</a> must be 1 or an <a href="https://api.dart.dev/stable/3.6.0/dart-core/Exception-class.html">Exception</a> will be thrown.</p>
-<p>Like <a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic/nextNegedge.html">nextNegedge</a> and <a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic/nextPosedge.html">nextPosedge</a>, this will only detect valid edge
+<p><a href="https://pub.dev/documentation/rohd/0.6.6/rohd/Logic/width.html">width</a> must be 1 or an <a href="https://api.dart.dev/stable/3.9.4/dart-core/Exception-class.html">Exception</a> will be thrown.</p>
+<p>Like <a href="https://pub.dev/documentation/rohd/0.6.6/rohd/Logic/nextNegedge.html">nextNegedge</a> and <a href="https://pub.dev/documentation/rohd/0.6.6/rohd/Logic/nextPosedge.html">nextPosedge</a>, this will only detect valid edge
 transitions. If the value is invalid (<code>x</code> or <code>z</code>) before or after the
 transition, it will not count as a cycle.</p>
 </section>
@@ -111,12 +108,12 @@ transition, it will not count as a cycle.</p>
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">rohd_vf</a></li>
-    <li><a href="../../rohd_vf/rohd_vf-library.html">rohd_vf</a></li>
+    <li><a href="../../rohd_vf/">rohd_vf</a></li>
     <li><a href="../../rohd_vf/LogicWaiter.html">LogicWaiter</a></li>
     <li class="self-crumb">waitCycles method</li>
 </ol>
 
-    <h5>LogicWaiter extension on <a href="https://pub.dev/documentation/rohd/0.6.0/rohd/Logic-class.html">Logic</a></h5>
+    <h5>LogicWaiter extension on <a href="https://pub.dev/documentation/rohd/0.6.6/rohd/Logic-class.html">Logic</a></h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
