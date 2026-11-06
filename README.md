@@ -3,7 +3,7 @@
 [![Tests](https://github.com/intel/rohd-vf/actions/workflows/general.yml/badge.svg?event=push)](https://github.com/intel/rohd-vf/actions/workflows/general.yml)
 [![API Docs](https://img.shields.io/badge/API%20Docs-generated-success)](https://intel.github.io/rohd-vf/rohd_vf/rohd_vf-library.html)
 [![Chat](https://img.shields.io/discord/1001179329411166267?label=Chat)](https://discord.gg/jubxF84yGw)
-[![License](https://img.shields.io/badge/License-BSD--3-blue)](https://github.com/intel/rohd-vf/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-BSD--3-blue)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/intel/rohd-vf/blob/main/CODE_OF_CONDUCT.md)
 
 # ROHD Verification Framework
@@ -25,6 +25,8 @@ A testbench is software used to interact with and test a device under test (DUT)
 ### Example
 
 Dive right in with a full [example testbench for a counter](https://github.com/intel/rohd-vf/raw/main/example/main.dart).  The example includes `Monitor`s, a `Driver`, a `Sequencer`, an `Agent`, an `Env`, a `Test`, the same DUT as the ROHD counter example, a `Sequence` with `SequenceItem`s, a scoreboard, and a main function to kick it all off, all in a single commented file.
+
+For ready/valid channels, see the [Ready/Valid Verification user guide](doc/user_guide/_docs/ready_valid.md). It covers source and sink agents, activity policies, monitors, scoreboards, protocol checks, and retained-storage status checks.
 
 ### Constructing Objects
 

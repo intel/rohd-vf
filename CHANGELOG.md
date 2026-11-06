@@ -1,3 +1,10 @@
+## 0.7.0
+
+- Breaking: Require ROHD `^0.7.0` and Dart `^3.6.0`.
+- Migrate the counter example to `Module.dumpWaves`.
+- Add ready/valid and credit-based communication verification components,
+  flow scoreboards, FIFO safety checks, and transaction lifecycle checks.
+
 ## 0.6.0
 
 - Updates ROHD dependency to at least v0.5.0.
