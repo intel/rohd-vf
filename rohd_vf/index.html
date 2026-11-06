@@ -81,6 +81,86 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
   The base class for any component in ROHD-VF.
 </dd>
 
+          <dt id="CountedCreditChannelChecker">
+  <span class="name "><a href="../rohd_vf/CountedCreditChannelChecker-class.html">CountedCreditChannelChecker</a></span> 
+
+</dt>
+<dd>
+  Checks counted debit and return events for independent or shared pools.
+</dd>
+
+          <dt id="CreditChannelActivity">
+  <span class="name "><a href="../rohd_vf/CreditChannelActivity-class.html">CreditChannelActivity</a></span> 
+
+</dt>
+<dd>
+  Selects reproducible debit and credit-return events across named pools.
+</dd>
+
+          <dt id="CreditChannelActivityEvent">
+  <span class="name "><a href="../rohd_vf/CreditChannelActivityEvent-class.html">CreditChannelActivityEvent</a></span> 
+
+</dt>
+<dd>
+  One cycle of pool-attributed credit traffic.
+</dd>
+
+          <dt id="CreditChannelCheckConfiguration">
+  <span class="name "><a href="../rohd_vf/CreditChannelCheckConfiguration-class.html">CreditChannelCheckConfiguration</a></span> 
+
+</dt>
+<dd>
+  Immutable pool configuration for a <a href="../rohd_vf/CreditChannelChecker-class.html">CreditChannelChecker</a>.
+</dd>
+
+          <dt id="CreditChannelChecker">
+  <span class="name "><a href="../rohd_vf/CreditChannelChecker-class.html">CreditChannelChecker</a></span> 
+
+</dt>
+<dd>
+  Checks conservation and bounds for one or more independent credit pools.
+</dd>
+
+          <dt id="CreditChannelMonitor">
+  <span class="name "><a href="../rohd_vf/CreditChannelMonitor-class.html">CreditChannelMonitor</a></span> 
+
+</dt>
+<dd>
+  Samples one-hot credit debits and credit returns at <a href="../rohd_vf/CreditChannelMonitor/clk.html">clk</a> posedges.
+</dd>
+
+          <dt id="CreditChannelViolation">
+  <span class="name "><a href="../rohd_vf/CreditChannelViolation-class.html">CreditChannelViolation</a></span> 
+
+</dt>
+<dd>
+  One sampled credit-accounting violation.
+</dd>
+
+          <dt id="CreditConservationChecker">
+  <span class="name "><a href="../rohd_vf/CreditConservationChecker-class.html">CreditConservationChecker</a></span> 
+
+</dt>
+<dd>
+  Checks end-to-end credit conservation in a common unit.
+</dd>
+
+          <dt id="CreditReturnDriver">
+  <span class="name "><a href="../rohd_vf/CreditReturnDriver-class.html">CreditReturnDriver</a></span> 
+
+</dt>
+<dd>
+  Drives one-cycle one-hot returned-credit pulses from a sequencer.
+</dd>
+
+          <dt id="CreditTransferItem">
+  <span class="name "><a href="../rohd_vf/CreditTransferItem-class.html">CreditTransferItem</a></span> 
+
+</dt>
+<dd>
+  One credit event observed at a channel boundary.
+</dd>
+
           <dt id="Driver">
   <span class="name "><a href="../rohd_vf/Driver-class.html">Driver</a><span class="signature">&lt;<wbr><span class="type-parameter">SequenceItemType extends <a href="../rohd_vf/SequenceItem-class.html">SequenceItem</a></span>&gt;</span></span> 
 
@@ -95,6 +175,46 @@ often a <a href="../rohd_vf/Driver-class.html">Driver</a>, <a href="../rohd_vf/S
 </dt>
 <dd>
   A high level encapsulation of related functionality.
+</dd>
+
+          <dt id="FifoSafetyChecker">
+  <span class="name "><a href="../rohd_vf/FifoSafetyChecker-class.html">FifoSafetyChecker</a></span> 
+
+</dt>
+<dd>
+  Checks FIFO control and status signals for common safety violations.
+</dd>
+
+          <dt id="FlowFailure">
+  <span class="name "><a href="../rohd_vf/FlowFailure-class.html">FlowFailure</a><span class="signature">&lt;<wbr><span class="type-parameter">PayloadType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A semantic failure reported by a <a href="../rohd_vf/FlowScoreboard-class.html">FlowScoreboard</a>.
+</dd>
+
+          <dt id="FlowScoreboard">
+  <span class="name "><a href="../rohd_vf/FlowScoreboard-class.html">FlowScoreboard</a><span class="signature">&lt;<wbr><span class="type-parameter">PayloadType</span>, <span class="type-parameter">KeyType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Compares expected and observed payload flows.
+</dd>
+
+          <dt id="KeyedTransactionLifecycleChecker">
+  <span class="name "><a href="../rohd_vf/KeyedTransactionLifecycleChecker-class.html">KeyedTransactionLifecycleChecker</a><span class="signature">&lt;<wbr><span class="type-parameter">KeyType</span>, <span class="type-parameter">ResourceType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Tracks outstanding keyed transactions and their attributed resources.
+</dd>
+
+          <dt id="LogicValueReadyValidChannelCodec">
+  <span class="name "><a href="../rohd_vf/LogicValueReadyValidChannelCodec-class.html">LogicValueReadyValidChannelCodec</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A packed <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/LogicValue-class.html">LogicValue</a> codec for any <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a> payload.
 </dd>
 
           <dt id="Monitor">
@@ -148,6 +268,110 @@ which can be prevented from ending.
 <dd>
   Maintains an <a href="../rohd_vf/Objection-class.html">Objection</a> based on whether an entity <a href="../rohd_vf/QuiesceObjector/isActive.html">isActive</a>, optionally
 with <a href="../rohd_vf/QuiesceObjector/dropDelay.html">dropDelay</a> before dropping and a <a href="../rohd_vf/QuiesceObjector/timeout.html">timeout</a>.
+</dd>
+
+          <dt id="ReadyValidChannelActivity">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelActivity-class.html">ReadyValidChannelActivity</a></span> 
+
+</dt>
+<dd>
+  Selects cycles on which a ready/valid participant may become active.
+</dd>
+
+          <dt id="ReadyValidChannelCheckConfiguration">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelCheckConfiguration-class.html">ReadyValidChannelCheckConfiguration</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Static ready/valid checks enabled for a channel boundary.
+</dd>
+
+          <dt id="ReadyValidChannelChecker">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelChecker-class.html">ReadyValidChannelChecker</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Checks one ready/valid boundary at rising clock edges.
+</dd>
+
+          <dt id="ReadyValidChannelCodec">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelCodec-class.html">ReadyValidChannelCodec</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Converts between a ready/valid payload signal and a semantic value.
+</dd>
+
+          <dt id="ReadyValidChannelItem">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelItem-class.html">ReadyValidChannelItem</a><span class="signature">&lt;<wbr><span class="type-parameter">PayloadType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A payload accepted across a ready/valid channel.
+</dd>
+
+          <dt id="ReadyValidChannelMonitor">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelMonitor-class.html">ReadyValidChannelMonitor</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Samples accepted transfers from a ready/valid channel at <a href="../rohd_vf/ReadyValidChannelMonitor/clk.html">clk</a> posedges.
+</dd>
+
+          <dt id="ReadyValidChannelSink">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelSink-class.html">ReadyValidChannelSink</a></span> 
+
+</dt>
+<dd>
+  Drives the consumer side of a ready/valid channel.
+</dd>
+
+          <dt id="ReadyValidChannelSinkAgent">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelSinkAgent-class.html">ReadyValidChannelSinkAgent</a></span> 
+
+</dt>
+<dd>
+  Composes a consumer-side backpressure driver for one ready/valid channel.
+</dd>
+
+          <dt id="ReadyValidChannelSourceAgent">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelSourceAgent-class.html">ReadyValidChannelSourceAgent</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Composes a sequencer-backed provider for one ready/valid channel.
+</dd>
+
+          <dt id="ReadyValidChannelSourceDriver">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelSourceDriver-class.html">ReadyValidChannelSourceDriver</a><span class="signature">&lt;<wbr><span class="type-parameter">LogicType extends <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a></span>, <span class="type-parameter">ValueType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Drives sequenced values onto the provider side of a ready/valid channel.
+</dd>
+
+          <dt id="ReadyValidChannelViolation">
+  <span class="name "><a href="../rohd_vf/ReadyValidChannelViolation-class.html">ReadyValidChannelViolation</a></span> 
+
+</dt>
+<dd>
+  One ready/valid protocol violation sampled by a channel checker.
+</dd>
+
+          <dt id="ReadyValidStorageStatusChecker">
+  <span class="name "><a href="../rohd_vf/ReadyValidStorageStatusChecker-class.html">ReadyValidStorageStatusChecker</a></span> 
+
+</dt>
+<dd>
+  Checks retained-storage status signals at rising clock edges.
+</dd>
+
+          <dt id="ReadyValidStorageStatusViolation">
+  <span class="name "><a href="../rohd_vf/ReadyValidStorageStatusViolation-class.html">ReadyValidStorageStatusViolation</a></span> 
+
+</dt>
+<dd>
+  One violation observed by <a href="../rohd_vf/ReadyValidStorageStatusChecker-class.html">ReadyValidStorageStatusChecker</a>.
 </dd>
 
           <dt id="ROHDVFObject">
@@ -218,12 +442,52 @@ formats.
   A field or column in a <a href="../rohd_vf/Tracker-class.html">Tracker</a> log.
 </dd>
 
+          <dt id="TransactionLifecycleFailure">
+  <span class="name "><a href="../rohd_vf/TransactionLifecycleFailure-class.html">TransactionLifecycleFailure</a><span class="signature">&lt;<wbr><span class="type-parameter">KeyType</span>, <span class="type-parameter">ResourceType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  One failure observed by <a href="../rohd_vf/KeyedTransactionLifecycleChecker-class.html">KeyedTransactionLifecycleChecker</a>.
+</dd>
+
+          <dt id="TransactionNamespaceKey">
+  <span class="name "><a href="../rohd_vf/TransactionNamespaceKey-class.html">TransactionNamespaceKey</a><span class="signature">&lt;<wbr><span class="type-parameter">NamespaceType</span>, <span class="type-parameter">LocalKeyType</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Immutable composite key for transactions scoped by a namespace.
+</dd>
+
       </dl>
     </section>
 
     <section class="summary offset-anchor" id="enums">
       <h2>Enums</h2>
       <dl>
+          <dt id="CountedCreditSameCyclePolicy">
+  <span class="name "><a href="../rohd_vf/CountedCreditSameCyclePolicy.html">CountedCreditSameCyclePolicy</a></span> 
+
+</dt>
+<dd>
+  Eligibility rule for simultaneous counted debit and return events.
+</dd>
+
+          <dt id="CountedCreditViolationHandling">
+  <span class="name "><a href="../rohd_vf/CountedCreditViolationHandling.html">CountedCreditViolationHandling</a></span> 
+
+</dt>
+<dd>
+  Handling for a counted event that crosses an accounting boundary.
+</dd>
+
+          <dt id="CreditTransferKind">
+  <span class="name "><a href="../rohd_vf/CreditTransferKind.html">CreditTransferKind</a></span> 
+
+</dt>
+<dd>
+  The direction of a credit-accounting event.
+</dd>
+
           <dt id="Edge">
   <span class="name "><a href="../rohd_vf/Edge.html">Edge</a></span> 
 
@@ -250,12 +514,12 @@ formats.
       <dl>
           <dt id="LogicWaiter">
   <span class="name "><a href="../rohd_vf/LogicWaiter.html">LogicWaiter</a></span>
-  on <a href="https://pub.dev/documentation/rohd/0.6.9/rohd/Logic-class.html">Logic</a>
+  on <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a>
   
 
 </dt>
 <dd>
-  An <code>extension</code> on <a href="https://pub.dev/documentation/rohd/0.6.9/rohd/Logic-class.html">Logic</a> for waiting for things.
+  An <code>extension</code> on <a href="https://pub.dev/documentation/rohd/0.7.0/rohd/Logic-class.html">Logic</a> for waiting for things.
 </dd>
 
       </dl>
@@ -292,7 +556,7 @@ formats.
 <footer>
   <span class="no-break">
     rohd_vf
-      0.6.0
+      0.7.0
   </span>
   
 </footer>
