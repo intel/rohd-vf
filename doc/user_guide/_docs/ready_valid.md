@@ -41,7 +41,7 @@ source.sequencer.add(ReadyValidChannelItem(LogicValue.ofInt(0x2a, 8)));
 ```
 
 The complete executable composition is covered by
-[`ready_valid_agent_test.dart`](https://github.com/intel/rohd-vf/blob/main/test/ready_valid_agent_test.dart).
+[`ready_valid_agent_test.dart`](../../../test/ready_valid_agent_test.dart).
 
 ## Monitoring And Ordering
 
@@ -111,7 +111,7 @@ handshakes. Flushes, fall-through paths, and component-specific state changes
 need an explicit component-level policy. It therefore composes well with the
 channel monitor and scoreboard instead of replacing them. The complete checker
 fixture is in
-[`ready_valid_storage_status_checker_test.dart`](https://github.com/intel/rohd-vf/blob/main/test/ready_valid_storage_status_checker_test.dart).
+[`ready_valid_storage_status_checker_test.dart`](../../../test/ready_valid_storage_status_checker_test.dart).
 
 ## Library Boundaries
 
