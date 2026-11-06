@@ -18,8 +18,3 @@ dependencies:
 dev_dependencies:
   test: ^1.17.3
 
-dependency_overrides:
-  rohd:
-    git:
-      url: https://github.com/intel/rohd.git
-      ref: main
