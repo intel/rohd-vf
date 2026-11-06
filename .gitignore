@@ -1,5 +1,6 @@
 # Files and directories created by pub
 .dart_tool/
+pubspec_overrides.yaml
 .packages
 pubspec.lock
 

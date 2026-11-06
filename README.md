@@ -26,6 +26,8 @@ A testbench is software used to interact with and test a device under test (DUT)
 
 Dive right in with a full [example testbench for a counter](https://github.com/intel/rohd-vf/raw/main/example/main.dart).  The example includes `Monitor`s, a `Driver`, a `Sequencer`, an `Agent`, an `Env`, a `Test`, the same DUT as the ROHD counter example, a `Sequence` with `SequenceItem`s, a scoreboard, and a main function to kick it all off, all in a single commented file.
 
+For ready/valid channels, see the [Ready/Valid Verification user guide](https://intel.github.io/rohd-vf/docs/ready-valid/). It covers source and sink agents, activity policies, monitors, scoreboards, protocol checks, and retained-storage status checks.
+
 ### Constructing Objects
 
 The ROHD Verification Framework does not come with a built-in "factory" (like UVM) for constructing `Component`s in the testbench.  Instead, objects can just be constructed like any other object.  It is a good idea to build a testbench with modularity and configurability in mind so that behavior can be easily changed depending on the desired test.  There is no restriction against using a factory design pattern to build a testbench if that's the right approach for a specific situation.  You also might be interested in using other approaches, such as dependency injection.  ROHD-VF doesn't push a strong opinion here.
